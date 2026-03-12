@@ -10,10 +10,11 @@
                         <span>
                             <img src="{{ asset('assets/img/icons/sub-logo1.svg') }}" alt="">
                         </span>
-                        How It's Work
+                        Cara Kerja
                     </h5>
                     <div class="space24"></div>
-                    <h2 class="text-anime-style-3">Expert IT Services Designed To Elevate Your Business</h2>
+                    <h2 class="text-anime-style-3">Buat Portfolio Profesional
+                        dalam 4 Langkah Mudah</h2>
                 </div>
             </div>
         </div>

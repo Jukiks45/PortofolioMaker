@@ -25,8 +25,8 @@
                     <div class="check-icons aniamtion-key-1">
                         <img src="{{ asset('assets/img/icons/check1.svg') }}" alt="">
                         <p>
-                            With 15+ years of experience
-                            IT solution help community.
+                            Membantu mahasiswa dan fresh graduate
+                            membuat portfolio profesional dengan mudah.
                         </p>
                     </div>
                 </div>
@@ -38,13 +38,16 @@
                         <span>
                             <img src="{{ asset('assets/img/icons/sub-logo1.svg') }}" alt="">
                         </span>
-                        About Eitech IT Solution
+                        Masalah yang Sering Dialami Mahasiswa
                     </h5>
                     <div class="space24"></div>
-                    <h2 class="text-anime-style-3">Unlock Business Potential with Tailored IT Services</h2>
+                    <h2 class="text-anime-style-3">Banyak Mahasiswa Belum Memiliki Portfolio Profesional</h2>
                     <div class="space16"></div>
-                    <p data-aos="fade-left" data-aos-duration="800">At Eitech, we understand that every business unique,
-                        which is why we offer customized IT solutions designed to meet.</p>
+                    <p data-aos="fade-left" data-aos-duration="800">
+                        Saat melamar pekerjaan atau magang, portfolio sering menjadi hal penting untuk menunjukkan
+                        kemampuan dan pengalaman. Namun banyak mahasiswa dan fresh graduate kesulitan membuat
+                        portfolio yang terlihat profesional.
+                    </p>
                     <div class="space28"></div>
                     <div class="row" data-aos="fade-left" data-aos-duration="900">
                         <div class="col-lg-6 col-md-6">
@@ -56,9 +59,9 @@
                                     </div>
                                 </div>
                                 <div class="content-area">
-                                    <h4>IT Solution</h4>
+                                    <h4>Tidak Punya Portfolio</h4>
                                     <div class="space8"></div>
-                                    <p>Level Is High</p>
+                                    <p>Mahasiswa belum memiliki portfolio profesional</p>
                                 </div>
                             </div>
                         </div>
@@ -72,22 +75,24 @@
                                     </div>
                                 </div>
                                 <div class="content-area">
-                                    <h4>Cyber Solution</h4>
+                                    <h4>Sulit Membuat CV</h4>
                                     <div class="space8"></div>
-                                    <p>#1 Best Of Solution</p>
+                                    <p>Tidak tahu desain dan struktur CV yang baik</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="space28"></div>
                     <div class="pera-box" data-aos="fade-left" data-aos-duration="1000">
-                        <p>“The right IT solutions done just support your on business-they transform it, at Eitech, we
-                            believe.”</p>
+                        <p>
+                            “Banyak mahasiswa sebenarnya memiliki kemampuan dan pengalaman proyek,
+                            tetapi tidak memiliki media yang tepat untuk menampilkan semuanya secara profesional.”
+                        </p>
                     </div>
                     <div class="space28"></div>
                     <div class="btn-area1" data-aos="fade-left" data-aos-duration="1200">
-                        <a href="contact.html" class="vl-btn2">
-                            See How We Can Help
+                        <a href="#" class="vl-btn2">
+                            Lihat Solusi Kami
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>

@@ -11,28 +11,26 @@
         class="scrollspy-example bg-body-tertiary rounded-2" tabindex="0">
         <!--===== ABOUT AREA STARTS =======-->
         @include('pages.sections.about')
+        {{-- problem section --}}
         <!--===== ABOUT AREA ENDS =======-->
         <!--===== SERVICE AREA STARTS =======-->
         @include('pages.sections.service')
+        {{-- features --}}
         <!--===== SERVICE AREA ENDS =======-->
         <!--===== WORK AREA STARTS =======-->
         @include('pages.sections.work')
+        {{-- template preview --}}
         <!--===== WORK AREA ENDS =======-->
         <!--===== WORK AREA STARTS =======-->
         @include('pages.sections.work-other')
         <!--===== WORK AREA ENDS =======-->
         <!--===== CASE AREA STARTS =======-->
         @include('pages.sections.case')
+        {{-- how it works --}}
         <!--===== CASE AREA ENDS =======-->
         <!--===== TESTIMONIAL AREA STARTS =======-->
         @include('pages.sections.testimonial')
         <!--===== TESTIMONIAL AREA ENDS =======-->
-        <!--===== TEAM AREA STARTS =======-->
-        @include('pages.sections.team')
-        <!--===== TEAM AREA ENDS =======-->
-        <!--===== BLOG AREA STARTS =======-->
-        @include('pages.sections.blog')
-        <!--===== BLOG AREA ENDS =======-->
         <!--===== CTA AREA STARTS =======-->
         @include('pages.sections.cta')
         <!--===== CTA AREA ENDS =======-->

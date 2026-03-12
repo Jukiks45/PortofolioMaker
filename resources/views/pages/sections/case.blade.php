@@ -1,4 +1,4 @@
-<div class="case1-section-area sp1" id="case">
+<div class="case1-section-area sp1">
     <div class="case-works-section-area">
         <div class="container">
             <div class="row">
@@ -11,17 +11,19 @@
                                         <h3>01</h3>
                                     </div>
                                     <div class="content-area">
-                                        <a href="service-single.html">Discovery Consultation</a>
+                                        <a href="#">Isi Data Diri</a>
                                         <div class="space14"></div>
-                                        <p>With our intuitive interface and robust features, you buy, sell.</p>
+                                        <p>Masukkan informasi seperti nama, pendidikan, pengalaman, dan keterampilan
+                                            untuk membuat portfolio Anda.</p>
                                     </div>
                                 </div>
                                 <div class="space30"></div>
                                 <div class="card-boxarea box2" data-aos="zoom-in" data-aos-duration="900">
                                     <div class="content-area">
-                                        <a href="service-single.html">Customized IT Strategy</a>
+                                        <a href="#">Pilih Template</a>
                                         <div class="space14"></div>
-                                        <p>Plus, our commitment to the security means that PayCoin.</p>
+                                        <p>Pilih desain template portfolio yang sesuai dengan kebutuhan dan gaya
+                                            profesional Anda.</p>
                                     </div>
                                     <div class="div text-end">
                                         <h3>02</h3>
@@ -50,20 +52,18 @@
                                         <h3>03</h3>
                                     </div>
                                     <div class="content-area2">
-                                        <a href="service-single.html">Quality Assurance</a>
+                                        <a href="#">Preview Portfolio</a>
                                         <div class="space14"></div>
-                                        <p>Trusted partner in the world of crypto trading Join us today.</p>
+                                        <p>Lihat tampilan portfolio secara langsung sebelum digunakan atau diunduh.</p>
                                     </div>
                                 </div>
                                 <div class="space30"></div>
                                 <div class="card-boxarea box4" data-aos="zoom-in" data-aos-duration="1000">
                                     <div class="content-area2">
-                                        <a href="service-single.html">24/7 Support</a>
+                                        <a href="#">Unduh CV</a>
                                         <div class="space14"></div>
-                                        <p>
-                                            Resources designed to help
-                                            navigate best the dynamic
-                                        </p>
+                                        <p>Unduh CV dalam format PDF dan gunakan untuk melamar pekerjaan atau program
+                                            magang.</p>
                                     </div>
                                     <div class="div">
                                         <h3>04</h3>
@@ -76,7 +76,9 @@
             </div>
         </div>
     </div>
-    <div class="container">
+
+    {{-- ini bagian list template --}}
+    <div class="container" id="case">
         <div class="row">
             <div class="col-lg-5">
                 <div class="case-header heading2 space-margin60">
@@ -84,10 +86,10 @@
                         <span>
                             <img src="{{ asset('assets/img/icons/sub-logo1.svg') }}" alt="">
                         </span>
-                        Case Studies
+                        Template Portfolio
                     </h5>
                     <div class="space24"></div>
-                    <h2 class="text-anime-style-3">Our Latest Case Studies</h2>
+                    <h2 class="text-anime-style-3">Pilih Template Portfolio Profesional</h2>
                 </div>
             </div>
         </div>
@@ -98,11 +100,11 @@
                         <img src="{{ asset('assets/img/all-images/case/case-img1.png') }}" alt="">
                     </div>
                     <div class="content-area">
-                        <p>#CloudFlex Solution</p>
+                        <p>#Template Portfolio</p>
                         <div class="space16"></div>
-                        <a href="service-single.html">Upgrading IT for Financial Secure</a>
+                        <a href="#">Template Portfolio Modern</a>
                         <div class="arrow">
-                            <a href="service-single.html">
+                            <a href="#">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -113,11 +115,11 @@
                         <img src="{{ asset('assets/img/all-images/case/case-img2.png') }}" alt="">
                     </div>
                     <div class="content-area">
-                        <p>#CloudFlex Solution</p>
+                        <p>#Template Portfolio</p>
                         <div class="space16"></div>
-                        <a href="service-single.html">Scaling IT for EcoSolutions</a>
+                        <a href="#">Template Portfolio Kreatif</a>
                         <div class="arrow">
-                            <a href="service-single.html">
+                            <a href="#">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>
@@ -128,11 +130,11 @@
                         <img src="{{ asset('assets/img/all-images/case/case-img3.png') }}" alt="">
                     </div>
                     <div class="content-area">
-                        <p>#CloudFlex Solution</p>
+                        <p>#Template Portfolio</p>
                         <div class="space16"></div>
-                        <a href="service-single.html">Optimizing IT For Solutions</a>
+                        <a href="#">Template Portfolio Minimalis</a>
                         <div class="arrow">
-                            <a href="service-single.html">
+                            <a href="#">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </div>

@@ -8,18 +8,21 @@
                         <span>
                             <img src="{{ asset('assets/img/icons/sub-logo1.svg') }}" alt="">
                         </span>
-                        best it solution
+                        Preview Portfolio
                     </h5>
                     <div class="space24"></div>
-                    <h2 class="text-anime-style-3">End-to-End IT Solutions for Growing Businesses</h2>
+                    <h2 class="text-anime-style-3">Tampilan Portfolio Profesional yang Siap Digunakan</h2>
                     <div class="space16"></div>
-                    <p data-aos="fade-left" data-aos-duration="800">We provide comprehensive, end-to-end IT
-                        solutions of designed to support businesses at stage of growing.</p>
+                    <p data-aos="fade-left" data-aos-duration="800">
+                        Portfolio Maker membantu Anda membuat portfolio yang terlihat profesional hanya dalam
+                        beberapa langkah. Cukup isi data diri, pengalaman, dan keterampilan, lalu sistem akan
+                        menampilkan portfolio secara otomatis dengan desain yang menarik.
+                    </p>
                     <div class="space24"></div>
                     <div class="bg-progress" data-aos="fade-left" data-aos-duration="900">
                         <div class="progress-bar">
                             <label>
-                                It Solution
+                                Kemudahan Penggunaan
                                 <span>98%</span>
                             </label>
                             <div class="progress">
@@ -28,7 +31,7 @@
                         </div>
                         <div class="progress-bar">
                             <label>
-                                Cyber Security
+                                Tampilan Profesional
                                 <span>99%</span>
                             </label>
                             <div class="progress">
@@ -37,7 +40,7 @@
                         </div>
                         <div class="progress-bar">
                             <label>
-                                Cloud Solution
+                                Siap Digunakan untuk Melamar Kerja
                                 <span>99%</span>
                             </label>
                             <div class="progress">
@@ -47,8 +50,8 @@
                     </div>
                     <div class="space32"></div>
                     <div class="btn-area1" data-aos="fade-left" data-aos-duration="1000">
-                        <a href="contact.html" class="vl-btn2">
-                            Discover Our Solutions
+                        <a href="#" class="vl-btn2">
+                            Lihat Template Portfolio
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>

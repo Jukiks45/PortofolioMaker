@@ -55,23 +55,25 @@
                 <div class="row align-items-center row-bg3">
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="vl-logo">
-                            <a href="index.html"><img src="{{ asset('assets/img/logo/logo1.png') }}" alt=""></a>
+                            <a href="index.html"><img src="{{ asset('assets/img/logo/logo1.png') }}"
+                                    alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-7 d-none d-lg-block">
                         <div class="vl-main-menu text-center">
                             <nav class="vl-mobile-menu-active navbar justify-content-center" id="navbar-example2">
                                 <ul class="nav-pills">
-                                    <li class="nav-item"><a href="#about" class="nav-link"><span>About Us</span></a>
+                                    <li class="nav-item"><a href="#about" class="nav-link"><span>Tentang
+                                                Aplikasi</span></a>
                                     </li>
-                                    <li class="nav-item"><a href="#service" class="nav-link"><span>Services</span></a>
+                                    <li class="nav-item"><a href="#service" class="nav-link"><span>Fitur</span></a>
                                     </li>
-                                    <li class="nav-item"><a href="#work" class="nav-link"><span>Works</span></a></li>
-                                    <li class="nav-item"><a href="#case" class="nav-link"><span>Case Study</span></a>
+                                    <li class="nav-item"><a href="#work" class="nav-link"><span>Cara Kerja</span></a>
+                                    </li>
+                                    <li class="nav-item"><a href="#case" class="nav-link"><span>Template</span></a>
                                     </li>
                                     <li class="nav-item"><a href="#testimonial"
-                                            class="nav-link"><span>Testimonials</span></a></li>
-                                    <li class="nav-item"><a href="#blog" class="nav-link"><span>Blogs</span></a></li>
+                                            class="nav-link"><span>Testimoni</span></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -79,8 +81,10 @@
                     <div class="col-lg-3 col-md-6 col-6">
                         <div class="vl-hero-btn d-none d-lg-block text-end">
                             <span class="vl-btn-wrap text-end">
-                                <a href="contact.html" class="vl-btn1">Get Started Now <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="{{ route('login') }}" class="vl-btn1">
+                                    Login Sekarang
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
                             </span>
                         </div>
                         <div class="vl-header-action-item d-block d-lg-none">
@@ -105,8 +109,11 @@
                     <div class="footer-logo1">
                         <img src="{{ asset('assets/img/logo/logo2.png') }}" alt="">
                         <div class="space16"></div>
-                        <p>We provide expert best services technology to meet your unique needs. Whether you're
-                            looking.</p>
+                        <p>
+                            Portfolio Maker membantu mahasiswa dan fresh graduate membuat
+                            portfolio dan CV profesional dengan mudah tanpa perlu kemampuan
+                            desain atau coding.
+                        </p>
                         <div class="space24"></div>
                         <ul>
                             <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
@@ -116,16 +123,17 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="col-lg-2 col-md-6">
                     <div class="space30 d-md-none d-block"></div>
                     <div class="vl-footer-widget">
-                        <h3>Quick Links</h3>
+                        <h3>Navigasi</h3>
                         <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="service.html">It Solution</a></li>
-                            <li><a href="blog1.html">Our Blog</a></li>
-                            <li><a href="#">Pricing Plan</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="#about">Tentang Aplikasi</a></li>
+                            <li><a href="#service">Fitur</a></li>
+                            <li><a href="#work">Template Portfolio</a></li>
+                            <li><a href="#case">Cara Kerja</a></li>
+                            <li><a href="#testimonial">Testimoni</a></li>
                         </ul>
                     </div>
                 </div>
@@ -133,38 +141,57 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="vl-footer-widget">
                         <div class="space30 d-lg-none d-block"></div>
-                        <h3>Our Services</h3>
+                        <h3>Fitur Aplikasi</h3>
                         <ul>
-                            <li><a href="#">Cyber Security Solution</a></li>
-                            <li><a href="#">Scalable Cloud Solutions</a></li>
-                            <li><a href="#">Data Protection Services</a></li>
-                            <li><a href="#">Optimization Management</a></li>
-                            <li><a href="#">Software Development</a></li>
+                            <li><a href="#">Portfolio Builder</a></li>
+                            <li><a href="#">Template Profesional</a></li>
+                            <li><a href="#">Preview Portfolio</a></li>
+                            <li><a href="#">CV Generator Otomatis</a></li>
+                            <li><a href="#">Download CV PDF</a></li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="vl-footer-widget">
                         <div class="space30 d-lg-none d-block"></div>
-                        <h3>Contact Us</h3>
+                        <h3>Kontak</h3>
                         <ul>
-                            <li><a href="tel:+11234567890"><img src="{{ asset('assets/img/icons/phn1.svg') }}" alt="">+1
-                                    123 456 7890</a></li>
-                            <li><a href="#"><img src="{{ asset('assets/img/icons/location1.svg') }}" alt="">421
-                                    Allen, Mexico 4233</a></li>
-                            <li><a href="mailto:eitechsolution@com"><img src="{{ asset('assets/img/icons/email1.svg') }}"
-                                        alt="">eitechsolution@com</a></li>
-                            <li><a href="#"><img src="{{ asset('assets/img/icons/global1.svg') }}"
-                                        alt="">eitechsolution.com</a></li>
+                            <li>
+                                <a href="tel:+6281234567890">
+                                    <img src="{{ asset('assets/img/icons/phn1.svg') }}" alt="">
+                                    +62 812 3456 7890
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/icons/location1.svg') }}" alt="">
+                                    Indonesia
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:portfoliomaker@email.com">
+                                    <img src="{{ asset('assets/img/icons/email1.svg') }}" alt="">
+                                    portfoliomaker@email.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="{{ asset('assets/img/icons/global1.svg') }}" alt="">
+                                    portfoliomaker.com
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="space60"></div>
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="vl-copyright-area">
-                        <p>© Copyright 2024 -Eitech. All Right Reserved</p>
+                        <p>© Copyright 2026 - Portfolio Maker. All Rights Reserved</p>
                     </div>
                 </div>
             </div>
@@ -194,4 +221,3 @@
 <!-- Mirrored from unifato.com/eitech/single-index1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Mar 2026 17:01:47 GMT -->
 
 </html>
-

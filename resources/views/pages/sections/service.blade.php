@@ -8,13 +8,13 @@
                         <span>
                             <img src="{{ asset('assets/img/icons/sub-logo1.svg') }}" alt="">
                         </span>
-                        Our Services
+                        Fitur Aplikasi
                     </h5>
                     <div class="space24"></div>
                     <h2 class="text-anime-style-3">
-                        Expert IT Services Designed
+                        Fitur Lengkap untuk Membuat
                         <br class="d-lg-block d-none">
-                        To Elevate Your Business
+                        Portfolio dan CV Profesional
                     </h2>
                 </div>
             </div>
@@ -26,110 +26,109 @@
                         <img src="{{ asset('assets/img/icons/service-icon1.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">Cyber Security Solution</a>
+                    <a href="#">Portfolio Builder</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Buat portfolio profesional dengan mudah hanya dengan mengisi data diri, pengalaman, dan keterampilan.</p>
                     <div class="space24"></div>
                     <h5>01</h5>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="900">
                 <div class="service1-boxarea">
                     <div class="icons">
                         <img src="{{ asset('assets/img/icons/service-icon2.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">Scalable Cloud Solutions</a>
+                    <a href="#">Template Profesional</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Pilih berbagai template portfolio modern yang dirancang agar terlihat profesional dan menarik.</p>
                     <div class="space24"></div>
                     <h5>02</h5>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1000">
                 <div class="service1-boxarea">
                     <div class="icons">
                         <img src="{{ asset('assets/img/icons/service-icon3.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">Data Protection Services</a>
+                    <a href="#">Preview Portfolio</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Lihat tampilan portfolio secara langsung sebelum diunduh atau dibagikan kepada recruiter.</p>
                     <div class="space24"></div>
                     <h5>03</h5>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1100">
                 <div class="service1-boxarea">
                     <div class="icons">
                         <img src="{{ asset('assets/img/icons/service-icon4.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">Optimization Management</a>
+                    <a href="#">CV Generator Otomatis</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Sistem secara otomatis membuat CV profesional berdasarkan data yang telah Anda masukkan.</p>
                     <div class="space24"></div>
                     <h5>04</h5>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1200">
                 <div class="service1-boxarea">
                     <div class="icons">
                         <img src="{{ asset('assets/img/icons/service-icon5.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">HelpDesk 360 Solutions</a>
+                    <a href="#">Mudah Digunakan</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Tidak memerlukan kemampuan desain atau coding sehingga siapa pun dapat membuat portfolio dengan cepat.</p>
                     <div class="space24"></div>
                     <h5>05</h5>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-duration="1300">
                 <div class="service1-boxarea">
                     <div class="icons">
                         <img src="{{ asset('assets/img/icons/service-icon6.svg') }}" alt="">
                     </div>
                     <div class="arrow">
-                        <a href="service-single.html">
+                        <a href="#">
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                     <div class="space24"></div>
-                    <a href="service-single.html">Software Development</a>
+                    <a href="#">Siap untuk Melamar Kerja</a>
                     <div class="space16"></div>
-                    <p>Our advanced cybersecurity solution designed to protect against ever- an evolving threats,
-                        approach ensures.</p>
+                    <p>Unduh CV dalam format PDF dan gunakan langsung untuk melamar pekerjaan atau program magang.</p>
                     <div class="space24"></div>
                     <h5>06</h5>
                 </div>
