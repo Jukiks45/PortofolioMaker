@@ -47,11 +47,13 @@
                             <h4><i class="fas fa-user me-2"></i>Informasi Dasar</h4>
 
                             <div class="form-floating mb-3">
-                                <input type="file" class="form-control" id="profile_photo" name="profile_photo" accept="image/*">
+                                <input type="file" class="form-control" id="profile_photo" name="profile_photo"
+                                    accept="image/*">
                                 <label for="profile_photo">Foto Profil</label>
                             </div>
 
-                            <img id="photo-preview" style="max-width:120px; display:none; margin-top:10px; border-radius:8px; border:2px solid #e9ecef;">
+                            <img id="photo-preview"
+                                style="max-width:120px; display:none; margin-top:10px; border-radius:8px; border:2px solid #e9ecef;">
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -114,54 +116,54 @@
                                     <button type="button" class="remove-item" onclick="removeItem(this)">
                                         <i class="fas fa-times"></i>
                                     </button>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control"
-                                            name="education_institution[]" placeholder="Institusi">
-                                        <label>Institusi</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" name="education_degree[]"
-                                            placeholder="Gelar">
-                                        <label>Gelar</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" name="education_field[]"
-                                            placeholder="Jurusan">
-                                        <label>Jurusan</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="number" class="form-control"
-                                                    name="education_start_year[]" placeholder="Tahun Mulai">
-                                                <label>Tahun Mulai</label>
+                                                <input type="text" class="form-control"
+                                                    name="education_institution[]" placeholder="Institusi">
+                                                <label>Institusi</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="number" class="form-control"
-                                                    name="education_end_year[]" placeholder="Tahun Selesai">
-                                                <label>Tahun Selesai</label>
+                                                <input type="text" class="form-control" name="education_degree[]"
+                                                    placeholder="Gelar">
+                                                <label>Gelar</label>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" name="education_field[]"
+                                                    placeholder="Jurusan">
+                                                <label>Jurusan</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input type="number" class="form-control"
+                                                            name="education_start_year[]" placeholder="Tahun Mulai">
+                                                        <label>Tahun Mulai</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input type="number" class="form-control"
+                                                            name="education_end_year[]" placeholder="Tahun Selesai">
+                                                        <label>Tahun Selesai</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addEducation()">
-                                <i class="fas fa-plus me-1"></i>Tambah Pendidikan
+                                <i class="fas fa-plus"></i> Tambah Pendidikan
                             </button>
                         </div>
 
@@ -174,50 +176,51 @@
                                     <button type="button" class="remove-item" onclick="removeItem(this)">
                                         <i class="fas fa-times"></i>
                                     </button>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control"
-                                            name="experience_company[]" placeholder="Perusahaan">
-                                        <label>Perusahaan</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control"
-                                            name="experience_position[]" placeholder="Jabatan">
-                                        <label>Jabatan</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control"
-                                            name="experience_location[]" placeholder="Lokasi">
-                                        <label>Lokasi</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="month" class="form-control"
-                                                    name="experience_start_date[]" placeholder="Tanggal Mulai">
-                                                <label>Tanggal Mulai</label>
+                                                <input type="text" class="form-control"
+                                                    name="experience_company[]" placeholder="Perusahaan">
+                                                <label>Perusahaan</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="month" class="form-control"
-                                                    name="experience_end_date[]"
-                                                    placeholder="Tanggal Selesai">
-                                                <label>Tanggal Selesai</label>
+                                                <input type="text" class="form-control"
+                                                    name="experience_position[]" placeholder="Jabatan">
+                                                <label>Jabatan</label>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control"
+                                                    name="experience_location[]" placeholder="Lokasi">
+                                                <label>Lokasi</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input type="month" class="form-control"
+                                                            name="experience_start_date[]"
+                                                            placeholder="Tanggal Mulai">
+                                                        <label>Tanggal Mulai</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input type="month" class="form-control"
+                                                            name="experience_end_date[]"
+                                                            placeholder="Tanggal Selesai">
+                                                        <label>Tanggal Selesai</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-floating">
                                         <textarea class="form-control" name="experience_description[]" placeholder="Deskripsi Pekerjaan"
                                             style="height: 100px"></textarea>
@@ -227,7 +230,7 @@
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addExperience()">
-                                <i class="fas fa-plus me-1"></i>Tambah Pengalaman
+                                <i class="fas fa-plus"></i> Tambah Pengalaman
                             </button>
                         </div>
 
@@ -241,31 +244,31 @@
                                     <button type="button" class="remove-item" onclick="removeItem(this)">
                                         <i class="fas fa-times"></i>
                                     </button>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" name="skill_name[]"
-                                            placeholder="Nama Keterampilan">
-                                        <label>Nama Keterampilan</label>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" name="skill_name[]"
+                                                    placeholder="Nama Keterampilan">
+                                                <label>Nama Keterampilan</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-floating">
+                                                <select class="form-select" name="skill_level[]">
+                                                    <option value="Pemula">Pemula</option>
+                                                    <option value="Menengah">Menengah</option>
+                                                    <option value="Mahir">Mahir</option>
+                                                    <option value="Ahli">Ahli</option>
+                                                </select>
+                                                <label>Tingkat Keterampilan</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-floating">
-                                        <select class="form-select" name="skill_level[]">
-                                            <option value="Pemula">Pemula</option>
-                                            <option value="Menengah">Menengah</option>
-                                            <option value="Mahir">Mahir</option>
-                                            <option value="Ahli">Ahli</option>
-                                        </select>
-                                        <label>Tingkat Keterampilan</label>
-                                    </div>
-                                </div>
-                            </div>
                                 </div>
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addSkill()">
-                                <i class="fas fa-plus me-1"></i>Tambah Keterampilan
+                                <i class="fas fa-plus"></i> Tambah Keterampilan
                             </button>
                         </div>
 
@@ -279,14 +282,15 @@
                                         <i class="fas fa-times"></i>
                                     </button>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="language[]" placeholder="Nama Bahasa">
+                                        <input type="text" class="form-control" name="language[]"
+                                            placeholder="Nama Bahasa">
                                         <label>Nama Bahasa</label>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addLanguage()">
-                                <i class="fas fa-plus me-1"></i>Tambah Bahasa
+                                <i class="fas fa-plus"></i> Tambah Bahasa
                             </button>
                         </div>
 
@@ -300,14 +304,15 @@
                                         <i class="fas fa-times"></i>
                                     </button>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="certification[]" placeholder="Nama Sertifikasi">
+                                        <input type="text" class="form-control" name="certification[]"
+                                            placeholder="Nama Sertifikasi">
                                         <label>Nama Sertifikasi</label>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addCertification()">
-                                <i class="fas fa-plus me-1"></i>Tambah Sertifikasi
+                                <i class="fas fa-plus"></i> Tambah Sertifikasi
                             </button>
                         </div>
 
@@ -323,13 +328,15 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" name="reference_name[]" placeholder="Nama">
+                                                <input type="text" class="form-control" name="reference_name[]"
+                                                    placeholder="Nama">
                                                 <label>Nama</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" name="reference_position[]" placeholder="Jabatan">
+                                                <input type="text" class="form-control"
+                                                    name="reference_position[]" placeholder="Jabatan">
                                                 <label>Jabatan</label>
                                             </div>
                                         </div>
@@ -337,13 +344,15 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" name="reference_company[]" placeholder="Perusahaan">
+                                                <input type="text" class="form-control" name="reference_company[]"
+                                                    placeholder="Perusahaan">
                                                 <label>Perusahaan</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating">
-                                                <input type="tel" class="form-control" name="reference_phone[]" placeholder="Nomor Telepon">
+                                                <input type="tel" class="form-control" name="reference_phone[]"
+                                                    placeholder="Nomor Telepon">
                                                 <label>Nomor Telepon</label>
                                             </div>
                                         </div>
@@ -352,7 +361,7 @@
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addReference()">
-                                <i class="fas fa-plus me-1"></i>Tambah Referensi
+                                <i class="fas fa-plus"></i> Tambah Referensi
                             </button>
                         </div>
 
@@ -365,22 +374,22 @@
                                     <button type="button" class="remove-item" onclick="removeItem(this)">
                                         <i class="fas fa-times"></i>
                                     </button>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" name="project_name[]"
-                                            placeholder="Nama Proyek">
-                                        <label>Nama Proyek</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" name="project_name[]"
+                                                    placeholder="Nama Proyek">
+                                                <label>Nama Proyek</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="url" class="form-control" name="project_url[]"
+                                                    placeholder="URL Proyek">
+                                                <label>URL Proyek</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="url" class="form-control" name="project_url[]"
-                                            placeholder="URL Proyek">
-                                        <label>URL Proyek</label>
-                                    </div>
-                                </div>
-                            </div>
                                     <div class="form-floating">
                                         <textarea class="form-control" name="project_description[]" placeholder="Deskripsi Proyek" style="height: 120px"></textarea>
                                         <label>Deskripsi Proyek</label>
@@ -389,12 +398,15 @@
                             </div>
 
                             <button type="button" class="add-item-btn" onclick="addProject()">
-                                <i class="fas fa-plus me-1"></i>Tambah Proyek
+                                <i class="fas fa-plus"></i> Tambah Proyek
                             </button>
                         </div>
-                        <a href="{{ route('portfolio.template') }}" class="btn btn-primary btn-lg">
-                            Selanjutnya: Pilih Template <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
+                        <div class="text-center mt-4">
+                            <a href="{{ route('portfolio.template') }}" class="btn btn-primary btn-lg">
+                                Selanjutnya: Pilih Template
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
                         {{-- <button type="submit" class="btn btn-primary btn-lg">
                             Selanjutnya: Pilih Template <i class="fas fa-arrow-right ms-2"></i>
                         </button> --}}
@@ -512,7 +524,9 @@
         });
 
         function removeItem(button) {
-            const item = button.closest('.education-item, .experience-item, .skill-item, .project-item, .language-item, .cert-item, .reference-item');
+            const item = button.closest(
+                '.education-item, .experience-item, .skill-item, .project-item, .language-item, .cert-item, .reference-item'
+                );
             item.remove();
         }
     </script>
