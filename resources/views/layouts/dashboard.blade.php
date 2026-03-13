@@ -20,52 +20,55 @@
 
         <ul class="sidebar-nav">
             <li class="sidebar-nav-item">
-                <a href="/dashboard" class="sidebar-nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}" class="sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/create-portfolio" class="sidebar-nav-link {{ request()->is('create-portfolio') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.create') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.create') ? 'active' : '' }}">
                     <i class="fas fa-plus-circle"></i>
                     Buat Portfolio
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/portfolio-template" class="sidebar-nav-link {{ request()->is('portfolio-template') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.template') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.template') ? 'active' : '' }}">
                     <i class="fas fa-palette"></i>
                     Template
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/portfolio-preview" class="sidebar-nav-link {{ request()->is('portfolio-preview') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.preview') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.preview') ? 'active' : '' }}">
                     <i class="fas fa-eye"></i>
                     Preview
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/portfolio-download" class="sidebar-nav-link {{ request()->is('portfolio-download') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.download') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.download') ? 'active' : '' }}">
                     <i class="fas fa-download"></i>
                     Download
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/profile" class="sidebar-nav-link {{ request()->is('profile') ? 'active' : '' }}">
+                <a href="{{ route('profile') }}" class="sidebar-nav-link {{ request()->routeIs('profile') ? 'active' : '' }}">
                     <i class="fas fa-user"></i>
                     Profile
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="/settings" class="sidebar-nav-link {{ request()->is('settings') ? 'active' : '' }}">
+                <a href="{{ route('settings') }}" class="sidebar-nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     Settings
                 </a>
             </li>
             <li class="sidebar-nav-item mt-auto">
-                <a href="/logout" class="sidebar-nav-link text-danger">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
+                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                    @csrf
+                    <button type="submit" class="sidebar-nav-link text-danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
@@ -87,7 +90,7 @@
         </div>
 
         <!-- Page Content -->
-        <main>
+        <main class="container-fluid py-4">
             @yield('content')
         </main>
     </div>
