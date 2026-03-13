@@ -21,7 +21,7 @@
                     </p>
                     <div class="space32"></div>
                     <div class="btn-area1" data-aos="fade-left" data-aos-duration="1000">
-                        <a href="#" class="vl-btn1">
+                        <a href="{{ route('portfolio.create') }}" class="vl-btn1">
                             Buat Portfolio
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>

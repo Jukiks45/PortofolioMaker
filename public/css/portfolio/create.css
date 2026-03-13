@@ -1,0 +1,59 @@
+/* Wizard Progress Indicator */
+
+.step:last-child::after {
+    display: none;
+}
+
+.step-dot {
+    width: 30px;
+    height: 30px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+.step.active .step-dot {
+    background: var(--primary-color);
+    color: white;
+}
+
+.step.completed .step-dot {
+    background: #10b981;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .wizard-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .wizard-step {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+
+    .wizard-step p {
+        text-align: left;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .step::after {
+        display: none;
+    }
+}
