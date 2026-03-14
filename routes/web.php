@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name('home');
 
 
 /*
@@ -36,19 +36,19 @@ Route::get('/register', function () {
 
 Route::get('/create-portfolio', function () {
     return view('portfolio.create');
-})->name('portfolio.create');
+})->name('guest.portfolio.create');
 
 Route::get('/portfolio-template', function () {
     return view('portfolio.template');
-})->name('portfolio.template');
+})->name('guest.portfolio.template');
 
 Route::get('/portfolio-preview', function () {
     return view('portfolio.preview');
-})->name('portfolio.preview');
+})->name('guest.portfolio.preview');
 
 Route::get('/portfolio-download', function () {
     return view('portfolio.download');
-})->name('portfolio.download');
+})->name('guest.portfolio.download');
 
 
 /*
@@ -61,19 +61,63 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->name('dashboard');
 
+
 /*
 |--------------------------------------------------------------------------
-| Dashboard Pages (Dummy for UI)
+| Dashboard Portfolio
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/portfolio', function () {
+    return view('dashboard.portfolio.index');
+})->name('portfolio.index');
+
+Route::get('/portfolio/create', function () {
+    return view('portfolio.create');
+})->name('portfolio.create');
+
+Route::get('/portfolio/edit', function () {
+    return view('dashboard.portfolio.edit');
+})->name('portfolio.edit');
+
+
+/*
+|--------------------------------------------------------------------------
+| Templates
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/portfolio-templates', function () {
+    return view('dashboard.templates.index');
+})->name('portfolio.templates');
+
+/*
+|--------------------------------------------------------------------------
+| Profile
 |--------------------------------------------------------------------------
 */
 
 Route::get('/profile', function () {
-    return view('dashboard.profile');
+    return view('dashboard.profile.index');
 })->name('profile');
 
+
+/*
+|--------------------------------------------------------------------------
+| Settings
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/settings', function () {
-    return view('dashboard.settings');
+    return view('dashboard.settings.index');
 })->name('settings');
+
+
+/*
+|--------------------------------------------------------------------------
+| Logout (Dummy UI)
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/logout', function () {
     return view('dashboard.logout');

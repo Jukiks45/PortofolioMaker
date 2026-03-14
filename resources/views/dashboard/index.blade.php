@@ -21,7 +21,7 @@
                     </p>
                 </div>
 
-                <a href="{{ route('portfolio.create') }}" class="btn btn-primary">
+                <a href="{{ route('guest.portfolio.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i> Buat Portfolio
                 </a>
 
@@ -91,7 +91,7 @@
                         Portfolio Anda
                     </h5>
 
-                    <a href="{{ route('portfolio.create') }}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{ route('guest.portfolio.create') }}" class="btn btn-sm btn-outline-primary">
                         + Buat Baru
                     </a>
 
@@ -114,15 +114,15 @@
 
                         <div class="portfolio-actions">
 
-                            <a href="{{ route('portfolio.preview') }}" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-sm btn-outline-secondary">
                                 <i class="fas fa-eye"></i>
                             </a>
 
-                            <a href="{{ route('portfolio.template') }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('guest.portfolio.template') }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="{{ route('portfolio.download') }}" class="btn btn-sm btn-success">
+                            <a href="{{ route('guest.portfolio.download') }}" class="btn btn-sm btn-success">
                                 <i class="fas fa-download"></i>
                             </a>
 
@@ -149,15 +149,15 @@
 
                         <div class="portfolio-actions">
 
-                            <a href="{{ route('portfolio.preview') }}" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-sm btn-outline-secondary">
                                 <i class="fas fa-eye"></i>
                             </a>
 
-                            <a href="{{ route('portfolio.template') }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('guest.portfolio.template') }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="{{ route('portfolio.download') }}" class="btn btn-sm btn-success">
+                            <a href="{{ route('guest.portfolio.download') }}" class="btn btn-sm btn-success">
                                 <i class="fas fa-download"></i>
                             </a>
 

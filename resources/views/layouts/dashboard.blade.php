@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/portfolio/dashboard.css') }}">
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
+
+        <div class="sidebar-header mb-3">
             <a href="/" class="sidebar-brand">
                 <i class="fas fa-briefcase"></i>
                 {{ config('app.name') }}
@@ -19,58 +22,68 @@
         </div>
 
         <ul class="sidebar-nav">
+
             <li class="sidebar-nav-item">
-                <a href="{{ route('dashboard') }}" class="sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
             </li>
+
             <li class="sidebar-nav-item">
-                <a href="{{ route('portfolio.create') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.create') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.index') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('portfolio.index') ? 'active' : '' }}">
+                    <i class="fas fa-briefcase"></i>
+                    My Portfolio
+                </a>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="{{ route('portfolio.create') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('portfolio.create') ? 'active' : '' }}">
                     <i class="fas fa-plus-circle"></i>
-                    Buat Portfolio
+                    Create Portfolio
                 </a>
             </li>
+
             <li class="sidebar-nav-item">
-                <a href="{{ route('portfolio.template') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.template') ? 'active' : '' }}">
+                <a href="{{ route('portfolio.templates') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('portfolio.templates') ? 'active' : '' }}">
                     <i class="fas fa-palette"></i>
-                    Template
+                    Templates
                 </a>
             </li>
+
             <li class="sidebar-nav-item">
-                <a href="{{ route('portfolio.preview') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.preview') ? 'active' : '' }}">
-                    <i class="fas fa-eye"></i>
-                    Preview
-                </a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a href="{{ route('portfolio.download') }}" class="sidebar-nav-link {{ request()->routeIs('portfolio.download') ? 'active' : '' }}">
-                    <i class="fas fa-download"></i>
-                    Download
-                </a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a href="{{ route('profile') }}" class="sidebar-nav-link {{ request()->routeIs('profile') ? 'active' : '' }}">
+                <a href="{{ route('profile') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('profile') ? 'active' : '' }}">
                     <i class="fas fa-user"></i>
                     Profile
                 </a>
             </li>
+
             <li class="sidebar-nav-item">
-                <a href="{{ route('settings') }}" class="sidebar-nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
+                <a href="{{ route('settings') }}"
+                    class="sidebar-nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     Settings
                 </a>
             </li>
+
             <li class="sidebar-nav-item mt-auto">
                 <form method="POST" action="{{ route('logout') }}" class="d-inline">
                     @csrf
-                    <button type="submit" class="sidebar-nav-link text-danger">
+                    <button type="submit"
+                        class="sidebar-nav-link text-danger border-0 bg-transparent w-100 text-start">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </button>
                 </form>
             </li>
+
         </ul>
+
     </div>
 
     <!-- Main Content -->
@@ -117,10 +130,11 @@
         // Initialize tooltips
         document.addEventListener('DOMContentLoaded', function() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
         });
     </script>
 </body>
+
 </html>
