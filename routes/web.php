@@ -73,7 +73,7 @@ Route::get('/portfolio', function () {
 })->name('portfolio.index');
 
 Route::get('/portfolio/create', function () {
-    return view('portfolio.create');
+    return view('dashboard.portfolio.create');
 })->name('portfolio.create');
 
 Route::get('/portfolio/edit', function () {
