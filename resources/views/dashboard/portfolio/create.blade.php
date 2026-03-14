@@ -14,8 +14,8 @@
     <div class="card shadow-sm border-0">
         <div class="card-body">
 
-            {{-- Import portfolio builder --}}
-            @include('portfolio.create')
+            {{-- Import portfolio builder partial --}}
+            @include('portfolio.partials.builder')
 
         </div>
     </div>
