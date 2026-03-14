@@ -21,7 +21,7 @@
                     </p>
                 </div>
 
-                <a href="{{ route('guest.portfolio.create') }}" class="btn btn-primary">
+                <a href="{{ route('portfolio.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i> Buat Portfolio
                 </a>
 
@@ -91,7 +91,7 @@
                         Portfolio Anda
                     </h5>
 
-                    <a href="{{ route('guest.portfolio.create') }}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{ route('portfolio.create') }}" class="btn btn-sm btn-outline-primary">
                         + Buat Baru
                     </a>
 
