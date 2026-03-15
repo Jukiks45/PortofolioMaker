@@ -8,8 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/portfolio/dashboard.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/globa.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
 </head>
 
 <body>
@@ -70,6 +72,30 @@
                     class="sidebar-nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     Settings
+                </a>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="/admin"
+                    class="sidebar-nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                    <i class="fas fa-shield-alt"></i>
+                    Admin
+                </a>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="/admin/templates"
+                    class="sidebar-nav-link {{ request()->is('admin/templates') ? 'active' : '' }}">
+                    <i class="fas fa-layer-group"></i>
+                    Templates
+                </a>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="/admin/users"
+                    class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                    <i class="fas fa-users"></i>
+                    Users
                 </a>
             </li>
 

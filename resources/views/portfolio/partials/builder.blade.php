@@ -384,7 +384,7 @@
             </button>
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('guest.portfolio.template') }}" class="btn btn-primary btn-lg">
+            <a href="{{ route('portfolio.template') }}" class="btn btn-primary btn-lg">
                 Selanjutnya: Pilih Template
                 <i class="fas fa-arrow-right ms-2"></i>
             </a>

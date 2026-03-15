@@ -80,6 +80,18 @@ Route::get('/portfolio/edit', function () {
     return view('dashboard.portfolio.edit');
 })->name('portfolio.edit');
 
+Route::get('/portfolio/template', function () {
+    return view('dashboard.portfolio.template');
+})->name('portfolio.template');
+
+Route::get('/portfolio/preview', function () {
+    return view('dashboard.portfolio.preview');
+})->name('portfolio.preview');
+
+Route::get('/portfolio/download', function () {
+    return view('dashboard.portfolio.download');
+})->name('portfolio.download');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -122,3 +134,21 @@ Route::get('/settings', function () {
 Route::get('/logout', function () {
     return view('dashboard.logout');
 })->name('logout');
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin', function () {
+    return view('dashboard.admin.index');
+});
+
+Route::get('/admin/templates', function () {
+    return view('dashboard.admin.templates');
+});
+
+Route::get('/admin/users', function () {
+    return view('dashboard.admin.users');
+});
