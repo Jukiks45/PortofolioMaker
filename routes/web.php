@@ -152,3 +152,7 @@ Route::get('/admin/templates', function () {
 Route::get('/admin/users', function () {
     return view('dashboard.admin.users');
 });
+
+Route::get('/admin/portfolios', function () {
+    return view('dashboard.admin.portfolios');
+});

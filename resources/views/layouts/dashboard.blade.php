@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
+    @if (request()->is('admin/templates'))
+        <link rel="stylesheet" href="{{ asset('css/admin/templates.css') }}">
+    @endif
+    @if (request()->is('admin/users'))
+        <link rel="stylesheet" href="{{ asset('css/admin/users.css') }}">
+    @endif
+    @if (request()->is('admin/portfolios'))
+        <link rel="stylesheet" href="{{ asset('css/admin/portfolios.css') }}">
+    @endif
 </head>
 
 <body>
@@ -96,6 +105,14 @@
                     class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     Users
+                </a>
+            </li>
+
+            <li class="sidebar-nav-item">
+                <a href="/admin/portfolios"
+                    class="sidebar-nav-link {{ request()->is('admin/portfolios') ? 'active' : '' }}">
+                    <i class="fas fa-folder"></i>
+                    Portfolios
                 </a>
             </li>
 
