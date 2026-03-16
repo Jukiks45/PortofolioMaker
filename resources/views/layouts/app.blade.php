@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eitech - Technology & It Solutions Services</title>
+    <title>@yield('title', 'Portfolio Maker')</title>
 
     <!--=====FAB ICON=======-->
     <link rel="shortcut icon" href="{{ asset('assets/img/logo/fav-logo1.png') }}" type="image/x-icon">
@@ -55,7 +55,7 @@
                 <div class="row align-items-center row-bg3">
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="vl-logo">
-                            <a href="index.html"><img src="{{ asset('assets/img/logo/logo1.png') }}"
+                            <a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo/logo1.png') }}"
                                     alt=""></a>
                         </div>
                     </div>
