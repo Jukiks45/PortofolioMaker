@@ -124,55 +124,6 @@ a:hover {
 .space60 { margin-top: 60px; margin-bottom: 60px; }
 .space80 { margin-top: 80px; margin-bottom: 80px; }
 
-/* Global Wizard Steps */
-.wizard-steps {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: var(--card);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-}
-
-.wizard-step {
-    text-align: center;
-    flex: 1;
-    position: relative;
-}
-
-.wizard-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 8px auto;
-    font-weight: 600;
-    color: var(--text-light);
-    border: 2px solid var(--card);
-    transition: all 0.3s ease;
-}
-
-.wizard-step.active .wizard-circle {
-    background: var(--secondary);
-    color: white;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-}
-
-.wizard-step p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-.wizard-step.active p {
-    color: var(--secondary);
-    font-weight: 600;
-}
 
 /* Global Template Cards */
 .template-card {

@@ -1,78 +1,54 @@
 /* Admin Templates Page Styles */
 
-/* Enhanced Header Section */
-.header-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.header-title {
-    color: #0b0f3b;
-    font-weight: 800;
-    font-size: 1.5rem;
-    margin-bottom: 0;
-}
-
-/* Enhanced Search and Filters */
-.filters-container {
-    display: flex;
-    gap: 1rem;
+/* Template-specific styles */
+.category-badge {
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid;
+    background: #f1f5f9;
+    color: #334155;
 }
 
-.search-group {
-    flex: 1;
-    min-width: 250px;
+.category-badge.developer {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    color: #1d4ed8;
 }
 
-.filter-group {
-    flex: 0 0 auto;
+.category-badge.designer {
+    border-color: #fce7f3;
+    background: #fdf2f8;
+    color: #be185d;
 }
 
-.form-control:focus {
-    border-color: #5B3DF5;
-    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.1);
-}
-
-.form-select:focus {
-    border-color: #5B3DF5;
-    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.1);
-}
-
-/* Enhanced Empty State */
-.empty-state {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 2px dashed #e2e8f0;
-    border-radius: 16px;
-    padding: 3rem;
-    margin: 2rem 0;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.empty-state:hover {
-    border-color: #5B3DF5;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(91, 61, 245, 0.1);
-}
-
-.empty-state h5 {
-    color: #0b0f3b;
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.empty-state p {
+.category-badge.photographer {
+    border-color: #f1f5f9;
+    background: #f8fafc;
     color: #64748b;
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
+}
+
+.category-badge.general {
+    border-color: #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background: #059669;
+}
+
+.status-indicator.inactive {
+    background: #ef4444;
 }
 
 /* Enhanced Template Cards */
@@ -143,29 +119,6 @@
     font-size: 0.875rem;
 }
 
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border: 1px solid;
-}
-
-.status-active {
-    background: #ecfdf5;
-    color: #059669;
-    border-color: #d1fae5;
-}
-
-.status-inactive {
-    background: #fef2f2;
-    color: #ef4444;
-    border-color: #fecaca;
-}
-
 .template-actions {
     display: flex;
     gap: 0.75rem;
@@ -229,89 +182,6 @@
     border-color: #ef4444;
 }
 
-/* Enhanced Pagination */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding: 1rem;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-}
-
-.pagination .page-item .page-link {
-    color: #64748b;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    transition: all 0.3s ease;
-    background: #ffffff;
-}
-
-.pagination .page-item.active .page-link {
-    background: #5B3DF5;
-    border-color: #5B3DF5;
-    color: white;
-    box-shadow: 0 4px 12px rgba(91, 61, 245, 0.3);
-}
-
-.pagination .page-item:hover .page-link {
-    background: #f8fafc;
-    border-color: #e2e8f0;
-    color: #5B3DF5;
-}
-
-/* Enhanced Modals */
-.modal-content {
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    border-bottom: 1px solid #e2e8f0;
-    border-radius: 16px 16px 0 0;
-}
-
-.modal-header .modal-title {
-    color: #0b0f3b;
-    font-weight: 700;
-    font-size: 1.25rem;
-}
-
-.modal-footer {
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    border-radius: 0 0 16px 16px;
-}
-
-.modal-form .form-label {
-    color: #334155;
-    font-weight: 600;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-}
-
-.modal-form .form-control,
-.modal-form .form-select {
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.modal-form .form-control:focus,
-.modal-form .form-select:focus {
-    border-color: #5B3DF5;
-    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.1);
-    transform: translateY(-1px);
-}
-
 /* Enhanced Buttons */
 .btn-add-template {
     background: linear-gradient(135deg, #5B3DF5 0%, #7c3aed 100%);
@@ -336,10 +206,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-section {
-        padding: 1rem;
-    }
-
     .filters-container {
         flex-direction: column;
         align-items: stretch;
@@ -364,18 +230,6 @@
     .btn-template {
         justify-content: center;
     }
-
-    .empty-state {
-        padding: 2rem 1rem;
-    }
-
-    .empty-state h5 {
-        font-size: 1.25rem;
-    }
-
-    .empty-state p {
-        font-size: 1rem;
-    }
 }
 
 /* Animation Enhancements */
@@ -392,56 +246,4 @@
 
 .template-card {
     animation: fadeInUp 0.5s ease-out;
-}
-
-/* Status Indicators */
-.status-indicator {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    background: #059669;
-}
-
-.status-indicator.inactive {
-    background: #ef4444;
-}
-
-/* Category Badges */
-.category-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border: 1px solid;
-    background: #f1f5f9;
-    color: #334155;
-}
-
-.category-badge.developer {
-    border-color: #bfdbfe;
-    background: #eff6ff;
-    color: #1d4ed8;
-}
-
-.category-badge.designer {
-    border-color: #fce7f3;
-    background: #fdf2f8;
-    color: #be185d;
-}
-
-.category-badge.photographer {
-    border-color: #f1f5f9;
-    background: #f8fafc;
-    color: #64748b;
-}
-
-.category-badge.general {
-    border-color: #e2e8f0;
-    background: #ffffff;
-    color: #475569;
 }

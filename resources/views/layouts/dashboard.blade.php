@@ -7,17 +7,25 @@
     <title>@yield('title', config('app.name'))</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio/wizard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
+
+    @if (request()->is('admin/*'))
+        <link rel="stylesheet" href="{{ asset('css/admin/admin-base.css') }}">
+    @endif
+
     @if (request()->is('admin/templates'))
         <link rel="stylesheet" href="{{ asset('css/admin/templates.css') }}">
     @endif
+
     @if (request()->is('admin/users'))
         <link rel="stylesheet" href="{{ asset('css/admin/users.css') }}">
     @endif
+
     @if (request()->is('admin/portfolios'))
         <link rel="stylesheet" href="{{ asset('css/admin/portfolios.css') }}">
     @endif
@@ -85,8 +93,7 @@
             </li>
 
             <li class="sidebar-nav-item">
-                <a href="/admin"
-                    class="sidebar-nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                <a href="/admin" class="sidebar-nav-link {{ request()->is('admin') ? 'active' : '' }}">
                     <i class="fas fa-shield-alt"></i>
                     Admin
                 </a>
@@ -101,8 +108,7 @@
             </li>
 
             <li class="sidebar-nav-item">
-                <a href="/admin/users"
-                    class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                <a href="/admin/users" class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     Users
                 </a>
