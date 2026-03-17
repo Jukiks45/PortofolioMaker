@@ -1,147 +1,353 @@
+/* ================================================
+   Portfolio Preview Page — Konsisten dengan Tahap 1 & 2
+   Menggunakan design system yang sama: warna, spacing,
+   border-radius, shadow, dan tipografi.
+================================================ */
+
+/* ========================
+   VARIABEL LOKAL
+   (override --primary agar sesuai dengan accent color
+    yang digunakan di create.css & template.css)
+======================== */
+
+:root {
+    --primary: #4f46e5;
+    --secondary: #64748b;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+}
+
+/* ========================
+   WRAPPER UTAMA
+   Konsisten dengan .form-container & .template-container
+======================== */
+
+.preview-container {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+}
+
+/* ========================
+   HEADER PREVIEW
+   Konsisten dengan .form-header di create.css
+======================== */
+
+.preview-header {
+    margin-bottom: 2rem;
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5px solid var(--border);
+}
+
+.preview-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0b0f3b;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+}
+
+.preview-header p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ========================
+   TEMPLATE INFO BADGE
+   Komponen baru yang hilang dari CSS lama
+======================== */
+
+.template-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.75rem;
+}
+
+.template-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #0b0f3b;
+}
+
+.template-style {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    background: #eef2ff;
+    color: #4c2ee6;
+    border: 1px solid #e0e7ff;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* ========================
+   PORTFOLIO PREVIEW CARD
+   Area tampilan CV/portfolio di dalam halaman
+======================== */
+
 .portfolio-preview {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 2rem;
     margin-bottom: 2rem;
-    min-height: 500px;
 }
+
+/* ========================
+   PORTFOLIO HEADER (dalam preview card)
+======================== */
 
 .portfolio-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 1.5rem;
     margin-bottom: 2rem;
     border-bottom: 2px solid var(--border);
     padding-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.portfolio-photo {
+    flex-shrink: 0;
+}
+
+.portfolio-photo img {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    border: 2px solid var(--border);
+    display: block;
+}
+
+.portfolio-info {
+    flex: 1;
+    min-width: 0;
 }
 
 .portfolio-info h1 {
-    color: var(--primary);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    color: #0b0f3b;
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
     font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 .portfolio-info h3 {
-    color: var(--secondary);
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.875rem;
     font-weight: 600;
 }
 
 .portfolio-info p {
     color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+    font-size: 0.925rem;
 }
 
 .portfolio-contact {
     text-align: right;
+    flex-shrink: 0;
 }
+
+/* ========================
+   CONTACT ITEM (di dalam preview)
+======================== */
 
 .contact-item {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 8px;
     margin-bottom: 0.5rem;
     color: var(--text-light);
+    font-size: 0.875rem;
 }
 
 .contact-item i {
     color: var(--primary);
-    margin-right: 0.5rem;
-    width: 20px;
+    width: 16px;
     text-align: center;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+}
+
+/* ========================
+   SECTIONS (dalam preview card)
+   Konsisten dengan .form-section di create.css
+======================== */
+
+.section {
+    margin-bottom: 1.75rem;
+    padding: 1.5rem;
+    background: var(--card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
 }
 
 .section-title {
-    color: var(--primary);
-    font-size: 1.5rem;
+    color: #0b0f3b;
+    font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid var(--primary);
-    padding-left: 1rem;
-    display: inline-block;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.01em;
 }
+
+.section-title i {
+    width: 28px;
+    height: 28px;
+    background: #f5f3ff;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* ========================
+   EXPERIENCE / EDUCATION ITEMS
+   Konsisten dengan item styling di create.css
+======================== */
 
 .experience-item,
 .education-item,
-.skill-item,
-.project-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
+.project-item,
+.reference-item {
+    padding: 1.125rem 1.25rem;
+    margin-bottom: 0.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background: #fafafa;
+    transition: border-color 0.2s ease;
+}
+
+.experience-item:last-child,
+.education-item:last-child,
+.project-item:last-child,
+.reference-item:last-child {
+    margin-bottom: 0;
 }
 
 .experience-item:hover,
 .education-item:hover,
-.skill-item:hover,
-.project-item:hover {
-    border-color: var(--primary);
-    transform: translateX(5px);
+.project-item:hover,
+.reference-item:hover {
+    border-color: #c4b5fd;
+    background: #fdfbff;
 }
 
 .item-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 0.75rem;
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .item-title {
     font-weight: 700;
     color: var(--text-dark);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
 }
 
 .item-subtitle {
     color: var(--primary);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    margin-top: 0.2rem;
 }
 
 .item-date {
     color: var(--text-light);
-    font-size: 0.875rem;
-    background: var(--bg);
-    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    background: #f1f5f9;
+    padding: 0.25rem 0.7rem;
     border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .item-location {
     color: var(--text-light);
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
+    font-size: 0.825rem;
+    margin-bottom: 0.625rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .item-description {
     color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 0.875rem;
 }
+
+/* ========================
+   SKILLS GRID
+======================== */
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
-    margin-top: 1rem;
 }
 
 .skill-category {
-    background: var(--card);
+    background: #fafafa;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.125rem;
 }
 
 .skill-category h6 {
-    color: var(--primary);
+    color: #0b0f3b;
     font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: 0.75rem;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
     padding-bottom: 0.5rem;
 }
 
@@ -152,11 +358,13 @@
 }
 
 .skill-list li {
-    padding: 0.25rem 0;
+    padding: 0.35rem 0;
     color: var(--text-light);
-    border-bottom: 1px solid var(--bg);
+    border-bottom: 1px solid #f1f5f9;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
 }
 
 .skill-list li:last-child {
@@ -165,70 +373,221 @@
 
 .skill-list li i {
     color: var(--primary);
-    margin-right: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+    flex-shrink: 0;
 }
+
+/* ========================
+   PROJECTS GRID
+======================== */
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
 }
 
 .project-card {
-    background: var(--card);
+    background: #fafafa;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .project-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
+    border-color: #c4b5fd;
+    background: #fdfbff;
 }
 
 .project-title {
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
 .project-url {
     color: var(--primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.825rem;
     display: inline-flex;
     align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
 }
 
 .project-url:hover {
+    color: #3730a3;
     text-decoration: underline;
 }
 
-.project-url i {
-    margin-right: 0.5rem;
+/* ========================
+   LANGUAGE & CERTIFICATION ITEMS
+======================== */
+
+.language-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.875rem;
+    background: #f5f3ff;
+    color: var(--primary);
+    border: 1px solid #e0e7ff;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0 0.35rem 0.5rem 0;
 }
 
+#preview-certifications {
+    padding-left: 1.25rem;
+    margin: 0;
+}
+
+#preview-certifications li {
+    padding: 0.35rem 0;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    border-bottom: 1px solid #f1f5f9;
+    line-height: 1.5;
+}
+
+#preview-certifications li:last-child {
+    border-bottom: none;
+}
+
+/* ========================
+   ACTIONS BAR
+   Konsisten dengan .actions di create.css & template.css
+======================== */
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1.5px solid var(--border);
+    margin-top: 1rem;
+}
+
+.actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.actions .btn-primary {
+    background: linear-gradient(135deg, #4f46e5 0%, #6d4cff 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.actions .btn-primary:hover {
+    background: linear-gradient(135deg, #4338ca 0%, #5B3DF5 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+    color: white;
+}
+
+.actions .btn-secondary {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    color: var(--text-light);
+}
+
+.actions .btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: var(--text-dark);
+    transform: translateY(-1px);
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
 
 @media (max-width: 768px) {
+    .preview-container {
+        padding: 1.25rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: var(--radius-md);
+    }
+
     .portfolio-header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 1rem;
     }
 
     .portfolio-info h1 {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .portfolio-contact {
         text-align: left;
-        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .contact-item {
+        justify-content: flex-start;
+    }
+
+    .template-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        justify-content: stretch;
+    }
+
+    .actions .btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .section {
+        padding: 1.125rem;
+    }
+
+    .portfolio-preview {
+        padding: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .preview-container {
+        padding: 1rem;
+    }
+
+    .portfolio-info h1 {
+        font-size: 1.35rem;
     }
 
     .actions {
         flex-direction: column;
+    }
+
+    .actions .btn {
+        width: 100%;
     }
 }
