@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +16,19 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Authentication
+| Authentication (Backend Ready)
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// guest only
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+});
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+// process
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 
 /*
@@ -57,9 +60,11 @@ Route::get('/portfolio-download', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.index');
+    })->name('dashboard');
+});
 
 
 /*
@@ -68,29 +73,31 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/portfolio', function () {
-    return view('dashboard.portfolio.index');
-})->name('portfolio.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/portfolio', function () {
+        return view('dashboard.portfolio.index');
+    })->name('portfolio.index');
 
-Route::get('/portfolio/create', function () {
-    return view('dashboard.portfolio.create');
-})->name('portfolio.create');
+    Route::get('/portfolio/create', function () {
+        return view('dashboard.portfolio.create');
+    })->name('portfolio.create');
 
-Route::get('/portfolio/edit', function () {
-    return view('dashboard.portfolio.edit');
-})->name('portfolio.edit');
+    Route::get('/portfolio/edit', function () {
+        return view('dashboard.portfolio.edit');
+    })->name('portfolio.edit');
 
-Route::get('/portfolio/template', function () {
-    return view('dashboard.portfolio.template');
-})->name('portfolio.template');
+    Route::get('/portfolio/template', function () {
+        return view('dashboard.portfolio.template');
+    })->name('portfolio.template');
 
-Route::get('/portfolio/preview', function () {
-    return view('dashboard.portfolio.preview');
-})->name('portfolio.preview');
+    Route::get('/portfolio/preview', function () {
+        return view('dashboard.portfolio.preview');
+    })->name('portfolio.preview');
 
-Route::get('/portfolio/download', function () {
-    return view('dashboard.portfolio.download');
-})->name('portfolio.download');
+    Route::get('/portfolio/download', function () {
+        return view('dashboard.portfolio.download');
+    })->name('portfolio.download');
+});
 
 
 /*
@@ -127,13 +134,11 @@ Route::get('/settings', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Logout (Dummy UI)
+| Logout (Fixed)
 |--------------------------------------------------------------------------
 */
 
-Route::get('/logout', function () {
-    return view('dashboard.logout');
-})->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
