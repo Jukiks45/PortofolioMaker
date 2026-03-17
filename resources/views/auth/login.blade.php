@@ -1,89 +1,156 @@
-@push('styles')
-    @vite('resources/css/auth.css')
-@endpush
-
 @extends('layouts.auth')
 
 @section('content')
-    <div class="cta1-section-area sp1" style="min-height:100vh; display:flex; align-items:center;">
-        <div class="container">
-            <div class="row align-items-center">
+<div class="auth-wrapper">
 
-                <div class="col-lg-5">
-                    <div class="cta-header heading1">
+    {{-- ======================== LEFT PANEL ======================== --}}
+    <div class="auth-left">
+        <div class="auth-grid-overlay"></div>
 
-                        <h2>Login</h2>
+        {{-- Brand --}}
+        <a href="{{ url('/') }}" class="auth-brand">
+            <div class="auth-brand-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <span class="auth-brand-name">Portfolio Maker</span>
+        </a>
 
-                        <div class="space24"></div>
+        {{-- Main content --}}
+        <div class="auth-left-body">
+            <h1 class="auth-left-headline">
+                Wujudkan Karier<br>
+                <span>Impianmu</span> Sekarang
+            </h1>
+            <p class="auth-left-desc">
+                Buat portfolio dan CV profesional dalam hitungan menit.
+                Tampil menonjol di mata rekruter tanpa perlu skill desain.
+            </p>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('login') }}" class="login-form">
-                            @csrf
-
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Masukkan Email Anda"
-                                value="{{ old('email') }}"
-                                class="@error('email') is-invalid @enderror"
-                            >
-                            @error('email')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Masukkan Password"
-                                class="@error('password') is-invalid @enderror"
-                            >
-                            @error('password')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <button type="submit" class="vl-btn1">
-                                Login
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-
-                        </form>
-
-                        <div class="space24"></div>
-
-                        <p>
-                            Belum punya akun?
-                            <a href="{{ route('register') }}" style="color:#0a0a0a; font-weight:600;">
-                                Daftar Sekarang
-                            </a>
-                        </p>
-
+            <div class="auth-features">
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-magic"></i>
                     </div>
+                    <span>Portfolio Builder Otomatis</span>
                 </div>
-
-                <div class="col-lg-3"></div>
-
-                <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                    <div class="cta-images">
-
-                        <img src="{{ asset('assets/img/elements/elements7.png') }}" class="elements7 keyframe5">
-
-                        <div class="img1">
-                            <img src="{{ asset('assets/img/all-images/cta/cta-img1.png') }}">
-                        </div>
-
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-palette"></i>
                     </div>
+                    <span>Template Profesional Siap Pakai</span>
                 </div>
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <span>Unduh CV PDF Langsung</span>
+                </div>
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Ramah ATS & Recruiter</span>
+                </div>
+            </div>
+        </div>
 
+        {{-- Stats --}}
+        <div class="auth-stats">
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">500+</span>
+                <span class="auth-stat-label">Portfolio Dibuat</span>
+            </div>
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">10+</span>
+                <span class="auth-stat-label">Template Tersedia</span>
+            </div>
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">98%</span>
+                <span class="auth-stat-label">User Puas</span>
             </div>
         </div>
     </div>
+
+    {{-- ======================== RIGHT PANEL ======================== --}}
+    <div class="auth-right">
+        <div class="auth-form-card">
+
+            <h2 class="auth-form-title">Selamat datang 👋</h2>
+            <p class="auth-form-subtitle">
+                Belum punya akun?
+                <a href="{{ route('register') }}">Daftar Sekarang</a>
+            </p>
+
+            {{-- Errors --}}
+            @if ($errors->any())
+                <div class="auth-alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                {{-- Email --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="email">Email</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="auth-input @error('email') is-invalid @enderror"
+                            placeholder="nama@email.com"
+                            value="{{ old('email') }}"
+                            autocomplete="email"
+                            required
+                        >
+                        <i class="fas fa-envelope auth-input-icon"></i>
+                    </div>
+                    @error('email')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                {{-- Password --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="password">Password</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="auth-input @error('password') is-invalid @enderror"
+                            placeholder="Masukkan password Anda"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <i class="fas fa-lock auth-input-icon"></i>
+                    </div>
+                    @error('password')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    Masuk
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
 @endsection

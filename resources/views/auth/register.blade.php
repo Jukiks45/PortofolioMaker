@@ -1,112 +1,204 @@
-@push('styles')
-    @vite('resources/css/auth.css')
-@endpush
-
 @extends('layouts.auth')
 
 @section('content')
-    <div class="cta1-section-area sp1" style="min-height:100vh; display:flex; align-items:center;">
-        <div class="container">
-            <div class="row align-items-center">
+<div class="auth-wrapper">
 
-                <!-- FORM -->
-                <div class="col-lg-5">
-                    <div class="cta-header heading1">
+    {{-- ======================== LEFT PANEL ======================== --}}
+    <div class="auth-left">
+        <div class="auth-grid-overlay"></div>
 
-                        <h2>Register</h2>
+        {{-- Brand --}}
+        <a href="{{ url('/') }}" class="auth-brand">
+            <div class="auth-brand-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <span class="auth-brand-name">Portfolio Maker</span>
+        </a>
 
-                        <div class="space24"></div>
+        {{-- Main content --}}
+        <div class="auth-left-body">
+            <h1 class="auth-left-headline">
+                Mulai Perjalanan<br>
+                <span>Karier Profesional</span><br>
+                Kamu
+            </h1>
+            <p class="auth-left-desc">
+                Bergabung bersama ratusan mahasiswa dan fresh graduate
+                yang telah membuat portfolio profesional dengan mudah.
+            </p>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('register') }}" class="login-form">
-                            @csrf
-
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Nama Lengkap"
-                                value="{{ old('name') }}"
-                                class="@error('name') is-invalid @enderror"
-                            >
-                            @error('name')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Masukkan Email Anda"
-                                value="{{ old('email') }}"
-                                class="@error('email') is-invalid @enderror"
-                            >
-                            @error('email')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                class="@error('password') is-invalid @enderror"
-                            >
-                            @error('password')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <input
-                                type="password"
-                                name="password_confirmation"
-                                placeholder="Konfirmasi Password"
-                                class="@error('password_confirmation') is-invalid @enderror"
-                            >
-                            @error('password_confirmation')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-
-                            <button type="submit" class="vl-btn1">
-                                Daftar Sekarang
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-
-                        </form>
-
-                        <div class="space24"></div>
-
-                        <p>
-                            Sudah punya akun?
-                            <a href="{{ route('login') }}" style="color:#0a0a0a; font-weight:600;">
-                                Login Disini
-                            </a>
-                        </p>
-
+            <div class="auth-features">
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-rocket"></i>
                     </div>
+                    <span>Gratis & Mudah Digunakan</span>
                 </div>
-
-                <!-- IMAGE -->
-                <div class="col-lg-3"></div>
-
-                <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                    <div class="cta-images">
-
-                        <img src="{{ asset('assets/img/elements/elements7.png') }}" class="elements7 keyframe5">
-
-                        <div class="img1">
-                            <img src="{{ asset('assets/img/all-images/cta/cta-img1.png') }}">
-                        </div>
-
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-bolt"></i>
                     </div>
+                    <span>Selesai dalam 5 Menit</span>
                 </div>
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span>Data Aman & Terlindungi</span>
+                </div>
+                <div class="auth-feature-pill">
+                    <div class="auth-feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <span>Export PDF Kapan Saja</span>
+                </div>
+            </div>
+        </div>
 
+        {{-- Stats --}}
+        <div class="auth-stats">
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">500+</span>
+                <span class="auth-stat-label">Portfolio Dibuat</span>
+            </div>
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">10+</span>
+                <span class="auth-stat-label">Template Tersedia</span>
+            </div>
+            <div class="auth-stat-item">
+                <span class="auth-stat-value">98%</span>
+                <span class="auth-stat-label">User Puas</span>
             </div>
         </div>
     </div>
+
+    {{-- ======================== RIGHT PANEL ======================== --}}
+    <div class="auth-right">
+        <div class="auth-form-card">
+
+            <h2 class="auth-form-title">Buat Akun Baru ✨</h2>
+            <p class="auth-form-subtitle">
+                Sudah punya akun?
+                <a href="{{ route('login') }}">Login di sini</a>
+            </p>
+
+            {{-- Errors --}}
+            @if ($errors->any())
+                <div class="auth-alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                {{-- Name --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="name">Nama Lengkap</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="auth-input @error('name') is-invalid @enderror"
+                            placeholder="John Doe"
+                            value="{{ old('name') }}"
+                            autocomplete="name"
+                            required
+                        >
+                        <i class="fas fa-user auth-input-icon"></i>
+                    </div>
+                    @error('name')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                {{-- Email --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="email">Email</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="auth-input @error('email') is-invalid @enderror"
+                            placeholder="nama@email.com"
+                            value="{{ old('email') }}"
+                            autocomplete="email"
+                            required
+                        >
+                        <i class="fas fa-envelope auth-input-icon"></i>
+                    </div>
+                    @error('email')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                {{-- Password --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="password">Password</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="auth-input @error('password') is-invalid @enderror"
+                            placeholder="Minimal 8 karakter"
+                            autocomplete="new-password"
+                            required
+                        >
+                        <i class="fas fa-lock auth-input-icon"></i>
+                    </div>
+                    @error('password')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                {{-- Confirm Password --}}
+                <div class="auth-form-group">
+                    <label class="auth-label" for="password_confirmation">Konfirmasi Password</label>
+                    <div class="auth-input-wrapper">
+                        <input
+                            type="password"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            class="auth-input @error('password_confirmation') is-invalid @enderror"
+                            placeholder="Ulangi password Anda"
+                            autocomplete="new-password"
+                            required
+                        >
+                        <i class="fas fa-lock auth-input-icon"></i>
+                    </div>
+                    @error('password_confirmation')
+                        <div class="auth-field-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    Daftar Sekarang
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
 @endsection
