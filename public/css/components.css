@@ -1,59 +1,352 @@
-/* =========================
-   ACTION BUTTON AREA
-========================= */
+/* Admin Templates Page — Upgraded UI */
 
-.actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
+/* ========================
+   CATEGORY BADGES
+======================== */
 
-/* =========================
-   TEMPLATE INFO
-========================= */
-
-.template-info {
-    display: flex;
-    justify-content: space-between;
+.category-badge {
+    display: inline-flex;
     align-items: center;
-    margin-top: 12px;
-}
-
-.template-name {
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.template-style {
-    font-size: 12px;
-    background: var(--bg);
-    color: var(--text-light);
-    padding: 4px 10px;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1.5px solid;
+    letter-spacing: 0.02em;
 }
 
-/* =========================
-   BUTTON STANDARDIZATION
-========================= */
+.category-badge.developer {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
 
-.btn-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    border-radius: 8px;
-    padding: 0.75rem 2rem;
+.category-badge.designer {
+    border-color: #fce7f3;
+    background: #fdf2f8;
+    color: #be185d;
+}
+
+.category-badge.photographer {
+    border-color: #f1f5f9;
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.category-badge.general {
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    flex-shrink: 0;
+}
+
+.status-indicator.inactive {
+    background: #ef4444;
+}
+
+/* ========================
+   FILTERS
+======================== */
+
+.filters-container {
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.filter-group {
+    min-width: 160px;
+}
+
+.filter-group .form-select {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.875rem;
+    color: #334155;
+    font-weight: 500;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-group .form-select:focus {
+    border-color: #5B3DF5;
+    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.08);
+}
+
+/* Search within header */
+.filters-container .search-group {
+    flex: 1;
+    min-width: 220px;
+}
+
+.filters-container .search-group .input-group {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters-container .search-group .input-group:focus-within {
+    border-color: #5B3DF5;
+    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.08);
+}
+
+.filters-container .search-group .input-group-text {
+    background: #f8fafc;
+    border: none;
+    color: #94a3b8;
+    padding: 0 0.875rem;
+}
+
+.filters-container .search-group .form-control {
+    border: none;
+    box-shadow: none;
+    padding: 0.65rem 0.875rem;
+    font-size: 0.875rem;
+}
+
+/* ========================
+   ADD TEMPLATE BUTTON
+======================== */
+
+.btn-add-template {
+    background: linear-gradient(135deg, #5B3DF5 0%, #7c3aed 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 14px rgba(91, 61, 245, 0.3);
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-add-template:hover {
+    background: linear-gradient(135deg, #4c2ee6 0%, #6d4cff 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(91, 61, 245, 0.35);
+    color: white;
+}
+
+.btn-add-template:active {
+    transform: translateY(0);
+}
+
+/* ========================
+   TEMPLATE GRID
+======================== */
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+/* ========================
+   TEMPLATE CARD
+======================== */
+
+.template-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(11, 15, 59, 0.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.template-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(91, 61, 245, 0.12);
+    border-color: #5B3DF5;
+}
+
+.template-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    display: block;
+}
+
+.template-content {
+    padding: 1.25rem 1.375rem 1.375rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-title {
+    color: #0b0f3b;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.template-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.template-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+/* ========================
+   TEMPLATE ACTION BUTTONS
+======================== */
+
+.btn-template {
+    flex: 1;
+    padding: 0.6rem 0.75rem;
+    border-radius: 10px;
     font-weight: 600;
-    transition: .3s;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.2s ease;
+    border: 1.5px solid;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    white-space: nowrap;
 }
 
-.btn-primary:hover {
-    background: #070a2a;
+.btn-template:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-secondary {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text-light);
-    border-radius: 8px;
-    padding: 0.75rem 2rem;
+.btn-preview {
+    background: #f8fafc;
+    color: #64748b;
+    border-color: #e2e8f0;
+}
+
+.btn-preview:hover {
+    background: #5B3DF5;
+    color: white;
+    border-color: #5B3DF5;
+    box-shadow: 0 4px 12px rgba(91, 61, 245, 0.25);
+}
+
+.btn-edit {
+    background: #fffbeb;
+    color: #d97706;
+    border-color: #fde68a;
+}
+
+.btn-edit:hover {
+    background: #d97706;
+    color: white;
+    border-color: #d97706;
+}
+
+.btn-delete {
+    background: #fef2f2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+.btn-delete:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+/* ========================
+   ANIMATIONS
+======================== */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.template-card {
+    animation: fadeInUp 0.3s ease-out both;
+}
+
+.template-card:nth-child(1) { animation-delay: 0.04s; }
+.template-card:nth-child(2) { animation-delay: 0.08s; }
+.template-card:nth-child(3) { animation-delay: 0.12s; }
+.template-card:nth-child(4) { animation-delay: 0.16s; }
+
+/* ========================
+   RESPONSIVE
+======================== */
+
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group,
+    .filters-container .search-group {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .template-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .template-image {
+        height: 150px;
+    }
+
+    .btn-add-template {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .template-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .template-actions {
+        flex-wrap: wrap;
+    }
+
+    .btn-template {
+        flex: none;
+        width: calc(50% - 0.25rem);
+    }
+
+    .btn-template:last-child {
+        width: 100%;
+    }
 }

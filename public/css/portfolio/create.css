@@ -1,40 +1,37 @@
-/* =========================
+/* Portfolio Create / Builder Form — Upgraded UI */
+
+/* ========================
    ADD BUTTON
-========================= */
+======================== */
 
 .add-item-btn {
-
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-
-    background: var(--bg);
+    gap: 6px;
+    background: #f5f3ff;
     color: var(--secondary);
-
-    border: 1px dashed var(--secondary);
+    border: 1.5px dashed var(--secondary);
     border-radius: 8px;
-
-    padding: 8px 14px;
-
-    font-size: 14px;
-    font-weight: 500;
-
+    padding: 7px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
     cursor: pointer;
-
-    transition: .2s;
-    margin-top: 10px;
+    transition: all 0.2s ease;
+    margin-top: 0.875rem;
+    letter-spacing: 0.01em;
 }
 
 .add-item-btn:hover {
     background: var(--secondary);
     color: white;
-
+    border-style: solid;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
 }
 
-/* =========================
-   REMOVE BUTTON
-========================= */
+/* ========================
+   DYNAMIC ITEMS
+======================== */
 
 .education-item,
 .experience-item,
@@ -44,73 +41,193 @@
 .cert-item,
 .reference-item {
     position: relative;
-
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
-
+    padding: 1.375rem 1.5rem;
+    margin-bottom: 0.875rem;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
     background: var(--card);
+    transition: border-color 0.2s ease;
 }
 
-/* X button */
+.education-item:hover,
+.experience-item:hover,
+.skill-item:hover,
+.project-item:hover,
+.language-item:hover,
+.cert-item:hover,
+.reference-item:hover {
+    border-color: #c4b5fd;
+}
 
+/* Remove (X) button */
 .remove-item {
-
     position: absolute;
-
     top: 10px;
     right: 10px;
-
-    width: 28px;
-    height: 28px;
-
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: none;
     border-radius: 50%;
-
-    background: color-mix(in oklab, var(--danger) 20%, transparent);
+    background: #fef2f2;
     color: var(--danger);
-
     cursor: pointer;
-
-    transition: .2s;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
 }
 
 .remove-item:hover {
     background: var(--danger);
     color: white;
+    transform: scale(1.1);
 }
 
-/* =========================
-   FORM SECTION
-========================= */
+/* ========================
+   FORM SECTIONS
+======================== */
 
 .form-section {
-
-    padding: 1.8rem;
-    margin-bottom: 2rem;
-
+    padding: 1.625rem 1.75rem;
+    margin-bottom: 1.5rem;
     border: 1px solid var(--border);
-    border-radius: 12px;
-
+    border-radius: 14px;
     background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .form-section h4 {
-
-    font-size: 1.1rem;
-    font-weight: 600;
-
+    font-size: 1rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
-
     display: flex;
     align-items: center;
     gap: 8px;
-
     color: var(--primary);
+    padding-bottom: 0.875rem;
+    border-bottom: 1.5px solid var(--border);
+}
+
+.form-section h4 i {
+    width: 32px;
+    height: 32px;
+    background: var(--bg);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--secondary);
+    flex-shrink: 0;
+}
+
+/* Form header inside builder */
+.form-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+}
+
+.form-header p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Form floating overrides */
+.form-floating {
+    margin-bottom: 0.875rem;
+}
+
+.form-floating .form-control,
+.form-floating .form-select {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-floating .form-control:focus,
+.form-floating .form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-floating label {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    padding: 0.9rem 1rem 0;
+}
+
+/* ========================
+   PHOTO PREVIEW
+======================== */
+
+#photo-preview {
+    max-width: 100px;
+    display: none;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+
+@media (max-width: 768px) {
+    .form-section {
+        padding: 1.125rem 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1.125rem;
+    }
+
+    .form-section h4 {
+        font-size: 0.95rem;
+        margin-bottom: 1.125rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .education-item,
+    .experience-item,
+    .skill-item,
+    .project-item,
+    .language-item,
+    .cert-item,
+    .reference-item {
+        padding: 1rem 1.125rem;
+        border-radius: 10px;
+    }
+
+    .add-item-btn {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+    }
+
+    .form-header h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section {
+        padding: 1rem;
+    }
+
+    .form-floating .form-control,
+    .form-floating .form-select {
+        font-size: 0.85rem;
+    }
 }

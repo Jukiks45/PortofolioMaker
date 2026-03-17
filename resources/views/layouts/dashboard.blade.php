@@ -20,25 +20,31 @@
     @if (request()->is('admin/*'))
         <link rel="stylesheet" href="{{ asset('css/admin/admin-base.css') }}">
     @endif
-
     @if (request()->is('admin/templates'))
         <link rel="stylesheet" href="{{ asset('css/admin/templates.css') }}">
     @endif
-
     @if (request()->is('admin/users'))
         <link rel="stylesheet" href="{{ asset('css/admin/users.css') }}">
     @endif
-
     @if (request()->is('admin/portfolios'))
         <link rel="stylesheet" href="{{ asset('css/admin/portfolios.css') }}">
     @endif
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
 
-        <div class="sidebar-header mb-3">
+    <!-- Mobile sidebar toggle -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
             <a href="/" class="sidebar-brand">
                 <i class="fas fa-briefcase"></i>
                 {{ config('app.name') }}
@@ -46,6 +52,9 @@
         </div>
 
         <ul class="sidebar-nav">
+
+            {{-- USER MENU --}}
+            <li><span class="sidebar-label">Menu Utama</span></li>
 
             <li class="sidebar-nav-item">
                 <a href="{{ route('dashboard') }}"
@@ -67,7 +76,7 @@
                 <a href="{{ route('portfolio.create') }}"
                     class="sidebar-nav-link {{ request()->routeIs('portfolio.create') ? 'active' : '' }}">
                     <i class="fas fa-plus-circle"></i>
-                    Create Portfolio
+                    Buat Portfolio
                 </a>
             </li>
 
@@ -83,7 +92,7 @@
                 <a href="{{ route('profile') }}"
                     class="sidebar-nav-link {{ request()->routeIs('profile') ? 'active' : '' }}">
                     <i class="fas fa-user"></i>
-                    Profile
+                    Profil
                 </a>
             </li>
 
@@ -91,14 +100,21 @@
                 <a href="{{ route('settings') }}"
                     class="sidebar-nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
-                    Settings
+                    Pengaturan
                 </a>
             </li>
 
+            {{-- DIVIDER --}}
+            <li><div class="sidebar-divider"></div></li>
+
+            {{-- ADMIN MENU --}}
+            <li><span class="sidebar-label">Admin</span></li>
+
             <li class="sidebar-nav-item">
-                <a href="/admin" class="sidebar-nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                <a href="/admin"
+                    class="sidebar-nav-link {{ request()->is('admin') && !request()->is('admin/*') ? 'active' : '' }}">
                     <i class="fas fa-shield-alt"></i>
-                    Admin
+                    Admin Panel
                 </a>
             </li>
 
@@ -106,30 +122,34 @@
                 <a href="/admin/templates"
                     class="sidebar-nav-link {{ request()->is('admin/templates') ? 'active' : '' }}">
                     <i class="fas fa-layer-group"></i>
-                    Templates
+                    Kelola Template
                 </a>
             </li>
 
             <li class="sidebar-nav-item">
-                <a href="/admin/users" class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                <a href="/admin/users"
+                    class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
-                    Users
+                    Kelola Users
                 </a>
             </li>
 
             <li class="sidebar-nav-item">
                 <a href="/admin/portfolios"
                     class="sidebar-nav-link {{ request()->is('admin/portfolios') ? 'active' : '' }}">
-                    <i class="fas fa-folder"></i>
-                    Portfolios
+                    <i class="fas fa-folder-open"></i>
+                    Kelola Portfolio
                 </a>
             </li>
 
-            <li class="sidebar-nav-item mt-auto">
-                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+            {{-- DIVIDER --}}
+            <li><div class="sidebar-divider"></div></li>
+
+            {{-- LOGOUT --}}
+            <li class="sidebar-nav-item">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit"
-                        class="sidebar-nav-link text-danger border-0 bg-transparent w-100 text-start">
+                    <button type="submit" class="sidebar-nav-link text-danger">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </button>
@@ -137,17 +157,17 @@
             </li>
 
         </ul>
-
-    </div>
+    </aside>
 
     <!-- Main Content -->
     <div class="main-content">
+
         <!-- Topbar -->
         <div class="topbar">
             <h1 class="page-title">@yield('title')</h1>
             <div class="user-info">
                 <div class="user-avatar">
-                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                    {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}
                 </div>
                 <div class="user-details">
                     <span class="user-name">{{ auth()->user()->name ?? 'User' }}</span>
@@ -157,35 +177,59 @@
         </div>
 
         <!-- Page Content -->
-        <main class="container-fluid py-4">
+        <main>
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Mobile sidebar toggle
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+        // Sidebar toggle for mobile
+        const sidebar        = document.getElementById('sidebar');
+        const overlay        = document.getElementById('sidebarOverlay');
+        const toggleBtn      = document.getElementById('sidebarToggle');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
         }
 
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const isMobile = window.innerWidth <= 992;
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
 
-            if (isMobile && sidebar.classList.contains('active')) {
-                if (!sidebar.contains(e.target) && !e.target.closest('.sidebar-toggle')) {
-                    sidebar.classList.remove('active');
-                }
-            }
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.contains('active') ? closeSidebar() : openSidebar();
         });
 
-        // Initialize tooltips
-        document.addEventListener('DOMContentLoaded', function() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) closeSidebar();
+        });
+
+        // Bootstrap tooltips
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                new bootstrap.Tooltip(el);
             });
         });
     </script>

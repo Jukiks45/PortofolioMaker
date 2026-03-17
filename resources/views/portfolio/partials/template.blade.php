@@ -1,7 +1,9 @@
 <div class="template-container">
+
+    {{-- WIZARD --}}
     <div class="wizard-steps">
-        <div class="wizard-step">
-            <div class="wizard-circle">1</div>
+        <div class="wizard-step completed">
+            <div class="wizard-circle"><i class="fas fa-check" style="font-size:.7rem;"></i></div>
             <p>Isi Data</p>
         </div>
         <div class="wizard-step active">
@@ -18,13 +20,16 @@
         </div>
     </div>
 
-    <div class="template-header">
+    {{-- HEADER --}}
+    <div class="form-header">
         <h2><i class="fas fa-palette me-2"></i>Pilih Template Portfolio</h2>
         <p>Pilih template yang paling sesuai dengan gaya dan kebutuhan Anda</p>
     </div>
 
+    {{-- GRID --}}
     <div class="template-grid">
-        <!-- Template 1 -->
+
+        {{-- Template 1 --}}
         <div class="template-card" onclick="selectTemplate('modern', this)">
             <div class="template-preview">
                 <img src="{{ asset('templates/template1.png') }}" alt="Modern Resume Template">
@@ -35,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Template 2 -->
+        {{-- Template 2 --}}
         <div class="template-card" onclick="selectTemplate('creative', this)">
             <div class="template-preview">
                 <img src="{{ asset('templates/template2.png') }}" alt="Creative Resume Template">
@@ -45,9 +50,21 @@
                 <div class="template-style">Artistic</div>
             </div>
         </div>
+
+        {{-- Template 3 --}}
+        <div class="template-card" onclick="selectTemplate('professional', this)">
+            <div class="template-preview">
+                <img src="{{ asset('templates/template3.png') }}" alt="Professional CV">
+            </div>
+            <div class="template-info">
+                <div class="template-name">Professional CV</div>
+                <div class="template-style">Corporate</div>
+            </div>
+        </div>
+
     </div>
 
-
+    {{-- ACTIONS --}}
     <div class="actions">
         <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-2"></i>Kembali
@@ -56,104 +73,63 @@
             <i class="fas fa-eye me-2"></i>Lihat Preview
         </button>
     </div>
+
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const routes = {
-        preview: "{{ route('portfolio.preview') }}",
-    };
-    let selectedTemplate = '';
+const routes = { preview: "{{ route('portfolio.preview') }}" };
+let selectedTemplate = '';
 
-    function selectTemplate(templateName, element) {
-        // Remove selected class from all cards
-        document.querySelectorAll('.template-card').forEach(card => {
-            card.classList.remove('selected');
-        });
+function selectTemplate(templateName, element) {
+    document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+    element.classList.add('selected');
+    selectedTemplate = templateName;
+    document.getElementById('preview-btn').disabled = false;
 
-        // Add selected class to clicked card
-        element.classList.add('selected');
+    // Toast feedback
+    showToast('Template "' + element.querySelector('.template-name').textContent + '" dipilih!');
+}
 
-        selectedTemplate = templateName;
-        document.getElementById('preview-btn').disabled = false;
+function showToast(msg) {
+    const existing = document.querySelector('.tpl-toast');
+    if (existing) existing.remove();
 
-        // Optional: Show selection feedback
-        showSelectionFeedback(templateName);
-    }
-
-    function showSelectionFeedback(templateName) {
-        // Remove existing feedback
-        const existingFeedback = document.querySelector('.selection-feedback');
-        if (existingFeedback) {
-            existingFeedback.remove();
-        }
-
-        // Create feedback element
-        const feedback = document.createElement('div');
-        feedback.className = 'selection-feedback';
-        feedback.style.position = 'fixed';
-        feedback.style.top = '20px';
-        feedback.style.right = '20px';
-        feedback.style.background = '#10b981';
-        feedback.style.color = 'white';
-        feedback.style.padding = '1rem 2rem';
-        feedback.style.borderRadius = '8px';
-        feedback.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.3)';
-        feedback.style.zIndex = '9999';
-        feedback.style.opacity = '0';
-        feedback.style.transition = 'opacity 0.3s ease';
-
-        const templateNames = {
-            'modern-minimal': 'Modern Minimal',
-            'creative-portfolio': 'Creative Portfolio',
-            'corporate-professional': 'Corporate Professional'
-        };
-
-        feedback.innerHTML = `
-                <i class="fas fa-check-circle me-2"></i>
-                Template "${templateNames[templateName]}" dipilih!
-            `;
-
-        document.body.appendChild(feedback);
-
-        // Animate feedback
-        setTimeout(() => {
-            feedback.style.opacity = '1';
-        }, 10);
-
-        // Auto remove after 3 seconds
-        setTimeout(() => {
-            feedback.style.opacity = '0';
-            setTimeout(() => {
-                feedback.remove();
-            }, 300);
-        }, 3000);
-    }
-
-        function goToPreview() {
-            if (selectedTemplate) {
-                // Simpan template yang dipilih ke session storage atau kirim via URL
-                sessionStorage.setItem('selectedTemplate', selectedTemplate);
-
-                // Redirect ke halaman preview
-                window.location.href = routes.preview + '?template=' + selectedTemplate;
-            } else {
-                alert('Silakan pilih template terlebih dahulu!');
-            }
-        }
-
-    // Initialize with any existing selection
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedTemplate = sessionStorage.getItem('selectedTemplate');
-        if (savedTemplate) {
-            // Find and select the saved template
-            const templateCard = document.querySelector(`[onclick*="${savedTemplate}"]`).parentElement;
-            if (templateCard) {
-                templateCard.classList.add('selected');
-                selectedTemplate = savedTemplate;
-                document.getElementById('preview-btn').disabled = false;
-            }
-        }
+    const t = document.createElement('div');
+    t.className = 'tpl-toast';
+    Object.assign(t.style, {
+        position:'fixed', bottom:'1.5rem', right:'1.5rem',
+        background:'#10b981', color:'white',
+        padding:'.75rem 1.25rem', borderRadius:'10px',
+        boxShadow:'0 4px 16px rgba(16,185,129,.3)',
+        fontSize:'.875rem', fontWeight:'600',
+        zIndex:'9999', opacity:'0',
+        transition:'opacity .25s ease',
+        display:'flex', alignItems:'center', gap:'.5rem'
     });
+    t.innerHTML = '<i class="fas fa-check-circle"></i> ' + msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.style.opacity = '1');
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
+}
+
+function goToPreview() {
+    if (selectedTemplate) {
+        sessionStorage.setItem('selectedTemplate', selectedTemplate);
+        window.location.href = routes.preview + '?template=' + selectedTemplate;
+    } else {
+        alert('Silakan pilih template terlebih dahulu!');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const saved = sessionStorage.getItem('selectedTemplate');
+    if (saved) {
+        const card = document.querySelector('[onclick*="' + saved + '"]');
+        if (card) {
+            card.classList.add('selected');
+            selectedTemplate = saved;
+            document.getElementById('preview-btn').disabled = false;
+        }
+    }
+});
 </script>
