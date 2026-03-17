@@ -6,7 +6,7 @@
     padding: 2rem;
     margin-top: 2rem;
 
-    background: var(--background);
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 12px;
 }
@@ -28,7 +28,7 @@
 }
 
 .template-header p {
-    color: var(--muted-foreground);
+    color: var(--text-light);
     margin: 0;
 }
 
@@ -122,7 +122,7 @@
 
     aspect-ratio: 210 / 297;
 
-    background: var(--muted);
+    background: var(--bg);
 
     border-radius: 10px;
 
@@ -145,57 +145,6 @@
 
 
 /* =========================
-   TEMPLATE INFO
-========================= */
-
-.template-info {
-
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    margin-top: 12px;
-}
-
-
-.template-name {
-
-    font-weight: 600;
-    color: var(--foreground);
-}
-
-
-.template-style {
-
-    font-size: 12px;
-
-    background: var(--muted);
-
-    color: var(--muted-foreground);
-
-    padding: 4px 10px;
-
-    border-radius: 999px;
-}
-
-
-/* =========================
-   ACTION BUTTONS
-========================= */
-
-.actions {
-
-    display: flex;
-    gap: 1rem;
-
-    justify-content: center;
-
-    margin-top: 2rem;
-}
-
-
-/* =========================
    MOBILE
 ========================= */
 
@@ -203,10 +152,6 @@
 
     .template-grid {
         grid-template-columns: 1fr;
-    }
-
-    .actions {
-        flex-direction: column;
     }
 
 }

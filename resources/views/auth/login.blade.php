@@ -1,60 +1,10 @@
+@push('styles')
+    @vite('resources/css/auth.css')
+@endpush
+
 @extends('layouts.auth')
 
 @section('content')
-    <style>
-        .login-form {
-            display: block !important;
-            max-width: 420px;
-            position: static !important;
-        }
-
-        .login-form input {
-            width: 100%;
-            display: block;
-            padding: 14px 16px;
-            margin-bottom: 16px;
-            border-radius: 8px;
-            border: none;
-        }
-
-        .login-form button {
-            width: 100%;
-            position: static !important;
-        }
-
-        /* FIX posisi gambar */
-
-        .cta-images {
-            position: relative !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cta-images .img1 {
-            position: relative !important;
-            bottom: auto !important;
-        }
-
-        .cta-images img {
-            max-height: 420px;
-        }
-
-        .login-form .vl-btn1 {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-form .vl-btn1::before,
-        .login-form .vl-btn1::after {
-            display: none !important;
-        }
-
-        .login-form .vl-btn1:hover {
-            background-color: #0d6efd;
-            color: white;
-        }
-    </style>
     <div class="cta1-section-area sp1" style="min-height:100vh; display:flex; align-items:center;">
         <div class="container">
             <div class="row align-items-center">
@@ -66,12 +16,39 @@
 
                         <div class="space24"></div>
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('login') }}" class="login-form">
                             @csrf
 
-                            <input type="email" name="email" placeholder="Masukkan Email Anda">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Masukkan Email Anda"
+                                value="{{ old('email') }}"
+                                class="@error('email') is-invalid @enderror"
+                            >
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
 
-                            <input type="password" name="password" placeholder="Masukkan Password">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Masukkan Password"
+                                class="@error('password') is-invalid @enderror"
+                            >
+                            @error('password')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
 
                             <button type="submit" class="vl-btn1">
                                 Login

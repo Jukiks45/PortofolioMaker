@@ -1,3 +1,23 @@
+@php
+$portfolios = $portfolios ?? [
+    [
+        'title' => 'John Doe CV',
+        'template' => 'Modern CV',
+        'updated_at' => '2 days ago'
+    ],
+    [
+        'title' => 'UI Designer Portfolio',
+        'template' => 'Creative Resume',
+        'updated_at' => '5 days ago'
+    ],
+    [
+        'title' => 'Developer Resume',
+        'template' => 'Minimal CV',
+        'updated_at' => '1 week ago'
+    ]
+];
+@endphp
+
 @extends('layouts.dashboard')
 
 @section('title', 'My Portfolio')
@@ -24,7 +44,9 @@
         <!-- Portfolio Grid -->
         <div class="row g-4">
 
-            <!-- Portfolio Card 1 -->
+            @forelse($portfolios ?? [] as $portfolio)
+
+            <!-- Portfolio Card -->
             <div class="col-lg-4 col-md-6">
                 <div class="card shadow-sm border-0 h-100">
 
@@ -33,20 +55,20 @@
                     <div class="card-body">
 
                         <h5 class="fw-semibold mb-1">
-                            John Doe CV
+                            {{ $portfolio['title'] ?? '-' }}
                         </h5>
 
                         <p class="text-muted small mb-2">
-                            Template: Modern CV
+                            Template: {{ $portfolio['template'] ?? '-' }}
                         </p>
 
                         <p class="text-muted small">
-                            Last updated: 2 days ago
+                            Last updated: {{ $portfolio['updated_at'] ?? '-' }}
                         </p>
 
                         <div class="d-flex gap-2 flex-wrap">
 
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm">
+                            <a href="{{ route('portfolio.preview') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-eye"></i> Preview
                             </a>
 
@@ -69,97 +91,13 @@
                 </div>
             </div>
 
+            @empty
 
-            <!-- Portfolio Card 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card shadow-sm border-0 h-100">
-
-                    <img src="https://placehold.co/600x400" class="card-img-top" alt="Portfolio Preview">
-
-                    <div class="card-body">
-
-                        <h5 class="fw-semibold mb-1">
-                            UI Designer Portfolio
-                        </h5>
-
-                        <p class="text-muted small mb-2">
-                            Template: Creative Resume
-                        </p>
-
-                        <p class="text-muted small">
-                            Last updated: 5 days ago
-                        </p>
-
-                        <div class="d-flex gap-2 flex-wrap">
-
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-eye"></i> Preview
-                            </a>
-
-                            <a href="{{ route('portfolio.edit') }}" class="btn btn-outline-secondary btn-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-
-                            <button class="btn btn-outline-success btn-sm">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-
-                            <button class="btn btn-outline-danger btn-sm">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
+            <div class="col-12">
+                <p class="text-muted">Belum ada portfolio</p>
             </div>
 
-
-            <!-- Portfolio Card 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card shadow-sm border-0 h-100">
-
-                    <img src="https://placehold.co/600x400" class="card-img-top" alt="Portfolio Preview">
-
-                    <div class="card-body">
-
-                        <h5 class="fw-semibold mb-1">
-                            Developer Resume
-                        </h5>
-
-                        <p class="text-muted small mb-2">
-                            Template: Minimal CV
-                        </p>
-
-                        <p class="text-muted small">
-                            Last updated: 1 week ago
-                        </p>
-
-                        <div class="d-flex gap-2 flex-wrap">
-
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-eye"></i> Preview
-                            </a>
-
-                            <a href="{{ route('portfolio.edit') }}" class="btn btn-outline-secondary btn-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-
-                            <button class="btn btn-outline-success btn-sm">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-
-                            <button class="btn btn-outline-danger btn-sm">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
+            @endforelse
 
         </div>
 

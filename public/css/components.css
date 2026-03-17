@@ -1,0 +1,59 @@
+/* =========================
+   ACTION BUTTON AREA
+========================= */
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* =========================
+   TEMPLATE INFO
+========================= */
+
+.template-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.template-name {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.template-style {
+    font-size: 12px;
+    background: var(--bg);
+    color: var(--text-light);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* =========================
+   BUTTON STANDARDIZATION
+========================= */
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn-primary:hover {
+    background: #070a2a;
+}
+
+.btn-secondary {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+}

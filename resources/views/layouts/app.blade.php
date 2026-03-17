@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
+    @stack('styles')
+
     <!--=====  JS SCRIPT LINK =======-->
     <script src="{{ asset('assets/js/plugins/jquery-3-7-1.min.js') }}"></script>
 </head>
@@ -216,6 +218,8 @@
     <script src="{{ asset('assets/js/plugins/slick-slider.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/circle-progress.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 <!-- Mirrored from unifato.com/eitech/single-index1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 11 Mar 2026 17:01:47 GMT -->
