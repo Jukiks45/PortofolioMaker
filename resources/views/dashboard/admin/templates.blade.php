@@ -51,7 +51,7 @@
 
         {{-- Card 1 --}}
         <div class="template-card">
-            <img src="{{ asset('templates/template1.png') }}" class="template-image" alt="Minimal Portfolio">
+            <img src="{{ asset('templates/template1.png') }}" class="template-image" alt="Minimal Portfolio" style="object-fit: contain; height: 200px;">
             <div class="template-content">
                 <h5 class="template-title">Minimal Portfolio</h5>
                 <div class="template-meta">
@@ -81,7 +81,7 @@
 
         {{-- Card 2 --}}
         <div class="template-card">
-            <img src="{{ asset('templates/template2.png') }}" class="template-image" alt="Creative Resume">
+            <img src="{{ asset('templates/template2.png') }}" class="template-image" alt="Creative Resume" style="object-fit: contain; height: 200px;">
             <div class="template-content">
                 <h5 class="template-title">Creative Resume</h5>
                 <div class="template-meta">
@@ -111,7 +111,7 @@
 
         {{-- Card 3 --}}
         <div class="template-card">
-            <img src="{{ asset('templates/template3.png') }}" class="template-image" alt="Professional CV">
+            <img src="{{ asset('templates/template3.png') }}" class="template-image" alt="Professional CV" style="object-fit: contain; height: 200px;">
             <div class="template-content">
                 <h5 class="template-title">Professional CV</h5>
                 <div class="template-meta">

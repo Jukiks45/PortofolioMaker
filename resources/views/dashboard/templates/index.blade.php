@@ -33,16 +33,13 @@
                             Clean and minimal design.
                         </p>
 
-                        <div class="d-flex gap-2">
-
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm w-50">
-                                Preview
+                        <div class="template-actions">
+                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                                <i class="fas fa-eye"></i> Preview
                             </a>
-
-                            <a href="{{ route('portfolio.create') }}" class="btn btn-primary btn-sm w-50">
-                                Use Template
+                            <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
+                                <i class="fas fa-plus"></i> Use Template
                             </a>
-
                         </div>
 
                     </div>
@@ -65,16 +62,13 @@
                             Perfect for professional resumes.
                         </p>
 
-                        <div class="d-flex gap-2">
-
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm w-50">
-                                Preview
+                        <div class="template-actions">
+                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                                <i class="fas fa-eye"></i> Preview
                             </a>
-
-                            <a href="{{ route('portfolio.create') }}" class="btn btn-primary btn-sm w-50">
-                                Use Template
+                            <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
+                                <i class="fas fa-plus"></i> Use Template
                             </a>
-
                         </div>
 
                     </div>
@@ -97,16 +91,13 @@
                             Great for designers and creatives.
                         </p>
 
-                        <div class="d-flex gap-2">
-
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-outline-primary btn-sm w-50">
-                                Preview
+                        <div class="template-actions">
+                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                                <i class="fas fa-eye"></i> Preview
                             </a>
-
-                            <a href="{{ route('portfolio.create') }}" class="btn btn-primary btn-sm w-50">
-                                Use Template
+                            <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
+                                <i class="fas fa-plus"></i> Use Template
                             </a>
-
                         </div>
 
                     </div>
