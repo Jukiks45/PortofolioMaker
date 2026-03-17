@@ -11,10 +11,25 @@
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portfolio/wizard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
+    @if (request()->is('portfolio/create'))
+        <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
+    @endif
 
+    @if (request()->is('portfolio/edit'))
+        <link rel="stylesheet" href="{{ asset('css/portfolio/create.css') }}">
+    @endif
+
+    @if (request()->is('portfolio/template'))
+        <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
+    @endif
+
+    @if (request()->is('portfolio/preview'))
+        <link rel="stylesheet" href="{{ asset('css/portfolio/preview.css') }}">
+    @endif
+
+    @if (request()->is('portfolio/download'))
+        <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
+    @endif
     @stack('styles')
 
     @if (request()->is('admin/*'))
@@ -105,7 +120,9 @@
             </li>
 
             {{-- DIVIDER --}}
-            <li><div class="sidebar-divider"></div></li>
+            <li>
+                <div class="sidebar-divider"></div>
+            </li>
 
             {{-- ADMIN MENU --}}
             <li><span class="sidebar-label">Admin</span></li>
@@ -127,8 +144,7 @@
             </li>
 
             <li class="sidebar-nav-item">
-                <a href="/admin/users"
-                    class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                <a href="/admin/users" class="sidebar-nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     Kelola Users
                 </a>
@@ -143,7 +159,9 @@
             </li>
 
             {{-- DIVIDER --}}
-            <li><div class="sidebar-divider"></div></li>
+            <li>
+                <div class="sidebar-divider"></div>
+            </li>
 
             {{-- LOGOUT --}}
             <li class="sidebar-nav-item">
@@ -178,14 +196,14 @@
 
         <!-- Page Content -->
         <main>
-            @if(session('success'))
+            @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
                     <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
-            @if(session('error'))
+            @if (session('error'))
                 <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
                     <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -199,9 +217,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Sidebar toggle for mobile
-        const sidebar        = document.getElementById('sidebar');
-        const overlay        = document.getElementById('sidebarOverlay');
-        const toggleBtn      = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const toggleBtn = document.getElementById('sidebarToggle');
 
         function openSidebar() {
             sidebar.classList.add('active');
