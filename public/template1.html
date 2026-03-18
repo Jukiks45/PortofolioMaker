@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Adeline Palmerston</title>
+    <style>
+        /* Konfigurasi Dasar & Reset */
+        :root {
+            --dark-blue: #333c4d;
+            --sidebar-color: #333c4d;
+            --light-text: #ffffff;
+            --dark-text: #333333;
+            --accent-gray: #f2f2f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+
+        body {
+            background-color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ukuran A4 */
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 30px 50px;
+            height: 180px;
+        }
+
+        .profile-img-container {
+            background-color: var(--dark-blue);
+            width: 160px;
+            height: 160px;
+            border-radius: 0 0 80px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-right: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-top: 10px;
+        }
+
+        .header-text {
+            margin-left: 180px;
+            margin-top: 20px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--dark-blue);
+            letter-spacing: 2px;
+        }
+
+        .job-title {
+            margin: 5px 0 0 0;
+            letter-spacing: 5px;
+            color: #777;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        /* Contact Bar */
+        .contact-bar {
+            background-color: var(--dark-blue);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 30px;
+            font-size: 11px;
+            border-radius: 50px;
+            margin: 0 40px 20px 40px;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--sidebar-color);
+            color: white;
+            width: 35%;
+            padding: 40px 30px;
+            border-radius: 0 60px 0 0;
+        }
+
+        .sidebar section {
+            margin-bottom: 35px;
+        }
+
+        .sidebar h3 {
+            border-bottom: 1.5px solid white;
+            padding-bottom: 8px;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .sidebar .item {
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .sidebar ul {
+            padding-left: 15px;
+            font-size: 13px;
+        }
+
+        .sidebar p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        /* Main Content */
+        .content {
+            width: 65%;
+            padding: 20px 40px 40px 40px;
+            color: var(--dark-text);
+        }
+
+        .content section {
+            margin-bottom: 30px;
+        }
+
+        .content h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .exp-item {
+            margin-bottom: 20px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .company {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .ref-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            font-size: 12px;
+        }
+
+        /* Utility */
+        .bold { font-weight: bold; color: #000; }
+        .white-bold { font-weight: bold; color: #fff; }
+
+        /* Print Optimization */
+        @media print {
+            body { background: none; padding: 0; }
+            .a4-page { box-shadow: none; margin: 0; }
+            .contact-bar { -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-page">
+        <div class="profile-img-container">
+            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Adeline" class="profile-img">
+        </div>
+
+        <header class="header">
+            <div class="header-text">
+                <h1>ADELINE PALMERSTON</h1>
+                <p class="job-title">Graphic Designer</p>
+            </div>
+        </header>
+
+        <div class="contact-bar">
+            <span>📞 +123-456-7890</span>
+            <span>📧 hello@reallygreatsite.com</span>
+            <span>🌐 www.reallygreatsite.com</span>
+            <span>📍 123 Anywhere St, Any City</span>
+        </div>
+
+        <div class="main-container">
+            <aside class="sidebar">
+                <section>
+                    <h3>Education</h3>
+                    <div class="item">
+                        <p class="white-bold">Bachelor of Design</p>
+                        <p>Really Great University</p>
+                        <p>2012-2015</p>
+                    </div>
+                    <div class="item">
+                        <p class="white-bold">Master of Design</p>
+                        <p>Really Great University</p>
+                        <p>2015-2020</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Certifications</h3>
+                    <ul>
+                        <li>Certified Graphic Designer</li>
+                        <li>User Experience (UX) Design Certificate</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Skills</h3>
+                    <p>Organized</p>
+                    <p>Creativity</p>
+                    <p>Teamwork</p>
+                    <p>Meeting deadlines</p>
+                    <p>Critical thinking</p>
+                </section>
+
+                <section>
+                    <h3>Language</h3>
+                    <p>French</p>
+                    <p>Spanish</p>
+                    <p>English</p>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section>
+                    <h2>About me</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </section>
+
+                <section>
+                    <h2>Experience</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="bold">Graphic Designer</span>
+                            <span class="small">Jan 2021 - Jan 2022</span>
+                        </div>
+                        <p class="company">Aldenaire & Partners</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="bold">Graphic Designer</span>
+                            <span class="small">Jan 2020 - Des 2020</span>
+                        </div>
+                        <p class="company">Warner & Spencer</p>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="bold">Graphic Designer</span>
+                            <span class="small">Jan 2017 - Des 2019</span>
+                        </div>
+                        <p class="company">Ingoude Company</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Reference</h2>
+                    <div class="ref-grid">
+                        <div>
+                            <p class="bold">Alfredo Torres | Director</p>
+                            <p>Aldenaire & Partners</p>
+                            <p>+123-456-7890</p>
+                        </div>
+                        <div>
+                            <p class="bold">Harumi Kobayashi | CEO</p>
+                            <p>Ingoude Company</p>
+                            <p>+123-456-7890</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>

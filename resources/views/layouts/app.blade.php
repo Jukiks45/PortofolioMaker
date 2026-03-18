@@ -83,10 +83,21 @@
                     <div class="col-lg-3 col-md-6 col-6">
                         <div class="vl-hero-btn d-none d-lg-block text-end">
                             <span class="vl-btn-wrap text-end">
-                                <a href="{{ route('login') }}" class="vl-btn1">
-                                    Login Sekarang
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </a>
+                                @auth
+                                    <span class="text-white me-3">Halo, {{ auth()->user()->name }}</span>
+                                    <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="vl-btn1">
+                                            Logout
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}" class="vl-btn1">
+                                        Login Sekarang
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                @endauth
                             </span>
                         </div>
                         <div class="vl-header-action-item d-block d-lg-none">

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Adeline Palmerston - Flexible A4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #8E4A31; 
+            --accent-color: #C69B7B;  
+            --bg-light: #FFF8F0;      
+            --text-dark: #2A2A2A;
+            --text-light: #FFFFFF;
+            --sidebar-bg: #8E4A31;    
+            --font-heading: 'DM Serif Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+
+        body {
+            background-color: #D6C7B9; 
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 40px 0; /* Memberi ruang di layar browser */
+            display: flex;
+            justify-content: center;
+        }
+
+        .a4-page {
+            width: 210mm;
+            /* KUNCI PERBAIKAN: min-height alih-alih height tetap */
+            min-height: 297mm; 
+            background-color: var(--bg-light);
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 30px 50px;
+            min-height: 160px;
+        }
+
+        .profile-img-container {
+            background-color: var(--primary-color);
+            width: 160px;
+            height: 160px;
+            border-radius: 0 0 80px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+        }
+
+        .header-text {
+            margin-left: 180px;
+            padding-top: 10px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-size: 40px;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .job-title {
+            margin: 5px 0 0 0;
+            letter-spacing: 4px;
+            color: var(--accent-color);
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        /* CONTACT BAR */
+        .contact-bar {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 30px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 50px;
+            margin: 10px 40px 25px 40px;
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            display: flex;
+            flex: 1; /* Mengisi sisa ruang */
+        }
+
+        .sidebar {
+            background-color: var(--sidebar-bg);
+            color: var(--text-light);
+            width: 33%;
+            padding: 40px 30px;
+            border-radius: 0 60px 0 0;
+        }
+
+        .sidebar section { margin-bottom: 35px; }
+
+        .sidebar h3 {
+            font-family: var(--font-heading);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar p, .sidebar li { font-size: 13px; line-height: 1.6; }
+
+        .content {
+            width: 67%;
+            padding: 10px 45px 50px 45px;
+        }
+
+        .content section { margin-bottom: 30px; }
+
+        .content h2 {
+            font-family: var(--font-heading);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .content p { font-size: 13px; line-height: 1.6; color: #444; }
+
+        /* EXPERIENCE */
+        .exp-item {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 2px solid #e2e2e2;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .company { font-style: italic; color: #777; font-size: 13px; margin-bottom: 5px; }
+
+        /* REFERENCE */
+        .ref-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .ref-box p { margin: 2px 0; font-size: 12px; }
+        .bold { font-weight: 600; color: #000; }
+
+        /* PRINT SETTINGS */
+        @media print {
+            body { background: none; padding: 0; }
+            .a4-page { box-shadow: none; margin: 0; height: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-page">
+        <div class="profile-img-container">
+            <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Adeline Palmerston" class="profile-img">
+        </div>
+
+        <header class="header">
+            <div class="header-text">
+                <h1>Adeline Palmerston</h1>
+                <p class="job-title">Creative Graphic Designer</p>
+            </div>
+        </header>
+
+        <div class="contact-bar">
+            <span>📞 +1 234 567 8900</span>
+            <span>📧 adeline.p@email.com</span>
+            <span>📍 Milan, Italy</span>
+        </div>
+
+        <div class="main-container">
+            <aside class="sidebar">
+                <section>
+                    <h3>Education</h3>
+                    <div class="item">
+                        <p><strong>Master of Visual Design</strong><br>Politecnico di Milano<br>2015-2017</p>
+                    </div>
+                    <div class="item">
+                        <p><strong>Bachelor of Fine Arts</strong><br>London College<br>2011-2014</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Expertise</h3>
+                    <ul style="padding-left: 15px; margin: 0;">
+                        <li>Brand Identity</li>
+                        <li>UI/UX Design</li>
+                        <li>Typography</li>
+                        <li>Packaging Design</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Software</h3>
+                    <p>Adobe Creative Suite<br>Figma<br>After Effects</p>
+                </section>
+
+                <section>
+                    <h3>Awards</h3>
+                    <p><strong>Red Dot Award 2021</strong><br>Communication Design</p>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section>
+                    <h2>About Me</h2>
+                    <p>Passionate Creative Designer with over 8 years of experience. I believe in the power of purposeful design to connect brands with their audiences emotionally, blending minimalist aesthetics with functional strategy.</p>
+                </section>
+
+                <section>
+                    <h2>Work Experience</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span style="color:var(--primary-color)">Senior Art Director</span>
+                            <span style="color:var(--accent-color)">2021 - Present</span>
+                        </div>
+                        <p class="company">Studio Nova, Milan</p>
+                        <p>Led visual direction for premium clients. Managed a team of 3 designers and coordinated cross-functional projects, increasing brand engagement by 25%.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span style="color:var(--primary-color)">Mid-Weight Designer</span>
+                            <span style="color:var(--accent-color)">2018 - 2020</span>
+                        </div>
+                        <p class="company">Aura Agency, London</p>
+                        <p>Developed comprehensive branding systems for tech startups from initial concept to final production across digital platforms.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span style="color:var(--primary-color)">Junior Designer</span>
+                            <span style="color:var(--accent-color)">2017 - 2018</span>
+                        </div>
+                        <p class="company">Ingoude Creative, London</p>
+                        <p>Supported senior staff in executing campaign assets, photo retouching, and preparing files for print production.</p>
+                    </div>
+                </section>
+
+                <section class="reference">
+                    <h2>References</h2>
+                    <div class="ref-grid">
+                        <div class="ref-box">
+                            <p class="bold">Marco Rossi</p>
+                            <p>Creative Director, Studio Nova</p>
+                            <p>m.rossi@studionova.it</p>
+                        </div>
+                        <div class="ref-box">
+                            <p class="bold">Sarah Chen</p>
+                            <p>Founder, Aura Agency</p>
+                            <p>s.chen@aura.agency</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>

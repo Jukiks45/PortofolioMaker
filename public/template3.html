@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Adeline - Fresh Full A4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            --dark-green: #062C22;
+            --lime-bright: #D1FF33;
+            --soft-green: #F0F5F2;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        /* UKURAN A4 FIX */
+        .a4-container {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--white);
+            display: grid;
+            grid-template-columns: 85mm 125mm;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* KOLOM KIRI (Sidebar) */
+        .sidebar {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Menyebar konten dari atas ke bawah */
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .photo-frame {
+            width: 160px;
+            height: 160px;
+            background-color: var(--lime-bright);
+            padding: 8px;
+            border-radius: 40px;
+            margin: 0 auto 30px;
+            transform: rotate(-3deg);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 35px;
+            transform: rotate(3deg);
+        }
+
+        .sidebar h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            color: var(--lime-bright);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(209, 255, 51, 0.3);
+        }
+
+        .contact-info div {
+            margin-bottom: 15px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .skill-item {
+            margin-bottom: 25px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .bar-bg {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--lime-bright);
+            border-radius: 10px;
+        }
+
+        /* KOLOM KANAN (Main) */
+        .main-content {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ini kunci agar bagian bawah tidak kosong */
+        }
+
+        .name-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 52px;
+            line-height: 0.9;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .name-header p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #7A8C85;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-box {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--lime-bright);
+            padding-left: 15px;
+        }
+
+        .about-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #44524D;
+        }
+
+        .experience-card {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .exp-header h4 {
+            font-weight: 700;
+            color: var(--dark-green);
+            font-size: 16px;
+        }
+
+        .exp-header span {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--lime-bright);
+            background: var(--dark-green);
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+
+        .company {
+            font-size: 14px;
+            color: #7A8C85;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .ref-item {
+            background: var(--soft-green);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .ref-item strong { font-size: 14px; color: var(--dark-green); }
+        .ref-item p { font-size: 12px; color: #7A8C85; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .a4-container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-container">
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="photo-frame">
+                    <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Profile">
+                </div>
+                <h2>Kontak</h2>
+                <div class="contact-info">
+                    <div>📍 Milan, Italy</div>
+                    <div>📞 +1 234 567 8900</div>
+                    <div>✉️ adeline@freshdesign.com</div>
+                    <div>🌐 www.adelinedesign.com</div>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <h2>Keahlian</h2>
+                <div class="skill-item">
+                    <div class="skill-name"><span>UI/UX Design</span><span>90%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Branding</span><span>85%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Typography</span><span>80%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 80%"></div></div>
+                </div>
+            </div>
+
+            <div class="edu-section">
+                <h2>Pendidikan</h2>
+                <div style="margin-bottom: 20px;">
+                    <p style="font-weight: 600; color: var(--lime-bright);">Master of Design</p>
+                    <p style="font-size: 12px; opacity: 0.8;">Politecnico di Milano (2015-2017)</p>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: var(--lime-bright);">Bachelor of Fine Arts</p>
+                    <p style="font-size: 12px; opacity: 0.8;">London College (2011-2014)</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="name-header">
+                <h1>Adeline<br>Palmerston</h1>
+                <p>Creative Designer</p>
+            </header>
+
+            <section class="section-box">
+                <h3 class="section-title">Profil</h3>
+                <p class="about-text">
+                    Desainer kreatif dengan pengalaman lebih dari 8 tahun dalam membangun identitas visual yang kuat. 
+                    Fokus pada estetika minimalis namun fungsional untuk membantu brand berinteraksi lebih dalam dengan audiens mereka.
+                </p>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title">Pengalaman Kerja</h3>
+                
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h4>Senior Art Director</h4>
+                        <span>2021 - Present</span>
+                    </div>
+                    <span class="company">Studio Nova, Milan</span>
+                    <p class="about-text">Memimpin visi kreatif untuk klien retail premium dan mengelola tim desainer junior dalam eksekusi kampanye global.</p>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h4>Visual Designer</h4>
+                        <span>2018 - 2020</span>
+                    </div>
+                    <span class="company">Aura Agency, London</span>
+                    <p class="about-text">Bertanggung jawab atas pengembangan sistem desain untuk startup teknologi, mulai dari konsep logo hingga strategi media sosial.</p>
+                </div>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title">Referensi</h3>
+                <div class="reference-grid">
+                    <div class="ref-item">
+                        <strong>Marco Rossi</strong>
+                        <p>Director, Studio Nova</p>
+                        <p style="color:var(--dark-green)">m.rossi@nova.it</p>
+                    </div>
+                    <div class="ref-item">
+                        <strong>Sarah Chen</strong>
+                        <p>Founder, Aura Agency</p>
+                        <p style="color:var(--dark-green)">s.chen@aura.io</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

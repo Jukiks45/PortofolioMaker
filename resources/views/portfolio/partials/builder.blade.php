@@ -26,7 +26,7 @@
         <p>Isi data diri Anda untuk membuat portfolio profesional</p>
     </div>
 
-    <form id="portfolio-form" action="/portfolio-template" method="POST" enctype="multipart/form-data">
+    <form id="portfolio-form" action="{{ route('portfolio.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         {{-- ===== INFORMASI DASAR ===== --}}
@@ -348,10 +348,10 @@
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">
                 <i class="fas fa-times me-1"></i> Batal
             </a>
-            <a href="{{ route('portfolio.template') }}" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
                 Selanjutnya: Pilih Template
                 <i class="fas fa-arrow-right ms-2"></i>
-            </a>
+            </button>
         </div>
 
     </form>
