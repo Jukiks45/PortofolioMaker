@@ -56,24 +56,18 @@ Route::get('/portfolio-download', function () {
 
 /*
 |--------------------------------------------------------------------------
-| User Dashboard
+| Protected Routes (AUTH REQUIRED)
 |--------------------------------------------------------------------------
 */
 
 Route::middleware('auth')->group(function () {
+
+    // dashboard
     Route::get('/dashboard', function () {
         return view('dashboard.index');
     })->name('dashboard');
-});
 
-
-/*
-|--------------------------------------------------------------------------
-| Dashboard Portfolio
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware('auth')->group(function () {
+    // portfolio dashboard
     Route::get('/portfolio', function () {
         return view('dashboard.portfolio.index');
     })->name('portfolio.index');
@@ -97,39 +91,40 @@ Route::middleware('auth')->group(function () {
     Route::get('/portfolio/download', function () {
         return view('dashboard.portfolio.download');
     })->name('portfolio.download');
+
+    // templates
+    Route::get('/portfolio-templates', function () {
+        return view('dashboard.templates.index');
+    })->name('portfolio.templates');
+
+    // profile
+    Route::get('/profile', function () {
+        return view('dashboard.profile.index');
+    })->name('profile');
+
+    // settings
+    Route::get('/settings', function () {
+        return view('dashboard.settings.index');
+    })->name('settings');
+
+    // admin (sementara masih auth saja)
+    Route::get('/admin', function () {
+        return view('dashboard.admin.index');
+    });
+
+    Route::get('/admin/templates', function () {
+        return view('dashboard.admin.templates');
+    });
+
+    Route::get('/admin/users', function () {
+        return view('dashboard.admin.users');
+    });
+
+    Route::get('/admin/portfolios', function () {
+        return view('dashboard.admin.portfolios');
+    });
+
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| Templates
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/portfolio-templates', function () {
-    return view('dashboard.templates.index');
-})->name('portfolio.templates');
-
-/*
-|--------------------------------------------------------------------------
-| Profile
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/profile', function () {
-    return view('dashboard.profile.index');
-})->name('profile');
-
-
-/*
-|--------------------------------------------------------------------------
-| Settings
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/settings', function () {
-    return view('dashboard.settings.index');
-})->name('settings');
 
 
 /*
@@ -139,25 +134,3 @@ Route::get('/settings', function () {
 */
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-/*
-|--------------------------------------------------------------------------
-| Admin
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/admin', function () {
-    return view('dashboard.admin.index');
-});
-
-Route::get('/admin/templates', function () {
-    return view('dashboard.admin.templates');
-});
-
-Route::get('/admin/users', function () {
-    return view('dashboard.admin.users');
-});
-
-Route::get('/admin/portfolios', function () {
-    return view('dashboard.admin.portfolios');
-});
