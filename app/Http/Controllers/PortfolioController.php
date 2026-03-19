@@ -19,12 +19,20 @@ class PortfolioController extends Controller
         }
 
         // simpan ke database
-        Auth::user()->portfolios()->create([
+        $portfolio = Auth::user()->portfolios()->create([
             'title' => $request->name ?? 'Portfolio',
             'data' => $data
         ]);
 
-        return redirect()->route('portfolio.template')
+        return redirect()->route('portfolio.preview', $portfolio->id)
             ->with('success', 'Portfolio berhasil dibuat!');
+    }
+
+    public function preview($id)
+    {
+        $portfolio = Auth::user()->portfolios()->findOrFail($id);
+        $data = $portfolio->data;
+
+        return view('templates.template1', compact('portfolio', 'data'));
     }
 }

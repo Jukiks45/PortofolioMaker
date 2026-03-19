@@ -6,7 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\Portfolio;
+
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Portfolio[] $portfolios
+ * @method \Illuminate\Database\Eloquent\Relations\HasMany portfolios()
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -47,8 +54,8 @@ class User extends Authenticatable
     }
 
     // relasi ke portfolio
-    public function portfolios()
+    public function portfolios(): HasMany
     {
-        return $this->hasMany(\App\Models\Portfolio::class);
+        return $this->hasMany(Portfolio::class);
     }
 }

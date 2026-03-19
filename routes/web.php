@@ -95,6 +95,9 @@ Route::middleware('auth')->group(function () {
     // simpan portfolio
     Route::post('/portfolio', [App\Http\Controllers\PortfolioController::class, 'store'])->name('portfolio.store');
 
+    // preview portfolio
+    Route::get('/portfolio/{id}/preview', [App\Http\Controllers\PortfolioController::class, 'preview'])->name('portfolio.preview');
+
     // templates
     Route::get('/portfolio-templates', function () {
         return view('dashboard.templates.index');
