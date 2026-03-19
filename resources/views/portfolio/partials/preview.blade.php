@@ -149,6 +149,7 @@
 
     {{-- ACTIONS — konsisten dengan semua tahap lain --}}
     <div class="actions">
+        @auth
         <a href="{{ route('portfolio.template') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
@@ -158,6 +159,17 @@
         <a href="{{ route('portfolio.download') }}" class="btn btn-primary">
             <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
         </a>
+        @else
+        <a href="{{ route('guest.portfolio.template') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Kembali
+        </a>
+        <a href="{{ route('guest.portfolio.create') }}" class="btn btn-secondary">
+            <i class="fas fa-edit me-1"></i> Edit Data
+        </a>
+        <a href="{{ route('guest.portfolio.download') }}" class="btn btn-primary">
+            <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
+        </a>
+        @endauth
     </div>
 
 </div>{{-- /.preview-container --}}

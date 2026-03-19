@@ -345,9 +345,15 @@
 
         {{-- SUBMIT --}}
         <div class="actions">
+            @auth
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">
                 <i class="fas fa-times me-1"></i> Batal
             </a>
+            @else
+            <a href="{{ route('home') }}" class="btn btn-secondary">
+                <i class="fas fa-times me-1"></i> Batal
+            </a>
+            @endauth
             <button type="submit" class="btn btn-primary">
                 Selanjutnya: Pilih Template
                 <i class="fas fa-arrow-right ms-2"></i>

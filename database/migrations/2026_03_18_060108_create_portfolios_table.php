@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
 
             // RELASI KE USER
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             // DATA UTAMA (basic dulu)
             $table->string('title')->nullable();

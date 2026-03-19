@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,21 +38,23 @@ Route::post('/register', [AuthController::class, 'register']);
 |--------------------------------------------------------------------------
 */
 
-Route::get('/create-portfolio', function () {
-    return view('portfolio.create');
-})->name('guest.portfolio.create');
+Route::middleware('guest')->group(function () {
+    Route::get('/create-portfolio', function () {
+        return view('portfolio.create');
+    })->name('guest.portfolio.create');
 
-Route::get('/portfolio-template', function () {
-    return view('portfolio.template');
-})->name('guest.portfolio.template');
+    Route::get('/portfolio-template', function () {
+        return view('portfolio.template');
+    })->name('guest.portfolio.template');
 
-Route::get('/portfolio-preview', function () {
-    return view('portfolio.preview');
-})->name('guest.portfolio.preview');
+    Route::get('/portfolio-preview', function () {
+        return view('portfolio.preview');
+    })->name('guest.portfolio.preview');
 
-Route::get('/portfolio-download', function () {
-    return view('portfolio.download');
-})->name('guest.portfolio.download');
+    Route::get('/portfolio-download', function () {
+        return view('portfolio.download');
+    })->name('guest.portfolio.download');
+});
 
 
 /*
@@ -92,8 +95,6 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.portfolio.download');
     })->name('portfolio.download');
 
-    // simpan portfolio
-    Route::post('/portfolio', [App\Http\Controllers\PortfolioController::class, 'store'])->name('portfolio.store');
 
     // preview portfolio
     Route::get('/portfolio/{id}/preview', [App\Http\Controllers\PortfolioController::class, 'preview'])->name('portfolio.preview');
@@ -112,8 +113,35 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', function () {
         return view('dashboard.settings.index');
     })->name('settings');
+});
 
-    // admin (sementara masih auth saja)
+// simpan portfolio
+Route::post('/portfolio', [App\Http\Controllers\PortfolioController::class, 'store'])->name('portfolio.store');
+
+// preview portfolio
+Route::get('/portfolio/{id}/preview', [App\Http\Controllers\PortfolioController::class, 'preview'])->name('portfolio.preview');
+
+// guest preview
+Route::get('/portfolio-preview/{id}', function ($id) {
+    $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+    if ($portfolio->user_id && Auth::check() && $portfolio->user_id !== Auth::id()) {
+        abort(403);
+    }
+
+    return view('portfolio.preview', [
+        'portfolio' => $portfolio,
+        'data' => $portfolio->data
+    ]);
+})->name('guest.portfolio.preview');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes (AUTH + ADMIN ROLE REQUIRED)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', function () {
         return view('dashboard.admin.index');
     });
@@ -129,7 +157,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/portfolios', function () {
         return view('dashboard.admin.portfolios');
     });
-
 });
 
 

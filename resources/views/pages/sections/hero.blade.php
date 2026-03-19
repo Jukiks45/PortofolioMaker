@@ -21,10 +21,17 @@
                     </p>
                     <div class="space32"></div>
                     <div class="btn-area1" data-aos="fade-left" data-aos-duration="1000">
-                        <a href="{{ route('portfolio.create') }}" class="vl-btn1">
-                            Buat Portfolio
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                        @auth
+                            <a href="{{ route('portfolio.create') }}" class="vl-btn1">
+                                Dashboard Portfolio
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        @else
+                            <a href="{{ route('guest.portfolio.create') }}" class="vl-btn1">
+                                Buat Portfolio
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        @endauth
                         <a href="https://www.youtube.com/watch?v=Y8XpQpW5OVY" class="popup-youtube">
                             <span>
                                 <i class="fa-solid fa-play"></i>

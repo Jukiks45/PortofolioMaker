@@ -18,19 +18,28 @@ class PortfolioController extends Controller
             $data['profile_photo'] = $path;
         }
 
+        $user = Auth::user();
+
         // simpan ke database
-        $portfolio = Auth::user()->portfolios()->create([
+        $portfolio = \App\Models\Portfolio::create([
+            'user_id' => $user?->id, // null jika guest
             'title' => $request->name ?? 'Portfolio',
             'data' => $data
         ]);
 
-        return redirect()->route('portfolio.preview', $portfolio->id)
-            ->with('success', 'Portfolio berhasil dibuat!');
+        // USER FLOW
+        if ($user) {
+            return redirect()->route('portfolio.preview', $portfolio->id)
+                ->with('success', 'Portfolio berhasil dibuat!');
+        }
+
+        // GUEST FLOW
+        return redirect()->route('guest.portfolio.preview', $portfolio->id);
     }
 
     public function preview($id)
     {
-        $portfolio = Auth::user()->portfolios()->findOrFail($id);
+        $portfolio = \App\Models\Portfolio::findOrFail($id);
         $data = $portfolio->data;
 
         return view('templates.template1', compact('portfolio', 'data'));

@@ -66,9 +66,15 @@
 
     {{-- ACTIONS --}}
     <div class="actions">
+        @auth
         <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-2"></i>Kembali
         </a>
+        @else
+        <a href="{{ route('guest.portfolio.create') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Kembali
+        </a>
+        @endauth
         <button type="button" class="btn btn-primary" id="preview-btn" onclick="goToPreview()" disabled>
             <i class="fas fa-eye me-2"></i>Lihat Preview
         </button>

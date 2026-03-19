@@ -1,10 +1,3 @@
-{{-- ============================================================
-     TAHAP 4 — Download Portfolio
-     Wrapper: .download-container  (konsisten dg .form-container, .template-container, .preview-container)
-     Header : .download-header     (konsisten dg .form-header, .preview-header)
-     Semua tombol menggunakan .actions bar yang sama
-============================================================ --}}
-
 {{-- WIZARD STEPS --}}
 <div class="wizard-steps">
     <div class="wizard-step completed">
@@ -115,9 +108,15 @@
 
     {{-- ACTIONS BAR — konsisten dengan semua tahap lain --}}
     <div class="actions">
+        @auth
         <a href="{{ route('portfolio.preview') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
+        @else
+        <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Kembali
+        </a>
+        @endauth
         <button type="button" class="btn btn-primary" id="download-btn" onclick="downloadFile()" disabled>
             <i class="fas fa-download me-1"></i> Download Sekarang
         </button>
