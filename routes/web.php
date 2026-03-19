@@ -43,9 +43,11 @@ Route::middleware('guest')->group(function () {
         return view('portfolio.create');
     })->name('guest.portfolio.create');
 
-    Route::get('/portfolio-template', function () {
-        return view('portfolio.template');
-    })->name('guest.portfolio.template');
+Route::get('/portfolio-template/{id}', function ($id) {
+    $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+    return view('portfolio.template', compact('portfolio'));
+})->name('guest.portfolio.template');
 
     Route::get('/portfolio-preview', function () {
         return view('portfolio.preview');
@@ -83,8 +85,10 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.portfolio.edit');
     })->name('portfolio.edit');
 
-    Route::get('/portfolio/template', function () {
-        return view('dashboard.portfolio.template');
+    Route::get('/portfolio/{id}/template', function ($id) {
+        $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+        return view('dashboard.portfolio.template', compact('portfolio'));
     })->name('portfolio.template');
 
     Route::get('/portfolio/preview', function () {

@@ -29,19 +29,29 @@ class PortfolioController extends Controller
 
         // USER FLOW
         if ($user) {
-            return redirect()->route('portfolio.preview', $portfolio->id)
+            return redirect()->route('portfolio.template', $portfolio->id)
                 ->with('success', 'Portfolio berhasil dibuat!');
         }
 
         // GUEST FLOW
-        return redirect()->route('guest.portfolio.preview', $portfolio->id);
+        return redirect()->route('guest.portfolio.template', $portfolio->id);
     }
 
     public function preview($id)
     {
-        $portfolio = \App\Models\Portfolio::findOrFail($id);
-        $data = $portfolio->data;
+        $portfolio = Auth::user()
+            ? Auth::user()->portfolios()->findOrFail($id)
+            : \App\Models\Portfolio::findOrFail($id);
 
-        return view('templates.template1', compact('portfolio', 'data'));
+        $template = request('template');
+
+        if ($template) {
+            $portfolio->update(['template' => $template]);
+        }
+
+        return view('portfolio.preview', [
+            'portfolio' => $portfolio,
+            'data' => $portfolio->data
+        ]);
     }
 }
