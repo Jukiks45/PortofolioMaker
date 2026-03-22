@@ -88,7 +88,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/portfolio/{id}/template', function ($id) {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
 
-        return view('dashboard.portfolio.template', compact('portfolio'));
+        // ambil template aktif
+        $templates = \App\Models\Template::where('status', 1)->get();
+
+        return view('dashboard.portfolio.template', compact('portfolio', 'templates'));
     })->name('portfolio.template');
 
     Route::get('/portfolio/preview', function () {
@@ -154,6 +157,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('dashboard.admin.templates');
     });
 
+    Route::post('/admin/templates', [App\Http\Controllers\TemplateController::class, 'store']);
+
     Route::get('/admin/users', function () {
         return view('dashboard.admin.users');
     });
@@ -162,6 +167,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('dashboard.admin.portfolios');
     });
 });
+
+Route::get('/test-template/{id}', [App\Http\Controllers\TemplateController::class, 'previewTemplate']);
 
 
 /*

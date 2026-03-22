@@ -43,10 +43,10 @@ class PortfolioController extends Controller
             ? Auth::user()->portfolios()->findOrFail($id)
             : \App\Models\Portfolio::findOrFail($id);
 
-        $template = request('template');
+        $templateId = request('template_id');
 
-        if ($template) {
-            $portfolio->update(['template' => $template]);
+        if ($templateId) {
+            $portfolio->update(['template_id' => $templateId]);
         }
 
         return view('portfolio.preview', [

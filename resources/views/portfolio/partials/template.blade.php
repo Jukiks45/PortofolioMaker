@@ -28,40 +28,17 @@
 
     {{-- GRID --}}
     <div class="template-grid">
-
-        {{-- Template 1 --}}
-        <div class="template-card" onclick="selectTemplate('modern', this)">
-            <div class="template-preview">
-                <img src="{{ asset('templates/template1.png') }}" alt="Modern Resume Template">
+        @foreach($templates as $template)
+            <div class="template-card" onclick="selectTemplate({{ $template->id }}, this)">
+                <div class="template-preview">
+                    <img src="{{ asset('storage/' . $template->image_path) }}" alt="{{ $template->title }}">
+                </div>
+                <div class="template-info">
+                    <div class="template-name">{{ $template->title }}</div>
+                    <div class="template-style">{{ $template->category_name }}</div>
+                </div>
             </div>
-            <div class="template-info">
-                <div class="template-name">Modern Resume</div>
-                <div class="template-style">Minimalist</div>
-            </div>
-        </div>
-
-        {{-- Template 2 --}}
-        <div class="template-card" onclick="selectTemplate('creative', this)">
-            <div class="template-preview">
-                <img src="{{ asset('templates/template2.png') }}" alt="Creative Resume Template">
-            </div>
-            <div class="template-info">
-                <div class="template-name">Creative Resume</div>
-                <div class="template-style">Artistic</div>
-            </div>
-        </div>
-
-        {{-- Template 3 --}}
-        <div class="template-card" onclick="selectTemplate('professional', this)">
-            <div class="template-preview">
-                <img src="{{ asset('templates/template3.png') }}" alt="Professional CV">
-            </div>
-            <div class="template-info">
-                <div class="template-name">Professional CV</div>
-                <div class="template-style">Corporate</div>
-            </div>
-        </div>
-
+        @endforeach
     </div>
 
     {{-- ACTIONS --}}
@@ -86,10 +63,10 @@
 const routes = { preview: "{{ route('portfolio.preview') }}" };
 let selectedTemplate = '';
 
-function selectTemplate(templateName, element) {
+function selectTemplate(templateId, element) {
     document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
-    selectedTemplate = templateName;
+    selectedTemplate = templateId;
     document.getElementById('preview-btn').disabled = false;
 
     // Toast feedback
@@ -121,7 +98,7 @@ function showToast(msg) {
 function goToPreview() {
     if (selectedTemplate) {
         sessionStorage.setItem('selectedTemplate', selectedTemplate);
-        window.location.href = routes.preview + '?template=' + selectedTemplate;
+        window.location.href = routes.preview + '?template_id=' + selectedTemplate;
     } else {
         alert('Silakan pilih template terlebih dahulu!');
     }

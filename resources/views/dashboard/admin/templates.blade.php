@@ -173,36 +173,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form class="modal-form">
+                <form class="modal-form" method="POST" action="/admin/templates" enctype="multipart/form-data" id="addTemplateForm">
+                    @csrf
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Nama Template</label>
-                            <input type="text" class="form-control" placeholder="Minimal Portfolio">
+                            <input type="text" name="title" class="form-control" placeholder="Minimal Portfolio">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" placeholder="minimal">
+                            <input type="text" name="slug" class="form-control" placeholder="minimal">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Upload File HTML</label>
-                            <input type="file" class="form-control" accept=".html">
+                            <input type="file" name="html_file" class="form-control" accept=".html">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Gambar Preview</label>
-                            <input type="file" class="form-control" accept="image/*">
+                            <input type="file" name="image" class="form-control" accept="image/*">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Kategori</label>
-                            <select class="form-select">
-                                <option>Developer</option>
-                                <option>Designer</option>
-                                <option>Photographer</option>
-                                <option>General</option>
+                            <select name="category_name" class="form-select">
+                                <option value="Developer">Developer</option>
+                                <option value="Designer">Designer</option>
+                                <option value="Photographer">Photographer</option>
+                                <option value="General">General</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Status</label>
-                            <select class="form-select">
+                            <select name="status" class="form-select">
                                 <option value="active">Aktif</option>
                                 <option value="inactive">Nonaktif</option>
                             </select>
@@ -212,7 +213,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" type="submit" form="addTemplateForm">
                     <i class="fas fa-save me-1"></i> Simpan Template
                 </button>
             </div>
