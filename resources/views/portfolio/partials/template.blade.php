@@ -31,7 +31,7 @@
         @foreach($templates as $template)
             <div class="template-card" onclick="selectTemplate({{ $template->id }}, this)">
                 <div class="template-preview">
-                    <img src="{{ asset('storage/' . $template->image_path) }}" alt="{{ $template->title }}">
+                    <img src="{{ asset('storage/' . $template->image_path) }}" alt="{{ $template->title }}" width="300" height="420">
                 </div>
                 <div class="template-info">
                     <div class="template-name">{{ $template->title }}</div>
@@ -60,7 +60,7 @@
 </div>
 
 <script>
-const routes = { preview: "{{ route('portfolio.preview') }}" };
+const routes = { preview: "{{ route('portfolio.preview', $portfolio->id) }}" };
 let selectedTemplate = '';
 
 function selectTemplate(templateId, element) {

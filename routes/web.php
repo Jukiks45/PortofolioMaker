@@ -2,179 +2,58 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\DashboardController;
 
-/*
-|--------------------------------------------------------------------------
-| Landing Page
-|--------------------------------------------------------------------------
-*/
+/* --- Landing Page --- */
+Route::view('/', 'pages.home')->name('home');
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
-
-
-/*
-|--------------------------------------------------------------------------
-| Authentication (Backend Ready)
-|--------------------------------------------------------------------------
-*/
-
-// guest only
+/* --- Authentication --- */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 });
 
-// process
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+/* --- Portfolio Flow (Public/Guest) --- */
+Route::get('/create-portfolio', [PortfolioController::class, 'create'])->name('guest.portfolio.create');
+Route::post('/portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
+Route::get('/portfolio-template/{id}', [PortfolioController::class, 'showTemplate'])->name('guest.portfolio.template'); // RECOVERED
+Route::get('/portfolio-preview/{id}', [PortfolioController::class, 'preview'])->name('guest.portfolio.preview');
+Route::get('/portfolio-download/{id}', [PortfolioController::class, 'download'])->name('guest.portfolio.download'); // RECOVERED
 
-/*
-|--------------------------------------------------------------------------
-| Portfolio Builder (Guest Flow)
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware('guest')->group(function () {
-    Route::get('/create-portfolio', function () {
-        return view('portfolio.create');
-    })->name('guest.portfolio.create');
-
-Route::get('/portfolio-template/{id}', function ($id) {
-    $portfolio = \App\Models\Portfolio::findOrFail($id);
-
-    return view('portfolio.template', compact('portfolio'));
-})->name('guest.portfolio.template');
-
-    Route::get('/portfolio-preview', function () {
-        return view('portfolio.preview');
-    })->name('guest.portfolio.preview');
-
-    Route::get('/portfolio-download', function () {
-        return view('portfolio.download');
-    })->name('guest.portfolio.download');
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Protected Routes (AUTH REQUIRED)
-|--------------------------------------------------------------------------
-*/
-
+/* --- Protected Routes (Auth Required) --- */
 Route::middleware('auth')->group(function () {
 
-    // dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard.index');
-    })->name('dashboard');
+    // Dashboard Core
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
+    Route::get('/portfolio-templates', [DashboardController::class, 'templatesIndex'])->name('portfolio.templates'); // RECOVERED
 
-    // portfolio dashboard
-    Route::get('/portfolio', function () {
-        return view('dashboard.portfolio.index');
-    })->name('portfolio.index');
-
-    Route::get('/portfolio/create', function () {
-        return view('dashboard.portfolio.create');
-    })->name('portfolio.create');
-
-    Route::get('/portfolio/edit', function () {
-        return view('dashboard.portfolio.edit');
-    })->name('portfolio.edit');
-
-    Route::get('/portfolio/{id}/template', function ($id) {
-        $portfolio = \App\Models\Portfolio::findOrFail($id);
-
-        // ambil template aktif
-        $templates = \App\Models\Template::where('status', 1)->get();
-
-        return view('dashboard.portfolio.template', compact('portfolio', 'templates'));
-    })->name('portfolio.template');
-
-    Route::get('/portfolio/preview', function () {
-        return view('dashboard.portfolio.preview');
-    })->name('portfolio.preview');
-
-    Route::get('/portfolio/download', function () {
-        return view('dashboard.portfolio.download');
-    })->name('portfolio.download');
-
-
-    // preview portfolio
-    Route::get('/portfolio/{id}/preview', [App\Http\Controllers\PortfolioController::class, 'preview'])->name('portfolio.preview');
-
-    // templates
-    Route::get('/portfolio-templates', function () {
-        return view('dashboard.templates.index');
-    })->name('portfolio.templates');
-
-    // profile
-    Route::get('/profile', function () {
-        return view('dashboard.profile.index');
-    })->name('profile');
-
-    // settings
-    Route::get('/settings', function () {
-        return view('dashboard.settings.index');
-    })->name('settings');
-});
-
-// simpan portfolio
-Route::post('/portfolio', [App\Http\Controllers\PortfolioController::class, 'store'])->name('portfolio.store');
-
-// preview portfolio
-Route::get('/portfolio/{id}/preview', [App\Http\Controllers\PortfolioController::class, 'preview'])->name('portfolio.preview');
-
-// guest preview
-Route::get('/portfolio-preview/{id}', function ($id) {
-    $portfolio = \App\Models\Portfolio::findOrFail($id);
-
-    if ($portfolio->user_id && Auth::check() && $portfolio->user_id !== Auth::id()) {
-        abort(403);
-    }
-
-    return view('portfolio.preview', [
-        'portfolio' => $portfolio,
-        'data' => $portfolio->data
-    ]);
-})->name('guest.portfolio.preview');
-
-/*
-|--------------------------------------------------------------------------
-| Admin Routes (AUTH + ADMIN ROLE REQUIRED)
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('dashboard.admin.index');
-    });
-
-    Route::get('/admin/templates', function () {
-        return view('dashboard.admin.templates');
-    });
-
-    Route::post('/admin/templates', [App\Http\Controllers\TemplateController::class, 'store']);
-
-    Route::get('/admin/users', function () {
-        return view('dashboard.admin.users');
-    });
-
-    Route::get('/admin/portfolios', function () {
-        return view('dashboard.admin.portfolios');
+    // Portfolio Management
+    Route::prefix('portfolio')->group(function () {
+        Route::get('/', [DashboardController::class, 'portfolioIndex'])->name('portfolio.index');
+        Route::get('/create', [PortfolioController::class, 'create'])->name('portfolio.create');
+        Route::get('/{id}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit'); // RECOVERED
+        Route::get('/{id}/template', [PortfolioController::class, 'showTemplate'])->name('portfolio.template');
+        Route::get('/{id}/preview', [PortfolioController::class, 'preview'])->name('portfolio.preview');
+        Route::get('/{id}/download', [PortfolioController::class, 'download'])->name('portfolio.download');
     });
 });
 
-Route::get('/test-template/{id}', [App\Http\Controllers\TemplateController::class, 'previewTemplate']);
+/* --- Admin Routes --- */
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'adminIndex'])->name('admin.index');
+    Route::get('/templates', [DashboardController::class, 'adminTemplates'])->name('admin.templates');
+    Route::post('/templates', [TemplateController::class, 'store'])->name('admin.templates.store');
+    Route::get('/users', [DashboardController::class, 'adminUsers'])->name('admin.users'); // RECOVERED
+    Route::get('/portfolios', [DashboardController::class, 'adminPortfolios'])->name('admin.portfolios'); // RECOVERED
+});
 
-
-/*
-|--------------------------------------------------------------------------
-| Logout (Fixed)
-|--------------------------------------------------------------------------
-*/
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Test Route
+Route::get('/test-template/{id}', [TemplateController::class, 'previewTemplate']);

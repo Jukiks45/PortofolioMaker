@@ -18,4 +18,9 @@ class Template extends Model
     protected $casts = [
         'status' => 'integer',
     ];
+
+    public function portfolios()
+    {
+        return $this->hasMany(\App\Models\Portfolio::class);
+    }
 }

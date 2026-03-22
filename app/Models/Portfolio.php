@@ -11,6 +11,7 @@ class Portfolio extends Model
         'user_id',
         'title',
         'data',
+        'template_id'
     ];
 
     protected $casts = [
@@ -21,5 +22,11 @@ class Portfolio extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // relasi ke template
+    public function template()
+    {
+        return $this->belongsTo(\App\Models\Template::class);
     }
 }

@@ -27,7 +27,7 @@ class TemplateController extends Controller
         // simpan image (optional)
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('templates/images');
+            $imagePath = $request->file('image')->store('templates/images', 'public');
         }
 
         // SIMPAN (sementara tanpa upload file)
@@ -43,7 +43,7 @@ class TemplateController extends Controller
         return back()->with('success', 'Template berhasil ditambahkan');
     }
 
-    private function renderTemplate($html, $data)
+    public function renderTemplate($html, $data)
     {
         // 1. HANDLE LOOP
         foreach ($data as $key => $value) {
