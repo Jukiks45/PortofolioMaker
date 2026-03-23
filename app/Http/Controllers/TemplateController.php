@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Template;
+use App\Services\TemplateService;
 
 class TemplateController extends Controller
 {
@@ -78,80 +79,14 @@ class TemplateController extends Controller
         return $html;
     }
 
-    public function previewTemplate($id)
+    public function previewTemplate($id, TemplateService $templateService)
     {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
         $template = Template::first(); // sementara ambil 1 dulu
 
         $html = \Illuminate\Support\Facades\Storage::get($template->file_path);
 
-        $data = $portfolio->data;
-
-        // =========================
-        // FIX BASIC FIELD
-        // =========================
-        $data['address'] = $data['location'] ?? '';
-
-        // =========================
-        // FIX EDUCATION
-        // =========================
-        $data['education'] = [];
-
-        if (isset($data['education_degree'])) {
-            foreach ($data['education_degree'] as $i => $degree) {
-                $data['education'][] = [
-                    'degree' => $degree,
-                    'school' => $data['education_institution'][$i] ?? '',
-                    'year' => ($data['education_start_year'][$i] ?? '') . ' - ' . ($data['education_end_year'][$i] ?? '')
-                ];
-            }
-        }
-
-        // =========================
-        // FIX SKILLS
-        // =========================
-        $data['skills'] = [];
-
-        if (isset($data['skill_name'])) {
-            foreach ($data['skill_name'] as $i => $name) {
-                $data['skills'][] = [
-                    'name' => $name,
-                    'level' => $data['skill_level'][$i] ?? ''
-                ];
-            }
-        }
-
-        // =========================
-        // FIX EXPERIENCE
-        // =========================
-        $data['experience'] = [];
-
-        if (isset($data['experience_company'])) {
-            foreach ($data['experience_company'] as $i => $company) {
-                $data['experience'][] = [
-                    'company' => $company,
-                    'position' => $data['experience_position'][$i] ?? '',
-                    'date' => ($data['experience_start_date'][$i] ?? '') . ' - ' . ($data['experience_end_date'][$i] ?? ''),
-                    'description' => $data['experience_description'][$i] ?? ''
-                ];
-            }
-        }
-
-        // =========================
-        // FIX REFERENCES
-        // =========================
-        $data['references'] = [];
-
-        if (isset($data['reference_name'])) {
-            foreach ($data['reference_name'] as $i => $name) {
-                $data['references'][] = [
-                    'name' => $name,
-                    'position' => $data['reference_position'][$i] ?? '',
-                    'company' => $data['reference_company'][$i] ?? '',
-                    'phone' => $data['reference_phone'][$i] ?? ''
-                ];
-            }
-        }
+        $data = $templateService->transform($portfolio->data);
 
         $rendered = $this->renderTemplate($html, $data);
 

@@ -1,9 +1,3 @@
-{{-- ============================================================
-     TAHAP 3 — Preview Portfolio
-     Wrapper: .preview-container  (konsisten dg .form-container & .template-container)
-     Header : .preview-header     (konsisten dg .form-header)
-     Semua tombol menggunakan .actions bar yang sama
-============================================================ --}}
 
 {{-- WIZARD STEPS --}}
 <div class="wizard-steps">
@@ -150,23 +144,23 @@
     {{-- ACTIONS — konsisten dengan semua tahap lain --}}
     <div class="actions">
         @auth
-        <a href="{{ route('portfolio.template') }}" class="btn btn-secondary">
+        <a href="{{ route('portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
             <i class="fas fa-edit me-1"></i> Edit Data
         </a>
-        <a href="{{ route('portfolio.download') }}" class="btn btn-primary">
+        <a href="{{ route('portfolio.download', $portfolio->id) }}" class="btn btn-primary">
             <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
         </a>
         @else
-        <a href="{{ route('guest.portfolio.template') }}" class="btn btn-secondary">
+        <a href="{{ route('guest.portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         <a href="{{ route('guest.portfolio.create') }}" class="btn btn-secondary">
             <i class="fas fa-edit me-1"></i> Edit Data
         </a>
-        <a href="{{ route('guest.portfolio.download') }}" class="btn btn-primary">
+        <a href="{{ route('guest.portfolio.download', $portfolio->id) }}" class="btn btn-primary">
             <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
         </a>
         @endauth
@@ -197,8 +191,9 @@
 
         applyTemplate(template);
 
-        const formData = getFormData();
-        populatePreview(formData);
+        const formData = @json($data);
+        const storageBase = "{{ asset('storage') }}";
+        populatePreview(formData, storageBase);
     }
 
     function applyTemplate(templateName) {
@@ -207,72 +202,14 @@
         document.getElementById('template-display-style').textContent = tpl.style;
     }
 
-    function getFormData() {
-        const savedData = sessionStorage.getItem('portfolioData');
-        if (savedData) return JSON.parse(savedData);
 
-        // Demo / fallback data
-        return {
-            name: 'John Doe',
-            job_title: 'Frontend Developer',
-            email: 'john.doe@example.com',
-            phone: '+62 812-3456-7890',
-            location: 'Jakarta, Indonesia',
-            about: 'Developer berpengalaman dalam pembuatan aplikasi web modern dengan fokus pada user experience dan performa.',
-            website: 'https://johndoe.com',
-            education: [{
-                institution: 'Universitas Indonesia',
-                degree: 'Sarjana Teknik Informatika',
-                field: 'Teknik Informatika',
-                start_year: '2015',
-                end_year: '2019'
-            }],
-            experience: [{
-                company: 'Tech Corp',
-                position: 'Frontend Developer',
-                location: 'Jakarta',
-                start_date: '2019-06',
-                end_date: '2022-12',
-                description: 'Mengembangkan aplikasi web modern menggunakan React dan Vue.js.'
-            }],
-            skills: [{
-                    name: 'HTML',
-                    level: 'Ahli'
-                },
-                {
-                    name: 'CSS',
-                    level: 'Ahli'
-                },
-                {
-                    name: 'JavaScript',
-                    level: 'Mahir'
-                },
-                {
-                    name: 'React',
-                    level: 'Mahir'
-                },
-                {
-                    name: 'Vue.js',
-                    level: 'Menengah'
-                }
-            ],
-            projects: [{
-                name: 'E-commerce Website',
-                url: 'https://example.com',
-                description: 'Website e-commerce dengan fitur keranjang belanja dan pembayaran online.'
-            }],
-            language: ['Bahasa Indonesia (Native)', 'English (Fluent)'],
-            certification: ['Google IT Support Professional Certificate', 'AWS Cloud Practitioner'],
-            reference: [{
-                name: 'Jane Smith',
-                position: 'Senior Developer',
-                company: 'Tech Corp',
-                phone: '+62 812-3456-7891'
-            }]
-        };
-    }
+    function populatePreview(data, storageBase) {
+        // Profile Photo
+        if (data.profile_photo) {
+            document.getElementById('preview-photo').src =
+                storageBase + '/' + data.profile_photo;
+        }
 
-    function populatePreview(data) {
         // Basic info
         document.getElementById('preview-name').textContent = data.name || '-';
         document.getElementById('preview-job-title').textContent = data.job_title || '-';

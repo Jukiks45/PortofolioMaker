@@ -109,11 +109,11 @@
     {{-- ACTIONS BAR — konsisten dengan semua tahap lain --}}
     <div class="actions">
         @auth
-        <a href="{{ route('portfolio.preview') }}" class="btn btn-secondary">
+        <a href="{{ route('portfolio.preview', $portfolio->id) }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         @else
-        <a href="{{ route('guest.portfolio.preview') }}" class="btn btn-secondary">
+        <a href="{{ route('guest.portfolio.preview', $portfolio->id) }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         @endauth
@@ -250,22 +250,7 @@
             return;
         }
 
-        const btn = document.getElementById('download-btn');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Memproses...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            const messages = {
-                pdf: 'Fitur download PDF akan diimplementasikan pada tahap backend.\n\nUntuk sementara, gunakan fitur Print di browser untuk membuat PDF.',
-                docx: 'Fitur download DOCX akan diimplementasikan pada tahap backend.',
-                html: 'Fitur download HTML akan diimplementasikan pada tahap backend.',
-                zip: 'Fitur download ZIP akan diimplementasikan pada tahap backend.'
-            };
-            alert(messages[selectedOption]);
-            btn.innerHTML = original;
-            btn.disabled = false;
-        }, 1500);
+        window.location.href = `/portfolio/{{ $portfolio->id }}/download/file?type=${selectedOption}`;
     }
 
     function sharePortfolio() {

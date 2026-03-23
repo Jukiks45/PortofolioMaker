@@ -23,11 +23,11 @@
         <link rel="stylesheet" href="{{ asset('css/portfolio/template.css') }}">
     @endif
 
-    @if (request()->is('portfolio/preview'))
+    @if (request()->routeIs('portfolio.preview'))
         <link rel="stylesheet" href="{{ asset('css/portfolio/preview.css') }}">
     @endif
 
-    @if (request()->is('portfolio/download'))
+    @if (request()->routeIs('portfolio.download'))
         <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
     @endif
     @stack('styles')

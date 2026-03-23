@@ -57,3 +57,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 // Test Route
 Route::get('/test-template/{id}', [TemplateController::class, 'previewTemplate']);
+
+// Render endpoint
+Route::get('/portfolio/{id}/render', [PortfolioController::class, 'render'])
+    ->name('portfolio.render');
+
+// Download routes
+Route::get('/portfolio/{id}/download', [PortfolioController::class, 'download'])
+    ->name('portfolio.download');
+
+Route::get('/portfolio/{id}/download/file', [PortfolioController::class, 'downloadFile'])
+    ->name('portfolio.download.file');
