@@ -88,25 +88,30 @@ class PortfolioController extends Controller
 
     public function downloadFile($id, TemplateService $templateService)
     {
-        $portfolio = \App\Models\Portfolio::findOrFail($id);
+        $portfolio = Auth::check()
+            ? Auth::user()->portfolios()->findOrFail($id)
+            : \App\Models\Portfolio::findOrFail($id);
 
-        $type = request('type', 'pdf');
-
-        if ($type !== 'pdf') {
-            abort(404);
+        // ❗ pastikan ada template
+        if (!$portfolio->template) {
+            abort(404, 'Template belum dipilih');
         }
 
-        $template = $portfolio->template;
-        $html = \Storage::get($template->file_path);
+        // ambil HTML template
+        $html = Storage::get($portfolio->template->file_path);
 
+        // transform data (mode PDF)
         $data = $templateService->transform($portfolio->data, 'pdf');
 
+        // render placeholder
         $rendered = app(\App\Http\Controllers\TemplateController::class)
             ->renderTemplate($html, $data);
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadHTML($rendered);
+        // generate PDF
+        $pdf = Pdf::loadHTML($rendered)
+            ->setPaper('a4', 'portrait');
 
-        return $pdf->download('portfolio-'.$portfolio->id.'.pdf');
+        return $pdf->download('portfolio.pdf');
     }
 
     public function render($id, TemplateService $templateService)

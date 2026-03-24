@@ -21,13 +21,13 @@
 {{-- MAIN CONTAINER --}}
 <div class="download-container">
 
-    {{-- HEADER — konsisten dengan .form-header & .preview-header --}}
+    {{-- HEADER --}}
     <div class="download-header">
         <h2><i class="fas fa-download me-2"></i>Download Portfolio</h2>
         <p>Pilih format file yang Anda inginkan untuk mendownload portfolio Anda</p>
     </div>
 
-    {{-- TEMPLATE INFO BADGE —  struktur sama persis dengan preview --}}
+    {{-- TEMPLATE INFO BADGE --}}
     <div class="template-info">
         <div>
             <span class="template-name" id="template-display-name">Template Name</span>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    {{-- RINGKASAN PORTFOLIO — konsisten dengan .form-section --}}
+    {{-- RINGKASAN PORTFOLIO --}}
     <div class="portfolio-summary">
         <h5><i class="fas fa-file-alt"></i>Ringkasan Portfolio</h5>
         <div class="summary-item">
@@ -61,9 +61,8 @@
         </div>
     </div>
 
-    {{-- PILIHAN FORMAT DOWNLOAD — PDF only --}}
+    {{-- PILIHAN FORMAT DOWNLOAD --}}
     <div class="download-options">
-
         <div class="option-card selected">
             <span class="option-icon"><i class="fas fa-file-pdf"></i></span>
             <div class="option-title">PDF Professional</div>
@@ -73,34 +72,9 @@
             </div>
             <span class="option-size"><i class="fas fa-file me-1"></i>~200 KB</span>
         </div>
-
     </div>
 
-    {{-- CV PREVIEW CONTAINER (UNTUK HTML2PDF) --}}
-    <div id="cv-preview" style="position: fixed; left: -9999px;">
-        {{-- Template akan di-render di sini --}}
-    </div>
-
-    {{-- CSS UNTUK A4 SIZE --}}
-    <style>
-        #cv-preview {
-            width: 794px;
-            min-height: 1123px;
-            background: white;
-            margin: auto;
-            padding: 20px;
-        }
-
-        #cv-preview img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-
-    {{-- HTML2PDF LIBRARY --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-    {{-- ACTIONS BAR — konsisten dengan semua tahap lain --}}
+    {{-- ACTIONS BAR --}}
     <div class="actions">
         @auth
         <a href="{{ route('portfolio.preview', $portfolio->id) }}" class="btn btn-secondary">
@@ -111,9 +85,9 @@
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         @endauth
-        <button type="button" class="btn btn-primary" id="download-btn" onclick="downloadFile()">
-            <i class="fas fa-download me-1"></i> Download Sekarang
-        </button>
+        <a href="{{ route('portfolio.download.file', $portfolio->id) }}" class="btn btn-primary">
+            <i class="fas fa-download me-1"></i> Download PDF
+        </a>
     </div>
 
     {{-- AKSI TAMBAHAN --}}
@@ -143,8 +117,6 @@
             style: 'Corporate'
         }
     };
-
-    let portfolioData = {};
 
     function loadPortfolioData() {
         // Ambil data dari PHP (database)
@@ -183,54 +155,6 @@
         document.getElementById('summary-items').textContent = count + ' item';
     }
 
-    async function downloadFile() {
-        const btn = document.getElementById('download-btn');
-        const original = btn.innerHTML;
-
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Memproses...';
-        btn.disabled = true;
-
-        try {
-            // Ambil template dari backend
-            await loadTemplate();
-
-            // Tunggu render selesai
-            await new Promise(resolve => setTimeout(resolve, 300));
-
-            const element = document.querySelector('#cv-preview #resume-content');
-
-            const opt = {
-                margin: 0,
-                filename: 'portfolio.pdf',
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-
-            await html2pdf().set(opt).from(element).save();
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('Gagal membuat PDF. Silakan coba lagi.');
-        } finally {
-            btn.innerHTML = original;
-            btn.disabled = false;
-        }
-    }
-
-    async function loadTemplate() {
-        const response = await fetch(`/portfolio/{{ $portfolio->id }}/render`);
-        const html = await response.text();
-
-        document.getElementById('cv-preview').innerHTML = html;
-    }
-
     function sharePortfolio() {
         const shareUrl = window.location.href;
         if (navigator.share) {
@@ -263,6 +187,23 @@
             sessionStorage.removeItem('selectedTemplate');
             window.location.href = '{{ route('portfolio.create') }}';
         }
+    }
+
+    function showToast(message) {
+        // Simple toast implementation
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.right = '20px';
+        toast.style.background = '#333';
+        toast.style.color = 'white';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '5px';
+        toast.style.zIndex = '9999';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
 
     document.addEventListener('DOMContentLoaded', loadPortfolioData);
