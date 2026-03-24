@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Template;
 use App\Services\TemplateService;
 
@@ -57,8 +58,13 @@ class TemplateController extends Controller
                     foreach ($value as $item) {
                         $temp = $matches[1];
 
-                        foreach ($item as $k => $v) {
-                            $temp = str_replace("{{{$k}}}", $v, $temp);
+                        if (is_array($item)) {
+                            foreach ($item as $k => $v) {
+                                $temp = str_replace("{{{$k}}}", $v, $temp);
+                            }
+                        } else {
+                            // handle array of string → {{.}}
+                            $temp = str_replace("{{.}}", $item, $temp);
                         }
 
                         $block .= $temp;
@@ -82,14 +88,23 @@ class TemplateController extends Controller
     public function previewTemplate($id, TemplateService $templateService)
     {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
-        $template = Template::first(); // sementara ambil 1 dulu
 
-        $html = \Illuminate\Support\Facades\Storage::get($template->file_path);
+        $template = $portfolio->template;
 
-        $data = $templateService->transform($portfolio->data);
+        if (!$template) {
+            abort(404, 'Template belum dipilih');
+        }
+
+        $html = Storage::get($template->file_path);
+        $data = $templateService->transform($portfolio->data, 'html');
+
+        // debug mode
+        if (request('debug')) {
+            return response()->json($data);
+        }
 
         $rendered = $this->renderTemplate($html, $data);
 
-        return response($rendered);
+        return response($rendered)->header('Content-Type', 'text/html');
     }
 }

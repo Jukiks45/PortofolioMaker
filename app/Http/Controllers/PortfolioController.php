@@ -92,21 +92,21 @@ class PortfolioController extends Controller
 
         $type = request('type', 'pdf');
 
-        if ($type === 'pdf') {
-            $template = $portfolio->template;
-            $html = \Storage::get($template->file_path);
-
-            $data = $templateService->transform($portfolio->data);
-
-            $rendered = app(\App\Http\Controllers\TemplateController::class)
-                ->renderTemplate($html, $data);
-
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadHTML($rendered);
-
-            return $pdf->download('portfolio-'.$portfolio->id.'.pdf');
+        if ($type !== 'pdf') {
+            abort(404);
         }
 
-        abort(404);
+        $template = $portfolio->template;
+        $html = \Storage::get($template->file_path);
+
+        $data = $templateService->transform($portfolio->data, 'pdf');
+
+        $rendered = app(\App\Http\Controllers\TemplateController::class)
+            ->renderTemplate($html, $data);
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadHTML($rendered);
+
+        return $pdf->download('portfolio-'.$portfolio->id.'.pdf');
     }
 
     public function render($id, TemplateService $templateService)

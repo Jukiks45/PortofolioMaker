@@ -61,10 +61,10 @@
         </div>
     </div>
 
-    {{-- PILIHAN FORMAT DOWNLOAD —  konsisten dengan .template-grid --}}
+    {{-- PILIHAN FORMAT DOWNLOAD — PDF only --}}
     <div class="download-options">
 
-        <div class="option-card" onclick="selectOption('pdf', this)">
+        <div class="option-card selected">
             <span class="option-icon"><i class="fas fa-file-pdf"></i></span>
             <div class="option-title">PDF Professional</div>
             <div class="option-description">
@@ -74,37 +74,31 @@
             <span class="option-size"><i class="fas fa-file me-1"></i>~200 KB</span>
         </div>
 
-        <div class="option-card" onclick="selectOption('docx', this)">
-            <span class="option-icon"><i class="fas fa-file-word"></i></span>
-            <div class="option-title">DOCX Editable</div>
-            <div class="option-description">
-                Format Microsoft Word yang bisa diedit. Cocok jika ingin
-                melakukan penyesuaian lebih lanjut setelah download.
-            </div>
-            <span class="option-size"><i class="fas fa-file me-1"></i>~150 KB</span>
-        </div>
-
-        <div class="option-card" onclick="selectOption('html', this)">
-            <span class="option-icon"><i class="fas fa-file-code"></i></span>
-            <div class="option-title">HTML Standalone</div>
-            <div class="option-description">
-                File HTML lengkap dengan CSS dan JS. Cocok untuk dipublikasikan
-                secara online sebagai portfolio website.
-            </div>
-            <span class="option-size"><i class="fas fa-file me-1"></i>~500 KB</span>
-        </div>
-
-        <div class="option-card" onclick="selectOption('zip', this)">
-            <span class="option-icon"><i class="fas fa-file-archive"></i></span>
-            <div class="option-title">Complete Package</div>
-            <div class="option-description">
-                Paket lengkap berisi semua format (PDF, DOCX, HTML) dalam satu
-                file ZIP. Pilihan terbaik untuk menyimpan semua versi.
-            </div>
-            <span class="option-size"><i class="fas fa-file me-1"></i>~1 MB</span>
-        </div>
-
     </div>
+
+    {{-- CV PREVIEW CONTAINER (UNTUK HTML2PDF) --}}
+    <div id="cv-preview" style="position: fixed; left: -9999px;">
+        {{-- Template akan di-render di sini --}}
+    </div>
+
+    {{-- CSS UNTUK A4 SIZE --}}
+    <style>
+        #cv-preview {
+            width: 794px;
+            min-height: 1123px;
+            background: white;
+            margin: auto;
+            padding: 20px;
+        }
+
+        #cv-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    {{-- HTML2PDF LIBRARY --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     {{-- ACTIONS BAR — konsisten dengan semua tahap lain --}}
     <div class="actions">
@@ -117,7 +111,7 @@
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         @endauth
-        <button type="button" class="btn btn-primary" id="download-btn" onclick="downloadFile()" disabled>
+        <button type="button" class="btn btn-primary" id="download-btn" onclick="downloadFile()">
             <i class="fas fa-download me-1"></i> Download Sekarang
         </button>
     </div>
@@ -150,17 +144,17 @@
         }
     };
 
-    let selectedOption = '';
     let portfolioData = {};
-    let selectedCard = null;
 
     function loadPortfolioData() {
+        // Ambil data dari PHP (database)
+        const portfolioData = @json($data);
+
+        // Ambil template dari URL atau session
         const urlParams = new URLSearchParams(window.location.search);
         const template = urlParams.get('template') || sessionStorage.getItem('selectedTemplate') || 'modern';
 
         applyTemplate(template);
-
-        portfolioData = getFormData();
         populateSummary(portfolioData, template);
     }
 
@@ -170,87 +164,71 @@
         document.getElementById('template-display-style').textContent = tpl.style;
     }
 
-    function getFormData() {
-        const saved = sessionStorage.getItem('portfolioData');
-        if (saved) return JSON.parse(saved);
-
-        return {
-            name: 'John Doe',
-            job_title: 'Frontend Developer',
-            itemCount: 10
-        };
-    }
-
     function populateSummary(data, template) {
         const tpl = templates[template] || templates['modern'];
         document.getElementById('summary-name').textContent = data.name || '–';
         document.getElementById('summary-job').textContent = data.job_title || '–';
         document.getElementById('summary-template').textContent = tpl.name;
 
-        // Count items if arrays present
+        // Count items from database
         let count = 0;
-        ['education', 'experience', 'skills', 'projects', 'language', 'certification', 'reference'].forEach(k => {
-            if (Array.isArray(data[k])) count += data[k].length;
-        });
-        document.getElementById('summary-items').textContent = (count || data.itemCount || 0) + ' item';
+        if (data.education && Array.isArray(data.education)) count += data.education.length;
+        if (data.experience && Array.isArray(data.experience)) count += data.experience.length;
+        if (data.skills && Array.isArray(data.skills)) count += data.skills.length;
+        if (data.projects && Array.isArray(data.projects)) count += data.projects.length;
+        if (data.language && Array.isArray(data.language)) count += data.language.length;
+        if (data.certification && Array.isArray(data.certification)) count += data.certification.length;
+        if (data.reference && Array.isArray(data.reference)) count += data.reference.length;
+
+        document.getElementById('summary-items').textContent = count + ' item';
     }
 
-    function selectOption(option, cardEl) {
-        // Reset semua card
-        document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    async function downloadFile() {
+        const btn = document.getElementById('download-btn');
+        const original = btn.innerHTML;
 
-        cardEl.classList.add('selected');
-        selectedOption = option;
-        document.getElementById('download-btn').disabled = false;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Memproses...';
+        btn.disabled = true;
 
-        showToast({
-            pdf: 'Format PDF Professional dipilih!',
-            docx: 'Format DOCX Editable dipilih!',
-            html: 'Format HTML Standalone dipilih!',
-            zip: 'Format Complete Package dipilih!'
-        } [option]);
-    }
+        try {
+            // Ambil template dari backend
+            await loadTemplate();
 
-    function showToast(msg) {
-        const existing = document.querySelector('.dl-toast');
-        if (existing) existing.remove();
+            // Tunggu render selesai
+            await new Promise(resolve => setTimeout(resolve, 300));
 
-        const t = document.createElement('div');
-        t.className = 'dl-toast';
-        Object.assign(t.style, {
-            position: 'fixed',
-            bottom: '1.5rem',
-            right: '1.5rem',
-            background: '#10b981',
-            color: 'white',
-            padding: '.75rem 1.25rem',
-            borderRadius: '10px',
-            boxShadow: '0 4px 16px rgba(16,185,129,.3)',
-            fontSize: '.875rem',
-            fontWeight: '600',
-            zIndex: '9999',
-            opacity: '0',
-            transition: 'opacity .25s ease',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '.5rem'
-        });
-        t.innerHTML = '<i class="fas fa-check-circle"></i> ' + msg;
-        document.body.appendChild(t);
-        requestAnimationFrame(() => t.style.opacity = '1');
-        setTimeout(() => {
-            t.style.opacity = '0';
-            setTimeout(() => t.remove(), 300);
-        }, 2500);
-    }
+            const element = document.querySelector('#cv-preview #resume-content');
 
-    function downloadFile() {
-        if (!selectedOption) {
-            alert('Silakan pilih format file terlebih dahulu!');
-            return;
+            const opt = {
+                margin: 0,
+                filename: 'portfolio.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            };
+
+            await html2pdf().set(opt).from(element).save();
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('Gagal membuat PDF. Silakan coba lagi.');
+        } finally {
+            btn.innerHTML = original;
+            btn.disabled = false;
         }
+    }
 
-        window.location.href = `/portfolio/{{ $portfolio->id }}/download/file?type=${selectedOption}`;
+    async function loadTemplate() {
+        const response = await fetch(`/portfolio/{{ $portfolio->id }}/render`);
+        const html = await response.text();
+
+        document.getElementById('cv-preview').innerHTML = html;
     }
 
     function sharePortfolio() {
