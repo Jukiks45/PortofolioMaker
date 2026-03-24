@@ -85,7 +85,7 @@
             <i class="fas fa-arrow-left me-1"></i> Kembali
         </a>
         @endauth
-        <a href="{{ route('portfolio.download.file', $portfolio->id) }}" class="btn btn-primary">
+        <a href="{{ route('portfolio.render', $portfolio->id) }}" target="_blank" class="btn btn-primary">
             <i class="fas fa-download me-1"></i> Download PDF
         </a>
     </div>

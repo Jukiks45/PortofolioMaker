@@ -66,5 +66,8 @@ Route::get('/portfolio/{id}/render', [PortfolioController::class, 'render'])
 Route::get('/portfolio/{id}/download', [PortfolioController::class, 'download'])
     ->name('portfolio.download');
 
+Route::get('/portfolio/{id}/print', [PortfolioController::class, 'print'])
+    ->name('portfolio.print');
+
 Route::get('/portfolio/{id}/download/file', [PortfolioController::class, 'downloadFile'])
     ->name('portfolio.download.file');

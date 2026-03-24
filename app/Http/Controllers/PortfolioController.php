@@ -114,6 +114,23 @@ class PortfolioController extends Controller
         return $pdf->download('portfolio.pdf');
     }
 
+    public function print($id, TemplateService $templateService)
+    {
+        $portfolio = \App\Models\Portfolio::with('template')->findOrFail($id);
+
+        if (!$portfolio->template_id) {
+            abort(404);
+        }
+
+        $template = $portfolio->template;
+        $html = Storage::get($template->file_path);
+        $data = $templateService->transform($portfolio->data, 'html');
+        $rendered = app(\App\Http\Controllers\TemplateController::class)
+            ->renderTemplate($html, $data);
+
+        return response($rendered)->header('Content-Type', 'text/html');
+    }
+
     public function render($id, TemplateService $templateService)
     {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
