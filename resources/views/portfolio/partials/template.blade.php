@@ -100,7 +100,7 @@ function goToPreview() {
         sessionStorage.setItem('selectedTemplate', selectedTemplate);
         window.location.href = routes.preview + '?template_id=' + selectedTemplate;
     } else {
-        alert('Silakan pilih template terlebih dahulu!');
+        showToast('Silakan pilih template terlebih dahulu!', 'warning');
     }
 }
 

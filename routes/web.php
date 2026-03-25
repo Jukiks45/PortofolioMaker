@@ -52,6 +52,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/templates', [DashboardController::class, 'adminTemplates'])->name('admin.templates');
     Route::post('/templates', [TemplateController::class, 'store'])->name('admin.templates.store');
     Route::get('/users', [DashboardController::class, 'adminUsers'])->name('admin.users'); // RECOVERED
+    Route::get('/users/{id}', [DashboardController::class, 'getUserData'])->name('api.admin.user.data');
+    Route::put('/users/{id}', [DashboardController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/users/{id}', [DashboardController::class, 'deleteUser'])->name('admin.users.delete');
     Route::get('/portfolios', [DashboardController::class, 'adminPortfolios'])->name('admin.portfolios'); // RECOVERED
 });
 

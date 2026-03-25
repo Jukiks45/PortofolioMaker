@@ -44,6 +44,7 @@
     @if (request()->is('admin/portfolios'))
         <link rel="stylesheet" href="{{ asset('css/admin/portfolios.css') }}">
     @endif
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -214,7 +215,44 @@
         </main>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;">
+        <div id="appToast" class="toast border-0 shadow-sm" role="alert">
+            <div class="d-flex">
+                <div class="toast-body fw-medium" id="toastMessage"></div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showToast(message, type = 'success') {
+            const toastEl = document.getElementById('appToast');
+            const toastBody = document.getElementById('toastMessage');
+
+            toastBody.textContent = message;
+
+            // reset class
+            toastEl.className = 'toast border-0 shadow-sm';
+
+            // warna sesuai type
+            if (type === 'success') {
+                toastEl.classList.add('bg-success', 'text-white');
+            } else if (type === 'error') {
+                toastEl.classList.add('bg-danger', 'text-white');
+            } else if (type === 'warning') {
+                toastEl.classList.add('bg-warning');
+            } else {
+                toastEl.classList.add('bg-primary', 'text-white');
+            }
+
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 2000
+            });
+
+            toast.show();
+        }
+    </script>
     <script>
         // Sidebar toggle for mobile
         const sidebar = document.getElementById('sidebar');
@@ -251,8 +289,6 @@
             });
         });
     </script>
-
     @stack('scripts')
 </body>
-
 </html>
