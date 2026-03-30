@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Template;
 use App\Services\TemplateService;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class PortfolioController extends Controller
 {
@@ -53,11 +52,20 @@ class PortfolioController extends Controller
         $portfolio = \App\Models\Portfolio::findOrFail($id);
         $templates = \App\Models\Template::where('status', 1)->get();
 
-        return view('dashboard.portfolio.template', compact('portfolio', 'templates'));
+        $view = Auth::check()
+            ? 'dashboard.portfolio.template'
+            : 'portfolio.template';
+
+        return view($view, compact('portfolio', 'templates'));
     }
 
     public function preview($id, TemplateService $templateService)
     {
+        // Proteksi: guest tidak boleh akses route user
+        if (!Auth::check() && request()->routeIs('portfolio.*')) {
+            abort(403);
+        }
+
         $portfolio = Auth::user()
             ? Auth::user()->portfolios()->findOrFail($id)
             : \App\Models\Portfolio::findOrFail($id);
@@ -71,7 +79,11 @@ class PortfolioController extends Controller
 
         $data = $templateService->transform($portfolio->data);
 
-        return view('dashboard.portfolio.preview', [
+        $view = Auth::check()
+            ? 'dashboard.portfolio.preview'
+            : 'portfolio.preview';
+
+        return view($view, [
             'portfolio' => $portfolio,
             'data' => $data
         ]);
@@ -83,35 +95,11 @@ class PortfolioController extends Controller
 
         $data = $templateService->transform($portfolio->data);
 
-        return view('dashboard.portfolio.download', compact('portfolio', 'data'));
-    }
+        $view = Auth::check()
+            ? 'dashboard.portfolio.download'
+            : 'portfolio.download';
 
-    public function downloadFile($id, TemplateService $templateService)
-    {
-        $portfolio = Auth::check()
-            ? Auth::user()->portfolios()->findOrFail($id)
-            : \App\Models\Portfolio::findOrFail($id);
-
-        // ❗ pastikan ada template
-        if (!$portfolio->template) {
-            abort(404, 'Template belum dipilih');
-        }
-
-        // ambil HTML template
-        $html = Storage::get($portfolio->template->file_path);
-
-        // transform data (mode PDF)
-        $data = $templateService->transform($portfolio->data, 'pdf');
-
-        // render placeholder
-        $rendered = app(\App\Http\Controllers\TemplateController::class)
-            ->renderTemplate($html, $data);
-
-        // generate PDF
-        $pdf = Pdf::loadHTML($rendered)
-            ->setPaper('a4', 'portrait');
-
-        return $pdf->download('portfolio.pdf');
+        return view($view, compact('portfolio', 'data'));
     }
 
     public function print($id, TemplateService $templateService)

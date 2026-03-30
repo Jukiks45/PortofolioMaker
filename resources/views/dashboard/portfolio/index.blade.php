@@ -1,23 +1,3 @@
-@php
-$portfolios = $portfolios ?? [
-    [
-        'title' => 'John Doe CV',
-        'template' => 'Modern CV',
-        'updated_at' => '2 days ago'
-    ],
-    [
-        'title' => 'UI Designer Portfolio',
-        'template' => 'Creative Resume',
-        'updated_at' => '5 days ago'
-    ],
-    [
-        'title' => 'Developer Resume',
-        'template' => 'Minimal CV',
-        'updated_at' => '1 week ago'
-    ]
-];
-@endphp
-
 @extends('layouts.dashboard')
 
 @section('title', 'My Portfolio')
@@ -50,29 +30,35 @@ $portfolios = $portfolios ?? [
             <div class="col-lg-4 col-md-6">
                 <div class="card shadow-sm border-0 h-100">
 
-                    <img src="https://placehold.co/600x400" class="card-img-top" alt="Portfolio Preview">
+                    <img
+                        src="{{ $portfolio->template && $portfolio->template->image_path
+                            ? asset('storage/' . $portfolio->template->image_path)
+                            : 'https://placehold.co/600x400' }}"
+                        class="card-img-top"
+                        alt="Portfolio Preview"
+                    >
 
                     <div class="card-body">
 
                         <h5 class="fw-semibold mb-1">
-                            {{ $portfolio['title'] ?? '-' }}
+                            {{ $portfolio->title ?? '-' }}
                         </h5>
 
                         <p class="text-muted small mb-2">
-                            Template: {{ $portfolio['template'] ?? '-' }}
+                            Template: {{ optional($portfolio->template)->title ?? 'No Template' }}
                         </p>
 
                         <p class="text-muted small">
-                            Last updated: {{ $portfolio['updated_at'] ?? '-' }}
+                            Last updated: {{ $portfolio->updated_at?->diffForHumans() ?? '-' }}
                         </p>
 
                         <div class="d-flex gap-2 flex-wrap">
 
-                            <a href="{{ route('portfolio.preview') }}" class="btn btn-outline-primary btn-sm">
+                            <a href="{{ route('portfolio.preview', $portfolio->id) }}" class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-eye"></i> Preview
                             </a>
 
-                            <a href="{{ route('portfolio.edit') }}" class="btn btn-outline-secondary btn-sm">
+                            <a href="{{ route('portfolio.edit', $portfolio->id) }}" class="btn btn-outline-secondary btn-sm">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
 

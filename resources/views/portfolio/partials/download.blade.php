@@ -95,9 +95,11 @@
         <button type="button" class="btn btn-warning" onclick="sharePortfolio()">
             <i class="fas fa-share-alt me-1"></i> Bagikan
         </button>
+        @auth
         <button type="button" class="btn btn-danger" onclick="deletePortfolio()">
             <i class="fas fa-trash me-1"></i> Hapus Portfolio
         </button>
+        @endauth
     </div>
 
 </div>{{-- /.download-container --}}
@@ -156,10 +158,13 @@
     }
 
     function sharePortfolio() {
-        const shareUrl = window.location.href;
+        const shareUrl = "{{ route('portfolio.render', $portfolio->id) }}";
+        const portfolioName = document.getElementById('summary-name').textContent || 'Portfolio Saya';
+
         if (navigator.share) {
             navigator.share({
-                title: 'Portfolio Saya',
+                title: portfolioName,
+                text: 'Lihat portfolio saya: ' + portfolioName,
                 url: shareUrl
             }).catch(() => copyToClipboard(shareUrl));
         } else {

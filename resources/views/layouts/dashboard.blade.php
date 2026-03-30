@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="{{ asset('css/portfolio/preview.css') }}">
     @endif
 
-    @if (request()->routeIs('portfolio.download'))
+    @if (request()->routeIs('portfolio.download.page'))
         <link rel="stylesheet" href="{{ asset('css/portfolio/download.css') }}">
     @endif
     @stack('styles')
@@ -70,6 +70,7 @@
         <ul class="sidebar-nav">
 
             {{-- USER MENU --}}
+            @if(auth()->user()->role === 'user')
             <li><span class="sidebar-label">Menu Utama</span></li>
 
             <li class="sidebar-nav-item">
@@ -119,13 +120,11 @@
                     Pengaturan
                 </a>
             </li>
+            @endif
 
-            {{-- DIVIDER --}}
-            <li>
-                <div class="sidebar-divider"></div>
-            </li>
 
             {{-- ADMIN MENU --}}
+            @if(auth()->user()->role === 'admin')
             <li><span class="sidebar-label">Admin</span></li>
 
             <li class="sidebar-nav-item">
@@ -158,7 +157,7 @@
                     Kelola Portfolio
                 </a>
             </li>
-
+            @endif
             {{-- DIVIDER --}}
             <li>
                 <div class="sidebar-divider"></div>
@@ -190,7 +189,7 @@
                 </div>
                 <div class="user-details">
                     <span class="user-name">{{ auth()->user()->name ?? 'User' }}</span>
-                    <span class="user-role">Member</span>
+                    <span class="user-role">{{ auth()->user()->role ?? '-' }}</span>
                 </div>
             </div>
         </div>

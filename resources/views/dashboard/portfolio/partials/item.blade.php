@@ -29,7 +29,7 @@
             title="Edit" data-bs-toggle="tooltip">
             <i class="fas fa-edit"></i>
         </a>
-        <a href="{{ route('portfolio.download') }}"
+        <a href="{{ route('portfolio.download.page') }}"
             class="btn btn-sm btn-success"
             title="Download" data-bs-toggle="tooltip">
             <i class="fas fa-download"></i>

@@ -107,4 +107,48 @@ class TemplateController extends Controller
 
         return response($rendered)->header('Content-Type', 'text/html');
     }
+
+    public function update(Request $request, $id)
+    {
+        $template = Template::findOrFail($id);
+
+        $request->validate([
+            'title' => 'sometimes|required|string|max:150',
+            'slug' => "sometimes|required|string|max:150|unique:templates,slug,$id",
+            'status' => 'sometimes|required|in:active,inactive',
+            'category_name' => 'sometimes|nullable|string'
+        ]);
+
+        $data = $request->only(['title', 'slug', 'category_name']);
+
+        if ($request->has('status')) {
+            $data['status'] = $request->status === 'active' ? 1 : 0;
+        }
+
+        $template->update($data);
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $template = Template::findOrFail($id);
+
+        // optional: hapus file juga
+        if ($template->file_path && Storage::exists($template->file_path)) {
+            Storage::delete($template->file_path);
+        }
+
+        if ($template->image_path && Storage::exists('public/' . $template->image_path)) {
+            Storage::delete('public/' . $template->image_path);
+        }
+
+        $template->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
 }

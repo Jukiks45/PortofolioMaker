@@ -48,97 +48,54 @@
 
     {{-- TEMPLATE GRID --}}
     <div class="template-grid">
-
-        {{-- Card 1 --}}
-        <div class="template-card">
-            <img src="{{ asset('templates/template1.png') }}" class="template-image" alt="Minimal Portfolio" style="object-fit: contain; height: 200px;">
-            <div class="template-content">
-                <h5 class="template-title">Minimal Portfolio</h5>
-                <div class="template-meta">
-                    <span class="category-badge developer">
-                        <i class="fas fa-code"></i> Developer
-                    </span>
-                    <span class="status-badge status-active">
-                        <span class="status-indicator"></span> Aktif
-                    </span>
-                </div>
-                <div class="template-actions">
-                    <a href="#" class="btn-template btn-preview"
-                        data-bs-toggle="modal" data-bs-target="#previewTemplateModal">
-                        <i class="fas fa-eye"></i> Preview
-                    </a>
-                    <a href="#" class="btn-template btn-edit"
-                        data-bs-toggle="modal" data-bs-target="#editTemplateModal">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <a href="#" class="btn-template btn-delete"
-                        data-bs-toggle="modal" data-bs-target="#deleteTemplateModal">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Card 2 --}}
-        <div class="template-card">
-            <img src="{{ asset('templates/template2.png') }}" class="template-image" alt="Creative Resume" style="object-fit: contain; height: 200px;">
-            <div class="template-content">
-                <h5 class="template-title">Creative Resume</h5>
-                <div class="template-meta">
-                    <span class="category-badge designer">
-                        <i class="fas fa-paint-brush"></i> Designer
-                    </span>
-                    <span class="status-badge status-active">
-                        <span class="status-indicator"></span> Aktif
-                    </span>
-                </div>
-                <div class="template-actions">
-                    <a href="#" class="btn-template btn-preview"
-                        data-bs-toggle="modal" data-bs-target="#previewTemplateModal">
-                        <i class="fas fa-eye"></i> Preview
-                    </a>
-                    <a href="#" class="btn-template btn-edit"
-                        data-bs-toggle="modal" data-bs-target="#editTemplateModal">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <a href="#" class="btn-template btn-delete"
-                        data-bs-toggle="modal" data-bs-target="#deleteTemplateModal">
-                        <i class="fas fa-trash"></i>
-                    </a>
+        @forelse($templates as $template)
+            <div class="template-card" data-template-id="{{ $template->id }}">
+                @if($template->image_path)
+                    <img src="{{ asset('storage/' . $template->image_path) }}" class="template-image" alt="{{ $template->title }}" style="object-fit: contain; height: 200px;">
+                @else
+                    <div class="template-image placeholder-image" style="height: 200px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                        <i class="fas fa-image fa-2x"></i>
+                    </div>
+                @endif
+                <div class="template-content">
+                    <h5 class="template-title">{{ $template->title }}</h5>
+                    <div class="template-meta">
+                        <span class="category-badge developer">
+                            <i class="fas fa-code"></i> {{ $template->category_name ?? 'General' }}
+                        </span>
+                        <span class="status-badge {{ $template->status ? 'status-active' : 'status-inactive' }}">
+                            <span class="status-indicator"></span> {{ $template->status ? 'Active' : 'Inactive' }}
+                        </span>
+                    </div>
+                    <div class="template-actions">
+                        <a href="#" class="btn-template btn-preview"
+                            data-bs-toggle="modal" data-bs-target="#previewTemplateModal"
+                            data-template-id="{{ $template->id }}"
+                            data-template-title="{{ $template->title }}"
+                            data-template-image="{{ $template->image_path ? asset('storage/' . $template->image_path) : '' }}">
+                            <i class="fas fa-eye"></i> Preview
+                        </a>
+                        <button class="btn-template btn-edit"
+                            data-bs-toggle="modal" data-bs-target="#editTemplateModal"
+                            data-template='@json($template)'>
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <a href="#" class="btn-template btn-delete"
+                            data-bs-toggle="modal" data-bs-target="#deleteTemplateModal"
+                            data-template-id="{{ $template->id }}"
+                            data-template-title="{{ $template->title }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        {{-- Card 3 --}}
-        <div class="template-card">
-            <img src="{{ asset('templates/template3.png') }}" class="template-image" alt="Professional CV" style="object-fit: contain; height: 200px;">
-            <div class="template-content">
-                <h5 class="template-title">Professional CV</h5>
-                <div class="template-meta">
-                    <span class="category-badge general">
-                        <i class="fas fa-briefcase"></i> General
-                    </span>
-                    <span class="status-badge status-inactive">
-                        <span class="status-indicator inactive"></span> Nonaktif
-                    </span>
-                </div>
-                <div class="template-actions">
-                    <a href="#" class="btn-template btn-preview"
-                        data-bs-toggle="modal" data-bs-target="#previewTemplateModal">
-                        <i class="fas fa-eye"></i> Preview
-                    </a>
-                    <a href="#" class="btn-template btn-edit"
-                        data-bs-toggle="modal" data-bs-target="#editTemplateModal">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <a href="#" class="btn-template btn-delete"
-                        data-bs-toggle="modal" data-bs-target="#deleteTemplateModal">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </div>
+        @empty
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-layer-group fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Belum ada template</h5>
+                <p class="text-muted">Upload template pertama Anda untuk memulai.</p>
             </div>
-        </div>
-
+        @endforelse
     </div>
 
     {{-- PAGINATION --}}
@@ -233,7 +190,7 @@
             </div>
             <div class="modal-body p-2">
                 <div style="background:#f8fafc;border-radius:12px;overflow:hidden;text-align:center;">
-                    <img src="{{ asset('templates/template1.png') }}"
+                    <img id="previewImage"
                         style="max-width:100%;max-height:70vh;object-fit:contain;display:block;margin:auto;"
                         alt="Template Preview">
                 </div>
@@ -256,38 +213,39 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form class="modal-form">
+                <form id="editTemplateForm">
+                    <input type="hidden" id="editTemplateId">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Nama Template</label>
-                            <input type="text" class="form-control" value="Minimal Portfolio">
+                            <input type="text" name="title" class="form-control" placeholder="Minimal Portfolio">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" value="minimal">
+                            <input type="text" name="slug" class="form-control" placeholder="minimal">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Ganti File HTML</label>
-                            <input type="file" class="form-control" accept=".html">
+                            <input type="file" name="html_file" class="form-control" accept=".html">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Ganti Gambar Preview</label>
-                            <input type="file" class="form-control" accept="image/*">
+                            <input type="file" name="image" class="form-control" accept="image/*">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Kategori</label>
-                            <select class="form-select">
-                                <option selected>Developer</option>
-                                <option>Designer</option>
-                                <option>Photographer</option>
-                                <option>General</option>
+                            <select name="category_name" class="form-select">
+                                <option value="Developer">Developer</option>
+                                <option value="Designer">Designer</option>
+                                <option value="Photographer">Photographer</option>
+                                <option value="General">General</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Status</label>
-                            <select class="form-select">
-                                <option selected>Aktif</option>
-                                <option>Nonaktif</option>
+                            <select name="status" class="form-select">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
                             </select>
                         </div>
                     </div>
@@ -295,8 +253,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-save me-1"></i> Update Template
+                <button class="btn btn-primary" type="submit" form="editTemplateForm">
+                    <i class="fas fa-save me-1"></i> Simpan Perubahan
                 </button>
             </div>
         </div>
@@ -321,7 +279,7 @@
             </div>
             <div class="modal-footer border-0 gap-2 pt-2">
                 <button class="btn btn-secondary flex-fill" data-bs-dismiss="modal">Batal</button>
-                <button class="btn btn-danger flex-fill">
+                <button id="confirmDeleteTemplate" class="btn btn-danger flex-fill">
                     <i class="fas fa-trash me-1"></i> Ya, Hapus
                 </button>
             </div>
@@ -330,3 +288,138 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editTemplateModal = document.getElementById('editTemplateModal');
+
+            // Handle Edit Template Modal
+            if (editTemplateModal) {
+                editTemplateModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const data = JSON.parse(button.getAttribute('data-template'));
+
+                    document.getElementById('editTemplateId').value = data.id;
+                    document.querySelector('#editTemplateForm input[name="title"]').value = data.title;
+                    document.querySelector('#editTemplateForm input[name="slug"]').value = data.slug;
+                    document.querySelector('#editTemplateForm select[name="status"]').value =
+                        data.status == 1 ? 'active' : 'inactive';
+                    document.querySelector('#editTemplateForm select[name="category_name"]').value = data.category_name || 'General';
+                });
+            }
+
+            // Handle Edit Template Form Submit
+            if (document.getElementById('editTemplateForm')) {
+                document.getElementById('editTemplateForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const id = document.getElementById('editTemplateId').value;
+
+                    const data = {
+                        title: this.querySelector('input[name="title"]').value,
+                        slug: this.querySelector('input[name="slug"]').value,
+                        status: this.querySelector('select[name="status"]').value,
+                        category_name: this.querySelector('select[name="category_name"]').value
+                    };
+
+                        fetch(`/admin/templates/${id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(res => {
+                            if (!res.ok) throw new Error('HTTP ' + res.status);
+                            return res.json();
+                        })
+                        .then(res => {
+                            showToast('Template berhasil diupdate');
+                        })
+                        .then(() => {
+                            const row = document.querySelector(`[data-template-id="${id}"]`);
+
+                            if (row) {
+                                const titleEl = row.querySelector('.template-title');
+                                if (titleEl) titleEl.textContent = data.title;
+                            }
+
+                            bootstrap.Modal.getInstance(editTemplateModal).hide();
+                        })
+                        .catch(error => {
+                            console.error('ERROR DETAIL:', error);
+                            showToast('Gagal update template', 'error');
+                        });
+                });
+            }
+        });
+
+        // Handle Delete Template Modal
+        const deleteTemplateModal = document.getElementById('deleteTemplateModal');
+        let selectedTemplateId = null;
+
+        if (deleteTemplateModal) {
+            deleteTemplateModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                selectedTemplateId = button.getAttribute('data-template-id');
+            });
+        }
+
+        // Handle Delete Template Confirmation
+        const deleteBtn = document.getElementById('confirmDeleteTemplate');
+
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', function() {
+                if (!selectedTemplateId) return;
+
+                fetch(`/admin/templates/${selectedTemplateId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(res => {
+                    showToast('Template berhasil dihapus');
+
+                    // 🔥 hapus dari UI
+                    const row = document.querySelector(`[data-template-id="${selectedTemplateId}"]`);
+                    if (row) row.remove();
+
+                    // 🔥 tutup modal
+                    bootstrap.Modal.getInstance(deleteTemplateModal).hide();
+
+                    selectedTemplateId = null;
+                })
+                .catch(error => {
+                    console.error('DELETE ERROR:', error);
+                    showToast('Gagal hapus template', 'error');
+                });
+            });
+        }
+
+        // Handle Preview Template Modal
+        const previewModal = document.getElementById('previewTemplateModal');
+
+        if (previewModal) {
+            previewModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const image = button.getAttribute('data-template-image');
+
+                const imgEl = document.getElementById('previewImage');
+
+                if (imgEl) {
+                    imgEl.src = image || '/images/no-image.png';
+                }
+            });
+        }
+    </script>
+@endpush

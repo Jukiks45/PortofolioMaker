@@ -60,7 +60,11 @@
 </div>
 
 <script>
-const routes = { preview: "{{ route('portfolio.preview', $portfolio->id) }}" };
+const routes = {
+    preview: "{{ auth()->check()
+        ? route('portfolio.preview', $portfolio->id)
+        : route('guest.portfolio.preview', $portfolio->id) }}"
+};
 let selectedTemplate = '';
 
 function selectTemplate(templateId, element) {

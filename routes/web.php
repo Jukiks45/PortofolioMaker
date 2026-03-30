@@ -7,6 +7,7 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 
 /* --- Landing Page --- */
+
 Route::view('/', 'pages.home')->name('home');
 
 /* --- Authentication --- */
@@ -42,7 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit'); // RECOVERED
         Route::get('/{id}/template', [PortfolioController::class, 'showTemplate'])->name('portfolio.template');
         Route::get('/{id}/preview', [PortfolioController::class, 'preview'])->name('portfolio.preview');
-        Route::get('/{id}/download', [PortfolioController::class, 'download'])->name('portfolio.download');
+        Route::get('/{id}/download', [PortfolioController::class, 'download'])->name('portfolio.download.page');
     });
 });
 
@@ -55,6 +56,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/users/{id}', [DashboardController::class, 'getUserData'])->name('api.admin.user.data');
     Route::put('/users/{id}', [DashboardController::class, 'updateUser'])->name('admin.users.update');
     Route::delete('/users/{id}', [DashboardController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::put('/templates/{id}', [TemplateController::class, 'update']);
+    Route::delete('/templates/{id}', [TemplateController::class, 'destroy'])->name('admin.templates.delete');
     Route::get('/portfolios', [DashboardController::class, 'adminPortfolios'])->name('admin.portfolios'); // RECOVERED
 });
 
@@ -66,11 +69,6 @@ Route::get('/portfolio/{id}/render', [PortfolioController::class, 'render'])
     ->name('portfolio.render');
 
 // Download routes
-Route::get('/portfolio/{id}/download', [PortfolioController::class, 'download'])
-    ->name('portfolio.download');
-
 Route::get('/portfolio/{id}/print', [PortfolioController::class, 'print'])
     ->name('portfolio.print');
 
-Route::get('/portfolio/{id}/download/file', [PortfolioController::class, 'downloadFile'])
-    ->name('portfolio.download.file');

@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Portfolio;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index() { return view('dashboard.index'); }
 
-    public function portfolioIndex() { return view('dashboard.portfolio.index'); }
+    public function portfolioIndex()
+    {
+        $portfolios = Portfolio::with('template')
+            ->where('user_id',Auth::id())
+            ->latest()
+            ->get();
+
+        return view('dashboard.portfolio.index', compact('portfolios'));
+    }
 
     public function profile() { return view('dashboard.profile.index'); }
 
@@ -16,7 +26,11 @@ class DashboardController extends Controller
 
     public function adminIndex() { return view('dashboard.admin.index'); }
 
-    public function adminTemplates() { return view('dashboard.admin.templates'); }
+    public function adminTemplates()
+    {
+        $templates = \App\Models\Template::latest()->get();
+        return view('dashboard.admin.templates', compact('templates'));
+    }
 
     public function templatesIndex() { return view('dashboard.templates.index'); }
 

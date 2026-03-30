@@ -69,7 +69,7 @@
                     </thead>
                     <tbody>
                         @forelse($users as $user)
-                            <tr>
+                            <tr data-user-id="{{ $user->id }}">
                                 <td>
                                     <span style="font-size:.78rem;font-weight:700;color:#94a3b8;font-family:monospace;">
                                         #{{ str_pad($loop->iteration, 3, '0', STR_PAD_LEFT) }}
@@ -391,7 +391,26 @@
                             .then(res => res.json())
                             .then(res => {
                                 showToast('User berhasil diupdate');
-                                location.reload();
+
+                                // 🔥 ambil row
+                                const row = document.querySelector(`[data-user-id="${id}"]`);
+
+                                if (row) {
+                                    // update nama
+                                    row.querySelector('.user-name').textContent = data.name;
+
+                                    // update email (2 tempat)
+                                    row.querySelector('.user-email').textContent = data.email;
+                                    row.querySelector('.meta-item').innerHTML =
+                                        `<i class="fas fa-envelope"></i> ${data.email}`;
+
+                                    // update avatar (huruf pertama)
+                                    row.querySelector('.user-avatar').textContent = data.name.charAt(0).toUpperCase();
+                                }
+
+                                // 🔥 tutup modal
+                                const modal = bootstrap.Modal.getInstance(editUserModal);
+                                modal.hide();
                             })
                             .catch(error => {
                                 console.error('Error updating user:', error);
@@ -438,7 +457,14 @@
                             .then(res => res.json())
                             .then(res => {
                                 showToast('User berhasil dihapus');
-                                location.reload();
+
+                                // 🔥 hapus row dari tabel
+                                const row = document.querySelector(`[data-user-id="${id}"]`);
+                                if (row) row.remove();
+
+                                // 🔥 tutup modal
+                                const modal = bootstrap.Modal.getInstance(deleteUserModal);
+                                modal.hide();
                             })
                             .catch(error => {
                                 console.error('Error deleting user:', error);

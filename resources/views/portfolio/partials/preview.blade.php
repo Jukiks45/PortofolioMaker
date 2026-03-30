@@ -150,7 +150,7 @@
         <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
             <i class="fas fa-edit me-1"></i> Edit Data
         </a>
-        <a href="{{ route('portfolio.download', $portfolio->id) }}" class="btn btn-primary">
+        <a href="{{ route('portfolio.download.page', $portfolio->id) }}" class="btn btn-primary">
             <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
         </a>
         @else
