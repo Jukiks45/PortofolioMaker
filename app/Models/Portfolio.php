@@ -11,12 +11,15 @@ class Portfolio extends Model
         'user_id',
         'title',
         'data',
-        'template_id'
+        'template_id',
+        'is_paid'
     ];
 
     protected $casts = [
         'data' => 'array',
+        'is_paid' => 'boolean',
     ];
+
 
     // relasi ke user
     public function user()

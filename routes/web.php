@@ -59,6 +59,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('/templates/{id}', [TemplateController::class, 'update']);
     Route::delete('/templates/{id}', [TemplateController::class, 'destroy'])->name('admin.templates.delete');
     Route::get('/portfolios', [DashboardController::class, 'adminPortfolios'])->name('admin.portfolios'); // RECOVERED
+    Route::get('/portfolios/{id}', [DashboardController::class, 'getPortfolio'])->name('api.admin.portfolio.data');
+    Route::delete('/portfolios/{id}', [DashboardController::class, 'deletePortfolio'])->name('admin.portfolios.delete');
 });
 
 // Test Route
@@ -72,3 +74,26 @@ Route::get('/portfolio/{id}/render', [PortfolioController::class, 'render'])
 Route::get('/portfolio/{id}/print', [PortfolioController::class, 'print'])
     ->name('portfolio.print');
 
+// Snap Token endpoint
+Route::get('/portfolio/{id}/snap-token', [PortfolioController::class, 'getSnapToken'])
+    ->name('portfolio.snap-token');
+
+// Midtrans Callback (for payment notification)
+Route::post('/midtrans/callback', [PortfolioController::class, 'midtransCallback'])
+    ->name('midtrans.callback');
+
+// Development payment simulation endpoint
+Route::post('/portfolio/{id}/mark-paid', function ($id) {
+    $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+    // Protection against bypassing - only update if not already paid
+    if ($portfolio->is_paid) {
+        return response()->json(['message' => 'Already paid']);
+    }
+
+    $portfolio->update([
+        'is_paid' => true
+    ]);
+
+    return response()->json(['success' => true]);
+});

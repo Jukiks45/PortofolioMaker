@@ -24,6 +24,7 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/toast.js') }}"></script>
 </body>
 
 </html>

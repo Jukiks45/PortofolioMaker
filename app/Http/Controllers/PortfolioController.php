@@ -7,9 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Template;
 use App\Services\TemplateService;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class PortfolioController extends Controller
 {
+    private function initMidtrans()
+    {
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = config('midtrans.is_production');
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
+
     public function create()
     {
         // Cek apakah user login atau guest untuk menentukan view
@@ -142,6 +152,80 @@ class PortfolioController extends Controller
     {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
         return view('dashboard.portfolio.edit', compact('portfolio'));
+    }
+
+    public function getSnapToken($id)
+    {
+        $this->initMidtrans();
+
+        $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+        $orderId = 'PORTO-' . $portfolio->id . '-' . time();
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => 10000, // harga sementara
+            ],
+            'customer_details' => [
+                'first_name' => $portfolio->data['name'] ?? 'Guest',
+            ]
+        ];
+
+        $snapToken = Snap::getSnapToken($params);
+
+        return response()->json([
+            'token' => $snapToken
+        ]);
+    }
+
+    public function midtransCallback(Request $request)
+    {
+        // Verifikasi signature key dari Midtrans
+        $serverKey = config('midtrans.server_key');
+        $orderId = $request->order_id;
+        $statusCode = $request->status_code;
+        $grossAmount = $request->gross_amount;
+        $signatureKey = $request->signature_key;
+
+        // Generate expected signature
+        $input = $orderId . $statusCode . $grossAmount . $serverKey;
+        $expectedSignature = hash('sha512', $input);
+
+        if ($signatureKey !== $expectedSignature) {
+            return response()->json(['message' => 'Invalid signature'], 403);
+        }
+
+        // Ekstrak portfolio ID dari order_id (format: PORTO-{id}-{timestamp})
+        $parts = explode('-', $orderId);
+        if (count($parts) < 2) {
+            return response()->json(['message' => 'Invalid order ID'], 400);
+        }
+
+        $portfolioId = $parts[1];
+        $portfolio = \App\Models\Portfolio::find($portfolioId);
+
+        if (!$portfolio) {
+            return response()->json(['message' => 'Portfolio not found'], 404);
+        }
+
+        // Update status pembayaran berdasarkan status transaksi
+        $transactionStatus = $request->transaction_status;
+
+        if ($transactionStatus == 'capture') {
+            // Untuk credit card, status capture berarti pembayaran berhasil
+            if ($request->fraud_status == 'accept') {
+                $portfolio->update(['is_paid' => true]);
+            }
+        } elseif ($transactionStatus == 'settlement') {
+            // Untuk selain credit card, status settlement berarti pembayaran berhasil
+            $portfolio->update(['is_paid' => true]);
+        } elseif ($transactionStatus == 'expire' || $transactionStatus == 'cancel' || $transactionStatus == 'deny') {
+            // Pembayaran gagal/dibatalkan
+            $portfolio->update(['is_paid' => false]);
+        }
+
+        return response()->json(['message' => 'Callback processed successfully']);
     }
 
 }

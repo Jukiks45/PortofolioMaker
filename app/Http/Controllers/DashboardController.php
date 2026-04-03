@@ -8,23 +8,35 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index() { return view('dashboard.index'); }
+    public function index()
+    {
+        return view('dashboard.index');
+    }
 
     public function portfolioIndex()
     {
         $portfolios = Portfolio::with('template')
-            ->where('user_id',Auth::id())
+            ->where('user_id', Auth::id())
             ->latest()
             ->get();
 
         return view('dashboard.portfolio.index', compact('portfolios'));
     }
 
-    public function profile() { return view('dashboard.profile.index'); }
+    public function profile()
+    {
+        return view('dashboard.profile.index');
+    }
 
-    public function settings() { return view('dashboard.settings.index'); }
+    public function settings()
+    {
+        return view('dashboard.settings.index');
+    }
 
-    public function adminIndex() { return view('dashboard.admin.index'); }
+    public function adminIndex()
+    {
+        return view('dashboard.admin.index');
+    }
 
     public function adminTemplates()
     {
@@ -32,7 +44,10 @@ class DashboardController extends Controller
         return view('dashboard.admin.templates', compact('templates'));
     }
 
-    public function templatesIndex() { return view('dashboard.templates.index'); }
+    public function templatesIndex()
+    {
+        return view('dashboard.templates.index');
+    }
 
     public function adminUsers()
     {
@@ -93,5 +108,49 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function adminPortfolios() { return view('dashboard.admin.portfolios'); }
+    public function adminPortfolios()
+    {
+        $portfolios = \App\Models\Portfolio::with(['user', 'template'])
+            ->latest()
+            ->paginate(5);
+
+        return view('dashboard.admin.portfolios', compact('portfolios'));
+    }
+
+    public function getPortfolio($id)
+    {
+        $portfolio = \App\Models\Portfolio::with(['user', 'template'])
+            ->findOrFail($id);
+
+        return response()->json([
+            'id' => $portfolio->id,
+            'title' => $portfolio->title,
+            'about' => $portfolio->data['about'] ?? '-',
+            'created_at' => $portfolio->created_at->format('d M Y'),
+
+            'template' => $portfolio->template->title ?? '-',
+
+            'user' => $portfolio->user ? [
+                'id' => $portfolio->user->id,
+                'name' => $portfolio->user->name,
+                'email' => $portfolio->user->email,
+                'total_portfolios' => $portfolio->user->portfolios->count(),
+            ] : [
+                'id' => 'Guest',
+                'name' => 'Guest User',
+                'email' => '-',
+                'total_portfolios' => 0,
+            ]
+        ]);
+    }
+
+    public function deletePortfolio($id)
+    {
+        $portfolio = \App\Models\Portfolio::findOrFail($id);
+        $portfolio->delete();
+
+        return redirect()
+            ->route('admin.portfolios')
+            ->with('success', 'Portfolio berhasil dihapus');
+    }
 }

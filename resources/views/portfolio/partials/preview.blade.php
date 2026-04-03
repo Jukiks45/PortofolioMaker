@@ -1,4 +1,3 @@
-
 {{-- WIZARD STEPS --}}
 <div class="wizard-steps">
     <div class="wizard-step completed">
@@ -143,34 +142,50 @@
 
     {{-- ACTIONS — konsisten dengan semua tahap lain --}}
     <div class="actions">
+        {{-- BACK & EDIT BUTTONS --}}
         @auth
-        <a href="{{ route('portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left me-1"></i> Kembali
-        </a>
-        <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
-            <i class="fas fa-edit me-1"></i> Edit Data
-        </a>
-        <a href="{{ route('portfolio.download.page', $portfolio->id) }}" class="btn btn-primary">
-            <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
-        </a>
+            <a href="{{ route('portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
+            <a href="{{ route('portfolio.create') }}" class="btn btn-secondary">
+                <i class="fas fa-edit me-1"></i> Edit Data
+            </a>
         @else
-        <a href="{{ route('guest.portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left me-1"></i> Kembali
-        </a>
-        <a href="{{ route('guest.portfolio.create') }}" class="btn btn-secondary">
-            <i class="fas fa-edit me-1"></i> Edit Data
-        </a>
-        <a href="{{ route('guest.portfolio.download', $portfolio->id) }}" class="btn btn-primary">
-            <i class="fas fa-arrow-right me-1"></i> Lanjut ke Download
-        </a>
+            <a href="{{ route('guest.portfolio.template', $portfolio->id) }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
+            <a href="{{ route('guest.portfolio.create') }}" class="btn btn-secondary">
+                <i class="fas fa-edit me-1"></i> Edit Data
+            </a>
         @endauth
+
+        {{-- PAYMENT / DOWNLOAD BUTTON --}}
+        @if (!$portfolio->is_paid)
+            <button class="btn btn-success" onclick="payNow()">
+                💳 Bayar & Unlock Download
+            </button>
+            <p class="text-danger small mt-2 mb-0">
+                🔒 Download terkunci — silakan lakukan pembayaran terlebih dahulu
+            </p>
+        @else
+            <a href="{{ auth()->check()
+                ? route('portfolio.download.page', $portfolio->id)
+                : route('guest.portfolio.download', $portfolio->id) }}"
+                class="btn btn-primary">
+                ⬇️ Download Sekarang
+            </a>
+        @endif
     </div>
 
 </div>{{-- /.preview-container --}}
 
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+</script>
+
 <script>
-    // Template configuration
-    const templates = {
+
+// Template configuration
+const templates = {
         'modern': {
             name: 'Modern Resume',
             style: 'Minimalist'
@@ -315,4 +330,59 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadPortfolioData);
+
+    function payNow() {
+        fetch('/portfolio/{{ $portfolio->id }}/snap-token')
+            .then(response => response.json())
+            .then(data => {
+                snap.pay(data.token, {
+                    onSuccess: function(result) {
+                        // Pembayaran berhasil - call mark-paid endpoint
+                        fetch('/portfolio/{{ $portfolio->id }}/mark-paid', {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    showToast("Pembayaran berhasil! Download sudah terbuka.");
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1500);
+                                } else {
+                                    showToast("Terjadi kesalahan: " + (data.message ||
+                                        "Gagal memperbarui status pembayaran"), "error");
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                showToast("Gagal memperbarui status pembayaran. Halaman akan dimuat ulang.", "error");
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1500);
+                            });
+                    },
+                    onPending: function(result) {
+                        showToast("Menunggu pembayaran...", "warning");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    },
+                    onError: function(result) {
+                        showToast("Pembayaran gagal. Silakan coba lagi.", "error");
+                    },
+                    onClose: function() {
+                        // User menutup popup pembayaran tanpa menyelesaikan
+                        showToast("Pembayaran dibatalkan. Silakan coba lagi saat Anda siap.", "warning");
+                    }
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                showToast("Gagal mengambil token pembayaran", "error");
+            });
+    }
 </script>

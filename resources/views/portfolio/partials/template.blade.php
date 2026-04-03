@@ -77,27 +77,6 @@ function selectTemplate(templateId, element) {
     showToast('Template "' + element.querySelector('.template-name').textContent + '" dipilih!');
 }
 
-function showToast(msg) {
-    const existing = document.querySelector('.tpl-toast');
-    if (existing) existing.remove();
-
-    const t = document.createElement('div');
-    t.className = 'tpl-toast';
-    Object.assign(t.style, {
-        position:'fixed', bottom:'1.5rem', right:'1.5rem',
-        background:'#10b981', color:'white',
-        padding:'.75rem 1.25rem', borderRadius:'10px',
-        boxShadow:'0 4px 16px rgba(16,185,129,.3)',
-        fontSize:'.875rem', fontWeight:'600',
-        zIndex:'9999', opacity:'0',
-        transition:'opacity .25s ease',
-        display:'flex', alignItems:'center', gap:'.5rem'
-    });
-    t.innerHTML = '<i class="fas fa-check-circle"></i> ' + msg;
-    document.body.appendChild(t);
-    requestAnimationFrame(() => t.style.opacity = '1');
-    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
-}
 
 function goToPreview() {
     if (selectedTemplate) {
