@@ -34,7 +34,7 @@
                         </p>
 
                         <div class="template-actions">
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                            <a href="{{ route('guest.portfolio.preview', ['id' => 1]) }}" class="btn-template btn-preview">
                                 <i class="fas fa-eye"></i> Preview
                             </a>
                             <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
@@ -63,7 +63,7 @@
                         </p>
 
                         <div class="template-actions">
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                            <a href="{{ route('guest.portfolio.preview', ['id' => 2]) }}" class="btn-template btn-preview">
                                 <i class="fas fa-eye"></i> Preview
                             </a>
                             <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
@@ -92,7 +92,7 @@
                         </p>
 
                         <div class="template-actions">
-                            <a href="{{ route('guest.portfolio.preview') }}" class="btn-template btn-preview">
+                            <a href="{{ route('guest.portfolio.preview', ['id' => 3]) }}" class="btn-template btn-preview">
                                 <i class="fas fa-eye"></i> Preview
                             </a>
                             <a href="{{ route('portfolio.create') }}" class="btn-template btn-primary">
