@@ -122,7 +122,7 @@ class PortfolioController extends Controller
 
         $template = $portfolio->template;
         $html = Storage::get($template->file_path);
-        $data = $templateService->transform($portfolio->data, 'html');
+        $data = $templateService->transform($portfolio->data);
         $rendered = app(\App\Http\Controllers\TemplateController::class)
             ->renderTemplate($html, $data);
 

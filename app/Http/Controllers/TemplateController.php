@@ -96,7 +96,7 @@ class TemplateController extends Controller
         }
 
         $html = Storage::get($template->file_path);
-        $data = $templateService->transform($portfolio->data, 'html');
+        $data = $templateService->transform($portfolio->data);
 
         // debug mode
         if (request('debug')) {

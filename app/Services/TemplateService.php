@@ -4,26 +4,16 @@ namespace App\Services;
 
 class TemplateService
 {
-    public function transform(array $data, $mode = 'html'): array
+    public function transform(array $data): array
     {
         // =========================
         // BASIC
         // =========================
         $data['address'] = $data['location'] ?? '';
 
-        // Profile photo - handle for both HTML and PDF
+        // Profile photo - 100% client side, gunakan URL asset
         if (!empty($data['profile_photo'])) {
-            if ($mode === 'pdf') {
-                $path = public_path('storage/' . $data['profile_photo']);
-
-                if (file_exists($path)) {
-                    // For PDF (dompdf) - use absolute path
-                    $data['profile_photo'] = $path;
-                }
-            } else {
-                // For HTML - use URL
-                $data['profile_photo'] = asset('storage/' . $data['profile_photo']);
-            }
+            $data['profile_photo'] = asset('storage/' . $data['profile_photo']);
         } else {
             // Fallback image
             $data['profile_photo'] = 'https://via.placeholder.com/150';

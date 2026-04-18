@@ -72,6 +72,16 @@
             </div>
             <span class="option-size"><i class="fas fa-file me-1"></i>~200 KB</span>
         </div>
+
+        <div class="option-card">
+            <span class="option-icon"><i class="fas fa-globe"></i></span>
+            <div class="option-title">🌐 Website Portfolio</div>
+            <div class="option-description">
+                Download portfolio dalam bentuk website HTML yang bisa dibuka di browser
+                atau langsung diupload ke hosting / Github Pages.
+            </div>
+            <span class="option-size"><i class="fas fa-folder me-1"></i>~500 KB</span>
+        </div>
     </div>
 
     {{-- ACTIONS BAR --}}
