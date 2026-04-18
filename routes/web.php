@@ -74,6 +74,9 @@ Route::get('/portfolio/{id}/render', [PortfolioController::class, 'render'])
 Route::get('/portfolio/{id}/print', [PortfolioController::class, 'print'])
     ->name('portfolio.print');
 
+Route::get('/portfolio/{id}/download-html', [PortfolioController::class, 'downloadHtml'])
+    ->name('portfolio.download.html');
+
 // Snap Token endpoint
 Route::get('/portfolio/{id}/snap-token', [PortfolioController::class, 'getSnapToken'])
     ->name('portfolio.snap-token');

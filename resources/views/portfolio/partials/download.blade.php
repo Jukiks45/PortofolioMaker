@@ -98,6 +98,9 @@
         <a href="{{ route('portfolio.render', $portfolio->id) }}" target="_blank" class="btn btn-primary">
             <i class="fas fa-download me-1"></i> Download PDF
         </a>
+        <a href="{{ route('portfolio.download.html', $portfolio->id) }}" class="btn btn-success">
+            🌐 Download Website
+        </a>
     </div>
 
     {{-- AKSI TAMBAHAN --}}

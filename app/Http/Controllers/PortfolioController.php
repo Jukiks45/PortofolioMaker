@@ -129,6 +129,19 @@ class PortfolioController extends Controller
         return response($rendered)->header('Content-Type', 'text/html');
     }
 
+    public function downloadHtml($id, TemplateService $templateService)
+    {
+        $portfolio = \App\Models\Portfolio::findOrFail($id);
+
+        $data = $templateService->transform($portfolio->data);
+
+        $html = view('templates.website', $data)->render();
+
+        return response($html)
+            ->header('Content-Type', 'text/html')
+            ->header('Content-Disposition', 'attachment; filename="portfolio.html"');
+    }
+
     public function render($id, TemplateService $templateService)
     {
         $portfolio = \App\Models\Portfolio::findOrFail($id);
